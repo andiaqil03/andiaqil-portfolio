@@ -9,6 +9,11 @@ import {
 } from 'react-router';
 import type { Route } from './+types/root';
 import './app.css';
+import { Backdrop } from './components/fx/backdrop';
+import { CommandPalette } from './components/fx/command-palette';
+import { Intro } from './components/fx/intro';
+import { ScrollProgress } from './components/fx/scroll-progress';
+import { SmoothScroll } from './components/fx/smooth-scroll';
 import { PageHeader } from './components/layout/page-header';
 import { SiteFooter } from './components/layout/site-footer';
 import { SiteHeader } from './components/layout/site-header';
@@ -26,8 +31,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#f5f6f3" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0d0f0d" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f6f7fb" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Meta />
         <Links />
@@ -35,13 +39,18 @@ export function Layout({ children }: { children: ReactNode }) {
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2.5 focus:text-canvas"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2.5 focus:text-canvas"
         >
           Skip to content
         </a>
+        <Intro />
+        <Backdrop />
+        <ScrollProgress />
         <SiteHeader />
         {children}
         <SiteFooter />
+        <CommandPalette />
+        <SmoothScroll />
         <ScrollRestoration />
         <Scripts />
       </body>

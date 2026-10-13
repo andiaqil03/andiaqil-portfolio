@@ -1,11 +1,20 @@
+import { useId } from 'react';
 import { Link } from 'react-router';
 import { profile } from '~/content/profile';
 
-/** The "A" mark: ink tile, canvas strokes, accent crossbar. Same drawing as the favicon. */
+/** The "A" mark: ink tile, canvas strokes, aurora crossbar. Same drawing as the favicon. */
 export function LogoMark({ className }: { className?: string }) {
+  const gradient = `logo-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" className={className}>
-      <rect width="32" height="32" rx="6" className="fill-ink" />
+      <defs>
+        <linearGradient id={gradient} x1="12" x2="20" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#818cf8" />
+          <stop offset="0.5" stopColor="#38bdf8" />
+          <stop offset="1" stopColor="#34d399" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="9" className="fill-ink" />
       <path
         d="M9.5 23.5 16 8.5l6.5 15"
         fill="none"
@@ -17,7 +26,7 @@ export function LogoMark({ className }: { className?: string }) {
       <path
         d="M12.2 18.2h7.6"
         fill="none"
-        className="stroke-accent"
+        stroke={`url(#${gradient})`}
         strokeWidth="2.6"
         strokeLinecap="round"
       />

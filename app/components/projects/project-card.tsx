@@ -1,27 +1,22 @@
-import { ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Zap } from 'lucide-react';
 import { Link } from 'react-router';
 import type { Project } from '~/content/types';
 import { stackNames } from '~/lib/content';
 import { cn } from '~/lib/cn';
 import { formatYearMonth } from '~/lib/format';
+import { TiltCard } from '../fx/tilt-card';
 import { List } from '../ui/list';
 import { Tag, TechChips } from '../ui/tag';
 import { projectTitleTransition } from './project-title';
 import { ProjectVisual } from './project-visual';
 
-const cardBase =
-  'group relative flex flex-col overflow-hidden border border-line bg-surface shadow-xs transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md focus-within:border-line-strong motion-reduce:hover:translate-y-0';
-
 /** Stretched link: the whole card is clickable, while the title stays the accessible name. */
-function CardLink({ project, className }: { project: Project; className?: string }) {
+function CardLink({ project }: { project: Project }) {
   return (
     <Link
       to={`/projects/${project.slug}`}
       viewTransition
-      className={cn(
-        'outline-none after:absolute after:inset-0 after:z-10 after:rounded-[inherit] after:content-[""] focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-accent',
-        className,
-      )}
+      className='outline-none after:absolute after:inset-0 after:z-20 after:rounded-[inherit] after:content-[""] focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-accent'
     >
       <span className="inline-block" style={projectTitleTransition(project.slug)}>
         {project.title}
@@ -33,7 +28,9 @@ function CardLink({ project, className }: { project: Project; className?: string
 function KeyCapability({ text }: { text: string }) {
   return (
     <p className="flex items-start gap-2 text-sm font-medium text-ink">
-      <Zap aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={1.75} />
+      <span className="mt-px inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+        <Zap aria-hidden="true" className="size-3" strokeWidth={2.25} />
+      </span>
       <span>{text}</span>
     </p>
   );
@@ -43,55 +40,72 @@ function ViewProject({ label = 'View project' }: { label?: string }) {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
+      className="inline-flex items-center gap-2 text-sm font-semibold text-accent"
     >
       {label}
-      <ArrowRight
-        className="size-4 transition-transform duration-200 ease-out-soft group-hover:translate-x-1"
-        strokeWidth={2}
-      />
+      <span className="inline-flex size-7 items-center justify-center rounded-full bg-accent-soft transition-[background-color,color,translate] duration-300 ease-out-expo group-hover/tilt:translate-x-1 group-hover/tilt:bg-accent group-hover/tilt:text-white">
+        <ArrowRight className="size-3.5" strokeWidth={2.25} />
+      </span>
     </span>
   );
 }
 
+const cardSurface =
+  'glass relative flex h-full flex-col overflow-hidden transition-shadow duration-500 group-hover/tilt:shadow-lg';
+
 /**
- * Product-style project card. Order of emphasis: name, visual, one-line
- * description, technology, key capability, "View project".
+ * Product-style project card: name, visual, one-line description, technology,
+ * key capability, "View project". Tilts toward the pointer.
  */
 export function ProjectCard({
   project,
+  index,
   headingLevel: Heading = 'h3',
+  className,
 }: {
   project: Project;
+  index?: number;
   headingLevel?: 'h2' | 'h3';
+  className?: string;
 }) {
   return (
-    <article className={cn(cardBase, 'h-full rounded-lg')}>
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <Heading className="text-subheading font-semibold">
-            <CardLink project={project} />
-          </Heading>
-          <time dateTime={project.date} className="mt-1 shrink-0 font-mono text-meta text-ink-3">
-            {formatYearMonth(project.date)}
-          </time>
-        </div>
-        <p className="mt-2 text-[0.9375rem] text-ink-2">{project.tagline}</p>
-        <TechChips items={stackNames(project.stack)} className="mt-4" />
-        <div className="mt-auto pt-5">
-          <KeyCapability text={project.highlight} />
-          <div className="mt-4 flex items-center justify-between gap-3">
-            <ViewProject />
-            {project.kind ? <Tag>{project.kind}</Tag> : null}
+    <TiltCard as="article" className={cn('h-full rounded-xl', className)}>
+      <div className={cn(cardSurface, 'rounded-xl')}>
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <div className="flex items-start justify-between gap-3">
+            <Heading className="font-display text-subheading font-semibold">
+              <CardLink project={project} />
+            </Heading>
+            <time
+              dateTime={project.date}
+              className="mt-1.5 shrink-0 font-mono text-meta text-ink-3"
+            >
+              {formatYearMonth(project.date)}
+            </time>
+          </div>
+          <p className="mt-2 text-[0.9375rem] text-ink-2">{project.tagline}</p>
+          <TechChips items={stackNames(project.stack)} className="mt-4" />
+          <div className="mt-auto pt-5">
+            <KeyCapability text={project.highlight} />
+            <div className="mt-5 flex items-center justify-between gap-3">
+              <ViewProject />
+              {project.kind ? <Tag>{project.kind}</Tag> : null}
+            </div>
           </div>
         </div>
+        <div className="relative order-first m-2 mb-0 overflow-hidden rounded-[calc(var(--radius-xl)-8px)]">
+          <ProjectVisual project={project} zoomOnHover className="aspect-[16/10]" />
+          {index !== undefined ? (
+            <span
+              aria-hidden="true"
+              className="absolute top-3 left-4 font-display text-3xl font-bold text-transparent [-webkit-text-stroke:1px_var(--line-strong)]"
+            >
+              {String(index).padStart(2, '0')}
+            </span>
+          ) : null}
+        </div>
       </div>
-      <ProjectVisual
-        project={project}
-        zoomOnHover
-        className="order-first aspect-[16/10] border-b border-line"
-      />
-    </article>
+    </TiltCard>
   );
 }
 
@@ -99,39 +113,78 @@ export function ProjectCard({
 export function FeaturedProjectCard({
   project,
   headingLevel: Heading = 'h3',
+  className,
 }: {
   project: Project;
   headingLevel?: 'h2' | 'h3';
+  className?: string;
 }) {
   return (
-    <article className={cn(cardBase, 'rounded-xl lg:grid lg:grid-cols-12 hover:shadow-lg')}>
-      <div className="flex flex-col p-6 sm:p-8 lg:col-span-5 lg:p-10">
-        <div className="flex flex-wrap items-center gap-2">
-          <Tag tone="accent">Featured project</Tag>
-          {project.kind ? <Tag>{project.kind}</Tag> : null}
+    <TiltCard as="article" max={3} className={cn('rounded-xl', className)}>
+      <div className={cn(cardSurface, 'ring-gradient rounded-xl lg:grid lg:grid-cols-12')}>
+        <div className="flex flex-col p-6 sm:p-8 lg:col-span-5 lg:p-10">
+          <div className="flex flex-wrap items-center gap-2">
+            <Tag tone="accent">
+              <span
+                aria-hidden="true"
+                className="size-1.5 rounded-full"
+                style={{ background: 'var(--gradient-aurora)' }}
+              />
+              Featured project
+            </Tag>
+            {project.kind ? <Tag>{project.kind}</Tag> : null}
+          </div>
+          <Heading className="mt-5 font-display text-title font-semibold">
+            <CardLink project={project} />
+          </Heading>
+          <p className="mt-3 text-lead text-ink-2">{project.tagline}</p>
+          <TechChips items={stackNames(project.stack)} className="mt-5" />
+          {project.keyPoints ? (
+            <List items={project.keyPoints} marker="check" className="mt-6 text-[0.9375rem]" />
+          ) : null}
+          <div className="mt-auto flex items-center justify-between gap-4 pt-8">
+            <ViewProject label="Read the case study" />
+            <time dateTime={project.date} className="font-mono text-meta text-ink-3">
+              {formatYearMonth(project.date)}
+            </time>
+          </div>
         </div>
-        <Heading className="mt-5 text-title font-semibold">
-          <CardLink project={project} />
-        </Heading>
-        <p className="mt-3 text-lead text-ink-2">{project.tagline}</p>
-        <TechChips items={stackNames(project.stack)} className="mt-5" />
-        {project.keyPoints ? (
-          <List items={project.keyPoints} marker="check" className="mt-6 text-[0.9375rem]" />
-        ) : null}
-        <div className="mt-auto flex items-center justify-between gap-4 pt-8">
-          <ViewProject label="Read the case study" />
-          <time dateTime={project.date} className="font-mono text-meta text-ink-3">
-            {formatYearMonth(project.date)}
-          </time>
+        <div className="order-first m-2 overflow-hidden rounded-[calc(var(--radius-xl)-8px)] lg:col-span-7 lg:mr-0">
+          <ProjectVisual
+            project={project}
+            zoomOnHover
+            priority
+            className="aspect-[16/10] h-full lg:aspect-auto lg:min-h-[24rem]"
+          />
         </div>
       </div>
-      <ProjectVisual
-        project={project}
-        zoomOnHover
-        priority
-        className="order-first aspect-[16/10] border-b border-line lg:col-span-7 lg:aspect-auto lg:min-h-[26rem] lg:border-r lg:border-b-0"
-      />
-    </article>
+    </TiltCard>
+  );
+}
+
+/** Closing card of the horizontal gallery. */
+export function AllProjectsCard({ count, className }: { count: number; className?: string }) {
+  return (
+    <Link
+      to="/projects"
+      viewTransition
+      className={cn(
+        'group relative flex flex-col justify-between overflow-hidden rounded-xl p-8 text-white shadow-lg',
+        className,
+      )}
+    >
+      <span aria-hidden="true" className="bg-brand is-animated absolute inset-0 -z-10" />
+      <span aria-hidden="true" className="dot-grid absolute inset-0 -z-10 opacity-40" />
+      <span className="font-mono text-meta tracking-[0.12em] text-white/70 uppercase">Archive</span>
+      <span>
+        <span className="block font-display text-4xl font-semibold tracking-[-0.04em]">
+          See all {count} projects
+        </span>
+        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-full bg-white text-[#0a0f1f] transition-transform duration-500 ease-out-expo group-hover:rotate-45">
+          <ArrowUpRight aria-hidden="true" className="size-6" strokeWidth={2} />
+        </span>
+      </span>
+    </Link>
   );
 }
 
@@ -145,9 +198,9 @@ export function ProjectGrid({
   className?: string;
 }) {
   return (
-    <ul className={cn('grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3', className)}>
+    <ul className={cn('grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3', className)}>
       {projects.map((project) => (
-        <li key={project.slug}>
+        <li key={project.slug} style={{ viewTransitionName: `card-${project.slug}` }}>
           <ProjectCard project={project} headingLevel={headingLevel} />
         </li>
       ))}

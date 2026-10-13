@@ -2,10 +2,15 @@ import { Handshake, Layers, Server } from 'lucide-react';
 import { ContactPanel } from '~/components/contact/contact-panel';
 import { EducationList } from '~/components/education/education-list';
 import { ExperienceSummary } from '~/components/experience/experience-list';
+import { ScrubText } from '~/components/fx/scrub-text';
+import { TiltCard } from '~/components/fx/tilt-card';
 import { Hero } from '~/components/home/hero';
-import { FeaturedProjectCard, ProjectGrid } from '~/components/projects/project-card';
+import { ProfileCard } from '~/components/home/profile-card';
+import { StatsBand } from '~/components/home/stats-band';
+import { ProjectShowcase } from '~/components/projects/project-showcase';
 import { SkillGroups } from '~/components/skills/skill-groups';
 import { ArrowLink } from '~/components/ui/action';
+import { Container } from '~/components/ui/container';
 import { Reveal } from '~/components/ui/reveal';
 import { Section } from '~/components/ui/section';
 import { education } from '~/content/education';
@@ -25,16 +30,19 @@ const pillars = [
     icon: Server,
     title: 'Backend development',
     text: 'REST APIs in NestJS, API performance work and code-quality fixes from my internship at TM R&D.',
+    tint: 'var(--g-indigo)',
   },
   {
     icon: Layers,
     title: 'Full-stack web apps',
     text: 'Full-stack projects with Laravel, NestJS with Angular, and .NET, plus React frontends.',
+    tint: 'var(--g-sky)',
   },
   {
     icon: Handshake,
     title: 'Client delivery',
     text: 'Freelance projects taken from gathering requirements through user testing to production.',
+    tint: 'var(--g-emerald)',
   },
 ];
 
@@ -42,62 +50,97 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <StatsBand />
 
-      <Section
+      {/* About: a statement that lights up as you read it, then the evidence. */}
+      <section
         id="about"
-        title="Backend-focused, comfortable across the stack"
-        description="I studied Software Engineering at UNITEN, built REST APIs for a production-related project as an intern, and now deliver web applications for clients. I’m growing toward professional engineering roles, especially in .NET, Angular and backend development."
-        action={<ArrowLink to="/about">More about me</ArrowLink>}
-        className="border-t border-line"
+        aria-labelledby="about-heading"
+        className="relative py-20 sm:py-24 lg:py-32"
       >
-        <ul className="grid gap-4 sm:gap-6 md:grid-cols-3">
-          {pillars.map(({ icon: Icon, title, text }, index) => (
-            <Reveal as="li" key={title} delay={index * 70}>
-              <div className="h-full rounded-lg border border-line bg-surface p-5 shadow-xs sm:p-6">
-                <span className="inline-flex size-10 items-center justify-center rounded-md bg-accent-soft text-accent">
-                  <Icon aria-hidden="true" className="size-5" strokeWidth={1.75} />
-                </span>
-                <h3 className="mt-4 text-subheading font-semibold">{title}</h3>
-                <p className="mt-2 text-[0.9375rem] text-ink-2">{text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
-      </Section>
+        <Container>
+          <h2 id="about-heading" className="sr-only">
+            About
+          </h2>
+          <p className="mb-8 inline-flex items-center gap-2 font-mono text-meta tracking-[0.12em] text-ink-3 uppercase">
+            <span
+              aria-hidden="true"
+              className="h-px w-8"
+              style={{ background: 'var(--gradient-aurora)' }}
+            />
+            About
+          </p>
+          <ScrubText
+            className="max-w-5xl text-[clamp(1.75rem,1.1rem+2.6vw,3.5rem)] leading-[1.12] font-semibold tracking-[-0.035em]"
+            text="I build backend services and full-stack web applications: REST APIs in NestJS, interfaces in Angular and React, and client projects taken from first requirements all the way to production."
+            highlight={['backend', 'full-stack', 'production.']}
+          />
 
-      <Section
-        id="projects"
-        title="Projects"
-        description="Things I’ve designed and built, from a researched final-year project to API-driven apps."
-        action={<ArrowLink to="/projects">View all projects</ArrowLink>}
-        className="border-t border-line bg-surface-2/40"
-      >
-        <Reveal>
-          <FeaturedProjectCard project={featuredProject} />
-        </Reveal>
-        <ProjectGrid projects={selectedProjects} className="mt-6" />
-      </Section>
+          <div className="mt-14 grid gap-6 lg:grid-cols-12">
+            <Reveal className="lg:col-span-5">
+              <ProfileCard />
+            </Reveal>
+            <ul className="grid gap-5 lg:col-span-7">
+              {pillars.map(({ icon: Icon, title, text, tint }, index) => (
+                <Reveal as="li" key={title} delay={index * 90}>
+                  <TiltCard max={4} className="rounded-xl">
+                    <div className="glass flex gap-5 rounded-xl p-5 sm:p-6">
+                      <span
+                        className="inline-flex size-12 shrink-0 items-center justify-center rounded-md text-white shadow-md"
+                        style={{
+                          background: `linear-gradient(135deg, ${tint}, color-mix(in srgb, ${tint} 55%, #0a0f1f))`,
+                        }}
+                      >
+                        <Icon aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                      </span>
+                      <div>
+                        <h3 className="font-display text-subheading font-semibold">{title}</h3>
+                        <p className="mt-1.5 text-[0.9375rem] text-ink-2">{text}</p>
+                      </div>
+                    </div>
+                  </TiltCard>
+                </Reveal>
+              ))}
+              <li>
+                <ArrowLink to="/about">More about me</ArrowLink>
+              </li>
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      <ProjectShowcase featured={featuredProject} projects={selectedProjects} />
 
       <Section
         id="skills"
-        title="Skills"
-        description="The languages, frameworks and tools I work with."
-        className="border-t border-line"
+        kicker="Toolbox"
+        title={
+          <>
+            The stack I <span className="text-gradient is-animated">build with</span>
+          </>
+        }
+        description="Backend first, comfortable across the stack."
       >
         <SkillGroups />
       </Section>
 
       <Section
         id="experience"
-        title="Experience"
+        kicker="Experience"
+        title={
+          <>
+            Where I’ve <span className="text-gradient is-animated">delivered</span>
+          </>
+        }
         description="Freelance delivery, a backend internship and a project-management role."
         action={<ArrowLink to="/experience">Full experience</ArrowLink>}
-        className="border-t border-line"
       >
-        <ExperienceSummary items={experience} />
+        <div className="max-w-4xl">
+          <ExperienceSummary items={experience} />
+        </div>
       </Section>
 
-      <Section id="education" title="Education" className="border-t border-line">
+      <Section id="education" kicker="Education" title="Software engineering, with honours">
         <EducationList items={education} />
       </Section>
 

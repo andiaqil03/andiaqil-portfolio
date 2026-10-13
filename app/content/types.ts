@@ -28,6 +28,8 @@ export interface Profile {
   heroHeading: [string, string];
   /** Supporting paragraph under the hero heading. */
   heroIntro: string;
+  /** Rotating focus areas in the hero's code line (first one prerenders). */
+  heroFocus: string[];
   location: string;
   email: string;
   /** Shown on the Contact page only. */

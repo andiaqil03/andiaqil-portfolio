@@ -3,9 +3,26 @@ import { isPlaceholder } from '~/content/placeholder';
 import { techName } from '~/content/tech';
 import type { Block } from '~/content/types';
 import { cn } from '~/lib/cn';
+import { Counter } from '../fx/counter';
 import { List } from '../ui/list';
 import { PlaceholderNote } from '../ui/placeholder-note';
 import { TechChips } from '../ui/tag';
+
+/** Numbers like 27,901, 83.66% or 60+ count up; anything else renders as text. */
+function FactValue({ value }: { value: string }) {
+  const match = /^([\d,]+(?:\.\d+)?)(%|\+)?$/.exec(value);
+  if (!match) return <>{value}</>;
+  const [, digits = '0', suffix = ''] = match;
+  const decimals = digits.includes('.') ? (digits.split('.')[1]?.length ?? 0) : 0;
+  return (
+    <Counter
+      value={Number(digits.replaceAll(',', ''))}
+      decimals={decimals}
+      suffix={suffix}
+      className="text-gradient is-animated"
+    />
+  );
+}
 
 /** Renders one typed content block of a case-study section. */
 export function CaseStudyBlock({ block }: { block: Block }) {
@@ -29,12 +46,16 @@ export function CaseStudyBlock({ block }: { block: Block }) {
             <div
               key={item.term}
               className={cn(
-                'rounded-lg border border-line bg-surface p-5 shadow-xs',
+                'glass rounded-xl p-5 sm:p-6',
                 block.items.length % 2 === 1 && index === block.items.length - 1 && 'sm:col-span-2',
               )}
             >
               <dt className="flex items-center gap-2.5 font-semibold">
-                <span aria-hidden="true" className="size-2 rounded-xs bg-accent" />
+                <span
+                  aria-hidden="true"
+                  className="size-2.5 rounded-full"
+                  style={{ background: 'var(--gradient-aurora)' }}
+                />
                 {item.term}
               </dt>
               <dd className="mt-2 text-[0.9375rem] text-ink-2">{item.detail}</dd>
@@ -48,8 +69,8 @@ export function CaseStudyBlock({ block }: { block: Block }) {
         <ol className="grid gap-3 lg:grid-cols-4 lg:gap-0">
           {block.items.map((step, index) => (
             <li key={step.title} className="relative flex flex-col lg:flex-row lg:items-stretch">
-              <div className="flex-1 rounded-lg border border-line bg-surface p-5 shadow-xs">
-                <span className="inline-flex size-7 items-center justify-center rounded-md bg-accent-soft font-mono text-meta font-semibold text-accent">
+              <div className="flex-1 glass rounded-xl p-5 sm:p-6">
+                <span className="bg-brand inline-flex size-8 items-center justify-center rounded-full font-mono text-meta font-semibold text-white shadow-md">
                   {index + 1}
                 </span>
                 <p className="mt-3 font-semibold">{step.title}</p>
@@ -75,13 +96,10 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       return (
         <dl className="grid gap-4 min-[480px]:grid-cols-2 lg:grid-cols-4">
           {block.items.map((fact) => (
-            <div
-              key={fact.label}
-              className="rounded-lg border border-line bg-surface p-5 shadow-xs"
-            >
+            <div key={fact.label} className="glass rounded-xl p-5 sm:p-6">
               <dt className="font-mono text-meta text-ink-3 uppercase">{fact.label}</dt>
-              <dd className="mt-2 text-lg leading-snug font-semibold tracking-[-0.01em] tabular">
-                {fact.value}
+              <dd className="mt-2 font-display text-2xl leading-tight font-semibold tracking-[-0.03em] tabular">
+                <FactValue value={fact.value} />
               </dd>
             </div>
           ))}
@@ -109,7 +127,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       return (
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {block.items.map((item) => (
-            <li key={item.id} className="rounded-lg border border-line bg-surface p-5 shadow-xs">
+            <li key={item.id} className="glass rounded-xl p-5 sm:p-6">
               <p className="inline-flex h-7 items-center rounded-sm bg-surface-2 px-2.5 font-mono text-[0.8125rem] font-semibold">
                 {techName(item.id)}
               </p>
@@ -130,10 +148,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       return (
         <div className="grid gap-6 sm:grid-cols-2">
           {block.images.map((image) => (
-            <figure
-              key={image.src}
-              className="overflow-hidden rounded-lg border border-line bg-surface shadow-xs"
-            >
+            <figure key={image.src} className="overflow-hidden glass rounded-xl">
               <img
                 src={image.src}
                 alt={image.alt}

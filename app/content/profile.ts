@@ -9,6 +9,13 @@ export const profile: Profile = {
   roleLine: 'Software Engineer / Full-Stack Developer',
   headline: 'Software Engineer · Full-Stack Developer · Software Engineering Graduate',
   heroHeading: ['Software Engineer', 'building practical digital products.'],
+  heroFocus: [
+    'REST APIs',
+    'backend services',
+    'full-stack web apps',
+    'Angular & React UIs',
+    '.NET applications',
+  ],
   heroIntro:
     'I’m a Software Engineering graduate focused on backend development and full-stack web applications. I built REST APIs with NestJS at TM R&D, and I now deliver web projects for clients from first requirements to production.',
   location: 'Selangor, Malaysia',

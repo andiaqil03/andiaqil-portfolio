@@ -2,7 +2,7 @@
 
 Personal portfolio of Andi Muhammad Aqil Bin Andi Abd Rahman, Software Engineering graduate and software developer.
 
-Built with **React 19, TypeScript, Tailwind CSS v4 and React Router (framework mode on Vite)**. Every page is prerendered to static HTML at build time, so the site is fast, SEO-friendly, shows proper link previews, and can be hosted on any static host for free.
+Built with **React 19, TypeScript, Tailwind CSS v4 and React Router (framework mode on Vite)**, animated with **GSAP + ScrollTrigger**, **Lenis** smooth scrolling and a **three.js** hero scene. Press **Ctrl/⌘ + K** anywhere for the command palette. Every page is prerendered to static HTML at build time, so the site is fast, SEO-friendly, shows proper link previews, and can be hosted on any static host for free.
 
 ## Quick start
 
@@ -121,5 +121,7 @@ PRODUCT.md      Product context and content constraints
 
 - Semantic landmarks, one `h1` per page, skip link, visible focus rings, keyboard-operable tabs, filters and menus.
 - Colour contrast meets WCAG AA in both themes. Theme follows the system until toggled.
-- All motion respects `prefers-reduced-motion`.
+- All motion respects `prefers-reduced-motion` (no intro, smooth scroll, pinning or reveals; the globe renders a still frame).
+- Light theme by default; dark is opt-in via the toggle or the command palette and is remembered.
+- The three.js scene is a separate, lazily loaded chunk that pauses when off-screen.
 - No runtime data fetching, no analytics, no cookies. Fonts are self-hosted.

@@ -88,16 +88,19 @@ export function ProfileCard() {
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-lg">
+    <div className="glass overflow-hidden rounded-xl">
       <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3">
         <h2 id={`${id}-label`} className="flex items-center gap-2 text-sm font-medium text-ink-2">
-          <span aria-hidden="true" className="size-2 rounded-full bg-accent" />
+          <span
+            aria-hidden="true"
+            className="pulse-dot relative size-2 rounded-full bg-[#10b981]"
+          />
           Profile
         </h2>
         <div
           role="tablist"
           aria-labelledby={`${id}-label`}
-          className="inline-flex rounded-md bg-surface-2 p-0.5"
+          className="inline-flex rounded-full bg-surface-2 p-1"
         >
           {views.map((tab, index) => {
             const selected = view === tab.id;
@@ -116,9 +119,9 @@ export function ProfileCard() {
                 onClick={() => setView(tab.id)}
                 onKeyDown={(event) => onKeyDown(event, index)}
                 className={cn(
-                  'h-8 rounded-sm px-3 text-[0.8125rem] font-medium transition-[background-color,color,box-shadow] duration-150',
+                  'h-8 rounded-full px-3.5 text-[0.8125rem] font-medium transition-[background-color,color,box-shadow] duration-200',
                   tab.id === 'json' && 'font-mono text-meta',
-                  selected ? 'bg-surface text-ink shadow-xs' : 'text-ink-3 hover:text-ink',
+                  selected ? 'bg-brand text-white shadow-sm' : 'text-ink-3 hover:text-ink',
                 )}
               >
                 {tab.label}
@@ -164,7 +167,7 @@ export function ProfileCard() {
         aria-labelledby={`${id}-tab-json`}
         hidden={view !== 'json'}
         tabIndex={0}
-        className="bg-surface-2/60"
+        className="bg-surface-2/50"
       >
         {view === 'json' ? <JsonView value={json} /> : null}
       </div>

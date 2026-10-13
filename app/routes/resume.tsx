@@ -76,9 +76,11 @@ export default function Resume() {
   const linkedin = resolved(profile.links.linkedin);
 
   return (
-    <Container className="py-12 sm:py-16 print:max-w-none print:p-0">
+    <Container className="pt-28 pb-16 sm:pt-32 sm:pb-20 print:max-w-none print:p-0">
       <div className="no-print mb-8 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-title font-semibold">Resume</h1>
+        <h1 className="font-display text-title font-semibold">
+          Resume <span className="text-gradient is-animated">&amp; CV</span>
+        </h1>
         <div className="flex flex-wrap gap-2.5">
           {pdf ? (
             <Action href={pdf}>
@@ -102,7 +104,7 @@ export default function Resume() {
 
       <article
         aria-label={`Resume of ${profile.fullName}`}
-        className="mx-auto max-w-[52rem] rounded-xl border border-line bg-surface px-5 py-8 shadow-md sm:px-12 sm:py-14 print:max-w-none print:rounded-none print:border-0 print:bg-transparent print:p-0 print:shadow-none"
+        className="glass ring-gradient mx-auto max-w-[52rem] rounded-xl px-5 py-8 sm:px-12 sm:py-14 print:max-w-none print:rounded-none print:border-0 print:bg-transparent print:p-0 print:shadow-none print:backdrop-filter-none print:before:hidden"
       >
         <header>
           <p className="text-[1.75rem] leading-tight font-semibold tracking-[-0.02em]">

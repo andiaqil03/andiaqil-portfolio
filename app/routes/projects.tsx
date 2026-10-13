@@ -61,25 +61,32 @@ export default function Projects() {
   const others = visible.filter((project) => project !== featuredProject);
 
   function select(filter: Filter) {
+    // Cards glide to their new places; the page itself doesn't wipe.
+    const root = document.documentElement;
+    root.classList.add('vt-filter');
+    window.setTimeout(() => root.classList.remove('vt-filter'), 900);
     setParams(filter === 'all' ? {} : { category: filter }, {
       replace: true,
       preventScrollReset: true,
+      viewTransition: true,
     });
   }
 
   return (
     <>
       <PageHeader
+        kicker="Work"
         title="Projects"
+        accent="I’ve built"
         lead="A researched final-year project, API-driven full-stack apps, an academic machine-learning study and a few smaller learning projects."
       />
 
       <Container className="pb-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-10">
           <div
             role="group"
             aria-label="Filter projects by category"
-            className="flex flex-wrap gap-1.5"
+            className="glass inline-flex max-w-full flex-wrap gap-1 rounded-[1.75rem] p-1.5"
           >
             {filters.map((filter) => {
               const pressed = active === filter.id;
@@ -90,17 +97,22 @@ export default function Projects() {
                   aria-pressed={pressed}
                   onClick={() => select(filter.id)}
                   className={cn(
-                    'inline-flex h-10 items-center gap-2 rounded-md border px-3.5 text-sm font-medium transition-[background-color,border-color,color] duration-150',
-                    pressed
-                      ? 'border-accent bg-accent text-on-accent'
-                      : 'border-line bg-surface text-ink-2 shadow-xs hover:border-line-strong hover:text-ink',
+                    'relative inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium transition-colors duration-200',
+                    pressed ? 'text-white' : 'text-ink-2 hover:text-ink',
                   )}
                 >
+                  {pressed ? (
+                    <span
+                      aria-hidden="true"
+                      className="bg-brand absolute inset-0 -z-10 rounded-full shadow-md"
+                      style={{ viewTransitionName: 'filter-pill' }}
+                    />
+                  ) : null}
                   {filter.label}
                   <span
                     className={cn(
                       'font-mono text-meta tabular',
-                      pressed ? 'text-on-accent/80' : 'text-ink-3',
+                      pressed ? 'text-white/80' : 'text-ink-3',
                     )}
                   >
                     {filter.count}
@@ -109,15 +121,17 @@ export default function Projects() {
               );
             })}
           </div>
-          <p role="status" className="text-sm text-ink-3">
+          <p role="status" className="font-mono text-meta text-ink-3">
             Showing {visible.length} of {allProjects.length}
           </p>
         </div>
 
         {featuredVisible ? (
-          <Reveal>
-            <FeaturedProjectCard project={featuredProject} headingLevel="h2" />
-          </Reveal>
+          <div style={{ viewTransitionName: `card-${featuredProject.slug}` }}>
+            <Reveal>
+              <FeaturedProjectCard project={featuredProject} headingLevel="h2" />
+            </Reveal>
+          </div>
         ) : null}
         <ProjectGrid
           projects={others}

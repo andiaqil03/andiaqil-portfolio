@@ -7,22 +7,23 @@ type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'md' | 'sm';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-accent text-on-accent shadow-xs hover:bg-accent-hover hover:shadow-sm',
-  secondary:
-    'border border-line-strong bg-surface text-ink shadow-xs hover:border-ink-3 hover:shadow-sm',
+  // Brand gradient that slowly rotates, a coloured glow, and a shine sweep on hover.
+  primary:
+    'bg-brand is-animated btn-shine relative overflow-hidden text-white shadow-[0_8px_24px_-8px_rgb(79_70_229/0.55)] hover:shadow-[0_14px_34px_-10px_rgb(79_70_229/0.7)] hover:-translate-y-0.5',
+  secondary: 'glass text-ink hover:border-line-strong hover:-translate-y-0.5 hover:shadow-md',
   ghost: 'text-ink-2 hover:bg-surface-2 hover:text-ink',
 };
 
 const sizes: Record<Size, string> = {
-  md: 'h-11 gap-2 px-5 text-[0.9375rem]',
-  sm: 'h-9 gap-1.5 px-3.5 text-sm',
+  md: 'h-12 gap-2 px-6 text-[0.9375rem]',
+  sm: 'h-10 gap-1.5 px-4 text-sm',
 };
 
-/** Button look shared by links and buttons (DESIGN.md §6). */
+/** Pill button look shared by links and buttons (DESIGN.md §6). */
 export function buttonStyles(variant: Variant = 'primary', size: Size = 'md', className?: string) {
   return cn(
-    'group/btn inline-flex shrink-0 items-center justify-center rounded-md font-medium whitespace-nowrap',
-    'transition-[background-color,border-color,color,box-shadow,translate] duration-200 ease-(--ease-out-soft)',
+    'group/btn inline-flex shrink-0 items-center justify-center rounded-full font-medium whitespace-nowrap',
+    'transition-[background-color,border-color,color,box-shadow,translate] duration-300 ease-out-expo',
     'active:translate-y-px',
     variants[variant],
     sizes[size],

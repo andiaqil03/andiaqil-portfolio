@@ -18,11 +18,13 @@ export default function ExperiencePage() {
   return (
     <>
       <PageHeader
-        title="Experience"
+        kicker="Experience"
+        title="Where I’ve"
+        accent="delivered."
         lead="Freelance work delivering web applications for clients, a project-management role at PNB, and a backend internship building NestJS REST APIs at TM R&D."
       />
-      <div className="border-t border-line">
-        <Container className="max-w-[60rem] py-12 sm:py-16 lg:py-20">
+      <div>
+        <Container className="max-w-[60rem] pt-4 pb-16 sm:pb-20 lg:pb-24">
           <ExperienceTimeline items={experience} />
         </Container>
       </div>

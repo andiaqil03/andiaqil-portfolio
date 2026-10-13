@@ -39,8 +39,8 @@ Early-career and honest about it, but backed by evidence: NestJS REST API work a
 ## Brand Commitments
 
 - Confident but honest voice. First person in body copy.
-- Visual identity set by the user (Oct 2026 direction): a modern minimalist software engineer's site with strong typography, generous whitespace, subtle borders and shadows, clean cards, and one technical primary accent (green) plus an optional secondary (blue), using Geist Sans + Geist Mono. It should communicate engineering, precision, reliability, curiosity and professionalism, with creativity that is never childish. Projects are presented as product showcases and case studies as mini technical write-ups. See DESIGN.md.
-- Explicitly unwanted: heavy gradients, glassmorphism, glowing effects, 3D objects, neon, decorative blobs or floating shapes, rows of technology logos, "Hello World" clichés, skill bars/percentages, fake statistics, and animating everything.
+- Visual identity set by the user (Oct 2026, "Living System"): light mode by default with dark as an opt-in toggle; maximal, high-end graphics and animation — a live WebGL network globe in the hero, aurora light, glass tilt cards, kinetic type, smooth scrolling, pinned horizontal project gallery, cinematic page/theme transitions, a once-per-session intro loader, animated real-number stats and a ⌘K command palette. Every effect must stay honest (no invented data) and switch off for reduced motion. See DESIGN.md.
+- Still unwanted: fake statistics, invented clients/testimonials, skill bars/percentages, rows of technology logos and "Hello World" clichés. (Earlier bans on gradients, glass and heavy animation were lifted by the user in Oct 2026.)
 
 ## Evidence on Hand
 
