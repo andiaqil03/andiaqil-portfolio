@@ -1,0 +1,12 @@
+node_modules/
+build/
+.react-router/
+*.log
+.DS_Store
+.env*
+!.env.example
+
+# Local design-tooling state
+.impeccable/review/
+.impeccable/build/
+.impeccable/config.local.json

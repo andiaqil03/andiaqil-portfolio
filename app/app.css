@@ -1,0 +1,317 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+/* ------------------------------------------------------------------ */
+/* Tokens (see DESIGN.md). Each colour is defined once with            */
+/* light-dark(); the scheme follows the system, or data-theme when the */
+/* visitor picks one.                                                  */
+/* ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light dark;
+
+  --canvas: light-dark(#f7f8f7, #0b0d0c);
+  --surface: light-dark(#ffffff, #121614);
+  --surface-2: light-dark(#f1f3f1, #181d1a);
+  --ink: light-dark(#0e1411, #eceeec);
+  --ink-2: light-dark(#4a524d, #a8b0aa);
+  --ink-3: light-dark(#69716b, #858d87);
+  --line: light-dark(#e4e7e4, #222824);
+  --line-strong: light-dark(#cdd3ce, #343c37);
+  --accent: light-dark(#0e7a55, #5cc594);
+  --accent-hover: light-dark(#0a6646, #7ad6aa);
+  --accent-soft: light-dark(#e7f4ee, #13271d);
+  --on-accent: light-dark(#ffffff, #06140d);
+  --accent-2: light-dark(#2f5bd3, #8ea6ff);
+  --accent-2-soft: light-dark(#eaf0fd, #182038);
+  --cta: light-dark(#0e1411, #161c19);
+  --dot: light-dark(rgb(14 20 17 / 0.11), rgb(236 238 236 / 0.08));
+  --shadow-ink: light-dark(rgb(14 20 17 / 1), rgb(0 0 0 / 1));
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Type scale */
+  --text-display: clamp(1.875rem, 1.2rem + 3.4vw, 4rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.035em;
+  --text-title: clamp(2rem, 1.55rem + 1.9vw, 3rem);
+  --text-title--line-height: 1.1;
+  --text-title--letter-spacing: -0.03em;
+  --text-section: clamp(1.625rem, 1.4rem + 0.9vw, 2.25rem);
+  --text-section--line-height: 1.15;
+  --text-section--letter-spacing: -0.025em;
+  --text-subheading: 1.25rem;
+  --text-subheading--line-height: 1.3;
+  --text-subheading--letter-spacing: -0.015em;
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.65;
+  --text-meta: 0.75rem;
+  --text-meta--line-height: 1.4;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Shadows: soft, offset downward, tinted with ink */
+  --shadow-xs: 0 1px 2px color-mix(in srgb, var(--shadow-ink) 5%, transparent);
+  --shadow-sm:
+    0 1px 2px color-mix(in srgb, var(--shadow-ink) 4%, transparent),
+    0 2px 6px -1px color-mix(in srgb, var(--shadow-ink) 7%, transparent);
+  --shadow-md:
+    0 2px 4px color-mix(in srgb, var(--shadow-ink) 4%, transparent),
+    0 12px 24px -8px color-mix(in srgb, var(--shadow-ink) 14%, transparent);
+  --shadow-lg:
+    0 4px 8px color-mix(in srgb, var(--shadow-ink) 4%, transparent),
+    0 24px 48px -16px color-mix(in srgb, var(--shadow-ink) 20%, transparent);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-soft: var(--accent-2-soft);
+  --color-cta: var(--cta);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5.5rem;
+    scrollbar-color: var(--line-strong) var(--canvas);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--canvas);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 22%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  input,
+  textarea {
+    caret-color: var(--accent);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  time,
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Components that read better as CSS than as utility strings          */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* Running-text link: hairline underline that firms up on hover. */
+  .link {
+    color: var(--ink);
+    text-decoration-line: underline;
+    text-decoration-color: var(--line-strong);
+    transition:
+      text-decoration-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .link:hover {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+
+  /* Engineering-paper dot grid: hero background and project visuals only. */
+  .dot-grid {
+    background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+    background-size: 20px 20px;
+    background-position: 10px 10px;
+  }
+
+  .dot-grid-fade {
+    mask-image: radial-gradient(90% 80% at 70% 30%, #000 25%, transparent 75%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion (DESIGN.md §10)                                              */
+/* ------------------------------------------------------------------ */
+
+@keyframes stream {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Section entrances: only elements that start below the fold are armed
+     (see components/ui/reveal.tsx), so nothing is hidden before hydration. */
+  [data-reveal='pending'] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  [data-reveal='in'] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 600ms var(--ease-out-expo),
+      transform 600ms var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .stream-line {
+    animation: stream 420ms var(--ease-out-expo) both;
+    animation-delay: calc(var(--line, 0) * 22ms);
+  }
+
+  .menu-in {
+    animation: menu-in 150ms var(--ease-out-soft) both;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 240ms;
+    animation-timing-function: var(--ease-out-soft);
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 420ms;
+    animation-timing-function: var(--ease-out-expo);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-property:
+      color, background-color, border-color, text-decoration-color, opacity !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Print: the resume page prints as a clean, single-column document.  */
+/* ------------------------------------------------------------------ */
+
+@media print {
+  :root,
+  :root[data-theme] {
+    color-scheme: light !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  @page {
+    margin: 14mm 14mm 16mm;
+  }
+}
