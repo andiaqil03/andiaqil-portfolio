@@ -10,6 +10,4 @@ build/
 .claude/
 
 # Local design-tooling state
-.impeccable/review/
-.impeccable/build/
-.impeccable/config.local.json
+.impeccable
