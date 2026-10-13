@@ -6,6 +6,9 @@ build/
 .env*
 !.env.example
 
+# Claude Code
+.claude/
+
 # Local design-tooling state
 .impeccable/review/
 .impeccable/build/
