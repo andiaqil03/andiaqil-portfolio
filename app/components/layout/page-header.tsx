@@ -32,8 +32,10 @@ export function PageHeader({
     <header className="relative isolate overflow-hidden">
       <div
         aria-hidden="true"
-        className="dot-grid absolute inset-0 -z-10 [mask-image:radial-gradient(60%_70%_at_20%_0%,#000_20%,transparent_75%)]"
-      />
+        className="absolute inset-0 -z-10 [mask-image:radial-gradient(70%_80%_at_85%_0%,#000_15%,transparent_75%)]"
+      >
+        <div className="topo absolute inset-0" />
+      </div>
       <Container className="pt-32 pb-12 sm:pt-36 sm:pb-14 lg:pt-44 lg:pb-16">
         {before ? (
           <div className="anim-rise mb-6" style={at(0)}>
@@ -45,11 +47,7 @@ export function PageHeader({
             className="anim-rise mb-5 inline-flex items-center gap-2 font-mono text-meta tracking-[0.12em] text-ink-3 uppercase"
             style={at(40)}
           >
-            <span
-              aria-hidden="true"
-              className="h-px w-8"
-              style={{ background: 'var(--gradient-aurora)' }}
-            />
+            <span aria-hidden="true" className="blaze" />
             {kicker}
           </p>
         ) : null}
@@ -58,7 +56,7 @@ export function PageHeader({
           {accent ? (
             <>
               {' '}
-              <span className="anim-rise text-gradient is-animated inline-block" style={at(380)}>
+              <span className="anim-rise text-accent inline-block" style={at(380)}>
                 {accent}
               </span>
             </>

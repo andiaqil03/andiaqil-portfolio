@@ -5,7 +5,7 @@ import { cn } from '~/lib/cn';
 /**
  * A statement whose words light up one by one as it scrolls through the
  * viewport. Fully readable without JavaScript or with reduced motion.
- * `highlight` words get the aurora gradient.
+ * `highlight` words are set in the pine accent.
  */
 export function ScrubText({
   text,
@@ -44,7 +44,7 @@ export function ScrubText({
         const bare = word.replace(/[^\p{L}\p{N}.+#-]/gu, '').toLowerCase();
         return (
           <span key={index}>
-            <span data-word className={marked.has(bare) ? 'text-gradient is-animated' : undefined}>
+            <span data-word className={marked.has(bare) ? 'text-accent' : undefined}>
               {word}
             </span>{' '}
           </span>

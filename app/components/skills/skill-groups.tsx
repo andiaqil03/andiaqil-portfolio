@@ -15,29 +15,38 @@ const meta: Record<
     Icon: Server,
     blurb: 'Server-side applications and REST APIs.',
     span: 'lg:col-span-2',
-    tint: 'var(--g-indigo)',
+    tint: 'var(--pine)',
   },
   frontend: {
     Icon: LayoutTemplate,
     blurb: 'Responsive, component-based interfaces.',
     span: '',
-    tint: 'var(--g-sky)',
+    tint: 'var(--lake)',
   },
   languages: {
     Icon: Code2,
     blurb: 'What I write it all in.',
     span: '',
-    tint: 'var(--g-fuchsia)',
+    tint: 'var(--trail)',
   },
   'data-tools': {
     Icon: Database,
     blurb: 'Databases, tooling, quality and reporting.',
     span: 'lg:col-span-2',
-    tint: 'var(--g-emerald)',
+    tint: 'var(--pine)',
   },
 };
 
-/** Skills as a bento grid of tilting glass cards, then the whole stack in motion. */
+/** Small mountain peak used as the marquee separator. */
+function Peak({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 12" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M0 12 6 2l3 4 2-3 5 9z" />
+    </svg>
+  );
+}
+
+/** Skills as a bento grid of tilting cards, then the whole stack in motion. */
 export function SkillGroups() {
   const everything = skillGroups.flatMap((group) => group.items.map(techName));
   const half = Math.ceil(everything.length / 2);
@@ -50,21 +59,34 @@ export function SkillGroups() {
             Icon: Code2,
             blurb: '',
             span: '',
-            tint: 'var(--g-indigo)',
+            tint: 'var(--pine)',
           };
           return (
             <Reveal as="li" key={group.id} delay={index * 80} className={cn('h-full', span)}>
               <TiltCard className="h-full rounded-xl">
-                <div className="glass relative h-full overflow-hidden rounded-xl p-6">
+                <div className="surface-card relative h-full overflow-hidden rounded-xl p-6">
+                  {/* A strip of contour lines along the top edge, tinted per category. */}
                   <div
                     aria-hidden="true"
-                    className="absolute -top-16 -right-16 size-48 rounded-full opacity-25 blur-2xl transition-opacity duration-500 group-hover/tilt:opacity-50"
-                    style={{ background: tint }}
-                  />
+                    className="absolute inset-x-0 top-0 h-28 opacity-70 transition-opacity duration-500 [mask-image:linear-gradient(#000_30%,transparent)] group-hover/tilt:opacity-100"
+                  >
+                    {/* Native-scale contours: `cover` would shrink the lines to hairlines here. */}
+                    <div
+                      className="topo absolute inset-0"
+                      style={{
+                        backgroundColor: `color-mix(in srgb, ${tint} 55%, transparent)`,
+                        WebkitMaskSize: '1600px 1000px',
+                        maskSize: '1600px 1000px',
+                        WebkitMaskPosition: `${-index * 280}px -360px`,
+                        maskPosition: `${-index * 280}px -360px`,
+                      }}
+                    />
+                  </div>
                   <span
-                    className="relative inline-flex size-11 items-center justify-center rounded-md text-white shadow-md"
+                    className="relative inline-flex size-11 items-center justify-center rounded-md"
                     style={{
-                      background: `linear-gradient(135deg, ${tint}, color-mix(in srgb, ${tint} 55%, #0a0f1f))`,
+                      background: `color-mix(in srgb, ${tint} 14%, var(--surface))`,
+                      color: tint,
                     }}
                   >
                     <Icon aria-hidden="true" className="size-5" strokeWidth={1.75} />
@@ -117,7 +139,7 @@ export function SkillGroups() {
                   >
                     <span
                       aria-hidden="true"
-                      className="pulse-dot relative size-1.5 rounded-full bg-[#10b981]"
+                      className="pulse-dot relative size-1.5 rounded-full bg-trail"
                     />
                     {techName(id)}
                   </li>
@@ -137,13 +159,10 @@ export function SkillGroups() {
           {everything.slice(0, half).map((name) => (
             <span
               key={name}
-              className="flex items-center gap-8 pr-8 font-display text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-6xl"
+              className="flex items-center gap-8 pr-8 font-display text-4xl tracking-[-0.01em] text-ink uppercase sm:text-6xl"
             >
               {name}
-              <span
-                className="size-3 rounded-full"
-                style={{ background: 'var(--gradient-aurora)' }}
-              />
+              <Peak className="h-3 w-4 text-trail" />
             </span>
           ))}
         </Marquee>
@@ -151,10 +170,10 @@ export function SkillGroups() {
           {everything.slice(half).map((name) => (
             <span
               key={name}
-              className="flex items-center gap-8 pr-8 font-display text-4xl font-semibold tracking-[-0.03em] text-transparent [-webkit-text-stroke:1.5px_var(--ink-3)] sm:text-6xl"
+              className="flex items-center gap-8 pr-8 font-display text-4xl tracking-[-0.01em] text-transparent uppercase [-webkit-text-stroke:1.5px_var(--ink-3)] sm:text-6xl"
             >
               {name}
-              <span className="size-3 rotate-45 rounded-[3px] border-2 border-ink-3" />
+              <Peak className="h-3 w-4 text-pine" />
             </span>
           ))}
         </Marquee>

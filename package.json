@@ -12,12 +12,13 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "check:content": "node scripts/check-content.mjs",
-    "og-image": "node scripts/social/render.mjs"
+    "og-image": "node scripts/social/render.mjs",
+    "topo": "node scripts/generate-topo.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource/barlow-semi-condensed": "^5.3.0",
     "@gsap/react": "^2.1.2",
     "@react-router/node": "^8.4.0",
     "gsap": "^3.15.0",

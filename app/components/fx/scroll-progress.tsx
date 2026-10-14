@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-/** Thin aurora bar across the top of the viewport showing reading progress. */
+/** Thin trail-orange bar across the top of the viewport showing reading progress. */
 export function ScrollProgress() {
   const bar = useRef<HTMLDivElement>(null);
 
@@ -33,7 +33,7 @@ export function ScrollProgress() {
       <div
         ref={bar}
         className="h-full origin-left scale-x-0"
-        style={{ background: 'var(--gradient-aurora)' }}
+        style={{ background: 'var(--trail)' }}
       />
     </div>
   );

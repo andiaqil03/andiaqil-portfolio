@@ -7,6 +7,7 @@ import { Container } from '~/components/ui/container';
 import { CopyButton } from '~/components/ui/copy-button';
 import { Reveal } from '~/components/ui/reveal';
 import { Magnetic } from '~/components/fx/magnetic';
+import { Ridges } from '~/components/fx/ridges';
 import { TiltCard } from '~/components/fx/tilt-card';
 import { resolved } from '~/content/placeholder';
 import { profile } from '~/content/profile';
@@ -30,7 +31,7 @@ interface Channel {
 
 function ChannelCard({ label, Icon, value, note }: Channel) {
   return (
-    <div className="glass flex h-full items-start gap-4 rounded-xl p-5">
+    <div className="surface-card flex h-full items-start gap-4 rounded-xl p-5">
       <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
         <Icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
       </span>
@@ -105,13 +106,23 @@ export default function Contact() {
         <Container className="grid gap-5 pt-4 pb-16 sm:gap-6 sm:pb-20 lg:grid-cols-12 lg:pb-28">
           <Reveal className="lg:col-span-7">
             <TiltCard max={3} className="h-full rounded-xl">
-              <div className="glass ring-gradient relative h-full overflow-hidden rounded-xl p-6 sm:p-10">
+              <div className="surface-card relative h-full overflow-hidden rounded-xl p-6 pb-20 sm:p-10 sm:pb-24">
+                {/* Contour corner and a low horizon, in place of a glow. */}
                 <div
                   aria-hidden="true"
-                  className="absolute -top-24 -right-24 size-72 rounded-full opacity-30 blur-3xl"
-                  style={{ background: 'var(--gradient-aurora)' }}
+                  className="absolute inset-0 [mask-image:radial-gradient(60%_70%_at_100%_0%,#000_20%,transparent_75%)]"
+                >
+                  <div className="topo absolute inset-0" />
+                </div>
+                <Ridges
+                  tones={[
+                    'color-mix(in srgb, var(--lake) 10%, transparent)',
+                    'color-mix(in srgb, var(--pine) 9%, transparent)',
+                    'color-mix(in srgb, var(--pine) 13%, transparent)',
+                  ]}
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-20"
                 />
-                <span className="bg-brand relative inline-flex size-12 items-center justify-center rounded-full text-white shadow-md">
+                <span className="bg-accent relative inline-flex size-12 items-center justify-center rounded-full text-on-accent shadow-md">
                   <Mail aria-hidden="true" className="size-5" strokeWidth={1.75} />
                 </span>
                 <h2 className="relative mt-6 font-display text-subheading font-semibold">Email</h2>

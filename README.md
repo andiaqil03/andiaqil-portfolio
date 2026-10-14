@@ -2,7 +2,7 @@
 
 Personal portfolio of Andi Muhammad Aqil Bin Andi Abd Rahman, Software Engineering graduate and software developer.
 
-Built with **React 19, TypeScript, Tailwind CSS v4 and React Router (framework mode on Vite)**, animated with **GSAP + ScrollTrigger**, **Lenis** smooth scrolling and a **three.js** hero scene. Press **Ctrl/⌘ + K** anywhere for the command palette. Every page is prerendered to static HTML at build time, so the site is fast, SEO-friendly, shows proper link previews, and can be hosted on any static host for free.
+Built with **React 19, TypeScript, Tailwind CSS v4 and React Router (framework mode on Vite)**, animated with **GSAP + ScrollTrigger**, **Lenis** smooth scrolling and a **three.js** hero: a 3D contour map where the career is drawn as a hiking trail. Press **Ctrl/⌘ + K** anywhere for the command palette. Every page is prerendered to static HTML at build time, so the site is fast, SEO-friendly, shows proper link previews, and can be hosted on any static host for free.
 
 ## Quick start
 
@@ -15,27 +15,29 @@ npm run build          # prerender everything into build/client
 npm run preview        # serve the build like a static host (http://localhost:4173)
 ```
 
-| Script | What it does |
-|---|---|
-| `npm run typecheck` | Generate route types and run TypeScript |
-| `npm run lint` | ESLint, including accessibility rules (jsx-a11y) |
-| `npm run check:content` | List every placeholder still waiting for real content |
-| `npm run og-image` | Re-render `public/og-image.png` and `public/apple-touch-icon.png` from `scripts/social/*.html` (needs Edge or Chrome) |
+| Script                  | What it does                                                                                                          |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`     | Generate route types and run TypeScript                                                                               |
+| `npm run lint`          | ESLint, including accessibility rules (jsx-a11y)                                                                      |
+| `npm run check:content` | List every placeholder still waiting for real content                                                                 |
+| `npm run og-image`      | Re-render `public/og-image.png` and `public/apple-touch-icon.png` from `scripts/social/*.html` (needs Edge or Chrome) |
+| `npm run topo`          | Regenerate the contour-line texture `public/topo.svg`                                                                 |
 
 ## Updating content
 
 All content lives in **`app/content/`**. You should rarely need to touch components.
 
-| File | Contains |
-|---|---|
-| `profile.ts` | Name, hero heading and intro, email, phone (Contact page only), links, resume PDF path, summary |
-| `about.ts` | The About page story timeline and the client-work process |
-| `experience.ts` | Roles, newest first. `highlights` are always shown; `details` sit behind "Show more" |
-| `projects.ts` | Projects and their case-study sections |
-| `skills.ts` | Skill categories (Backend, Frontend, Languages, Database & tools) and what you're currently learning |
-| `education.ts` | Education and activities |
-| `tech.ts` | Every technology name, referenced by id everywhere else |
-| `site.ts` | Production domain, navigation, this repo's URL |
+| File            | Contains                                                                                             |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| `profile.ts`    | Name, hero heading and intro, email, phone (Contact page only), links, resume PDF path, summary      |
+| `about.ts`      | The About page story timeline and the client-work process                                            |
+| `experience.ts` | Roles, newest first. `highlights` are always shown; `details` sit behind "Show more"                 |
+| `projects.ts`   | Projects and their case-study sections                                                               |
+| `skills.ts`     | Skill categories (Backend, Frontend, Languages, Database & tools) and what you're currently learning |
+| `education.ts`  | Education and activities                                                                             |
+| `outdoors.ts`   | The "Off the trail" section: hiking, travel and sport, plus photo slots                              |
+| `tech.ts`       | Every technology name, referenced by id everywhere else                                              |
+| `site.ts`       | Production domain, navigation, this repo's URL                                                       |
 
 ### Placeholders
 
@@ -82,6 +84,29 @@ content: [
 ],
 ```
 
+### Outdoor photos
+
+The "Off the trail" section (Home and About) has six photo frames for hiking, travel and sport. They stay hidden on the live site until real photos are added:
+
+1. Put images in `public/images/outdoors/` (WebP or JPG, landscape, around 1600px wide).
+2. In `app/content/outdoors.ts`, replace a photo's `image: todo(...)` with its details and its `caption: todo(...)` with a short caption, for example the trail, peak, city or sport:
+
+```ts
+{
+  id: 'hike-1',
+  kind: 'Hiking',
+  caption: 'Sunrise at the summit',
+  image: {
+    src: '/images/outdoors/hike-1.webp',
+    alt: 'Sunrise over forested hills, seen from a summit',
+    width: 1600,
+    height: 1200,
+  },
+},
+```
+
+Delete the photo entries you don't need. In production, only frames with a real image are shown.
+
 ### Resume PDF
 
 Copy your PDF into `public/` (e.g. `public/andi-aqil-resume.pdf`) and set `resumePdf: '/andi-aqil-resume.pdf'` in `profile.ts`. A "Download PDF" button then appears on `/resume`. The web resume deliberately leaves out your phone number; keep it in the PDF if you want it there.
@@ -112,7 +137,7 @@ app/
   app.css       Design tokens (light and dark) and global styles
   root.tsx      Document shell, header, footer, error boundary
 public/         Favicon, touch icon, link-preview image, (your resume PDF)
-scripts/        Post-build 404, preview server, content check, social images
+scripts/        Post-build 404, preview server, content check, social images, contour texture
 DESIGN.md       Design system: colour, type, spacing, radius, shadow, buttons, cards, nav, breakpoints, motion
 PRODUCT.md      Product context and content constraints
 ```
@@ -120,8 +145,8 @@ PRODUCT.md      Product context and content constraints
 ## Accessibility and performance
 
 - Semantic landmarks, one `h1` per page, skip link, visible focus rings, keyboard-operable tabs, filters and menus.
-- Colour contrast meets WCAG AA in both themes. Theme follows the system until toggled.
-- All motion respects `prefers-reduced-motion` (no intro, smooth scroll, pinning or reveals; the globe renders a still frame).
+- Colour contrast meets WCAG AA in both themes.
+- All motion respects `prefers-reduced-motion` (no intro, smooth scroll, pinning or reveals; the trail map renders a still frame with the route fully drawn).
 - Light theme by default; dark is opt-in via the toggle or the command palette and is remembered.
 - The three.js scene is a separate, lazily loaded chunk that pauses when off-screen.
 - No runtime data fetching, no analytics, no cookies. Fonts are self-hosted.

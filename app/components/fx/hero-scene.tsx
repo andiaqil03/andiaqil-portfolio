@@ -1,23 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '~/lib/cn';
 import { prefersReducedMotion } from '~/lib/gsap';
+import type { TrailWaypoint } from './trail-scene';
 
-/** Hubs on the globe: real parts of the stack. */
-const LABELS = ['NestJS API', 'Angular', 'React', 'Laravel', '.NET', 'MySQL', 'Firebase', 'Gemini'];
+/** Real milestones along the trail, trailhead to summit. */
+const WAYPOINTS: TrailWaypoint[] = [
+  { label: 'UNITEN · 2021', t: 0.04 },
+  { label: 'TM R&D · 2025', t: 0.34 },
+  { label: 'PNB · 2025–26', t: 0.6 },
+  { label: 'Freelance · now', t: 0.84 },
+  { label: 'Next: Software Engineer', t: 1, summit: true },
+];
 
 function supportsWebGL(): boolean {
   try {
     const canvas = document.createElement('canvas');
-    return Boolean(canvas.getContext('webgl2') ?? canvas.getContext('webgl'));
+    return Boolean(canvas.getContext('webgl2'));
   } catch {
     return false;
   }
 }
 
 /**
- * Host for the WebGL "Living System". Shows a soft CSS orb immediately (and
- * as the fallback without WebGL), then loads three.js in its own chunk and
- * fades the live scene in.
+ * Host for the WebGL trail map. Shows the flat topographic texture right away
+ * (and as the fallback without WebGL), then loads three.js in its own chunk
+ * and fades the 3D mountain in.
  */
 export function HeroScene({ className }: { className?: string }) {
   const mount = useRef<HTMLDivElement>(null);
@@ -32,10 +39,10 @@ export function HeroScene({ className }: { className?: string }) {
     let disposed = false;
     let dispose: (() => void) | undefined;
 
-    import('./living-system').then(({ createLivingSystem }) => {
+    import('./trail-scene').then(({ createTrailScene }) => {
       if (disposed) return;
-      dispose = createLivingSystem(container, labelLayer, {
-        labels: LABELS,
+      dispose = createTrailScene(container, labelLayer, {
+        waypoints: WAYPOINTS,
         reducedMotion: prefersReducedMotion(),
         onReady: () => setReady(true),
       });
@@ -49,23 +56,18 @@ export function HeroScene({ className }: { className?: string }) {
 
   return (
     <div aria-hidden="true" className={className ?? 'relative'}>
-      {/* Placeholder orb: visible until the scene is ready, and the fallback without WebGL. */}
+      {/* Flat contour map: visible until the 3D scene is ready, and the fallback without WebGL. */}
       <div
         className={cn(
-          'absolute inset-[14%] rounded-full transition-opacity duration-1000',
+          'topo absolute inset-[6%] rounded-full transition-opacity duration-1000 [--topo:color-mix(in_srgb,var(--pine)_30%,transparent)]',
           ready ? 'opacity-0' : 'opacity-100',
         )}
-        style={{
-          background:
-            'radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--g-indigo) 38%, transparent), transparent 60%), radial-gradient(circle at 70% 75%, color-mix(in srgb, var(--g-emerald) 30%, transparent), transparent 55%)',
-          filter: 'blur(8px)',
-        }}
       />
       <div
         ref={mount}
         className={cn(
           'absolute inset-0 transition-[opacity,transform] duration-[1400ms] ease-out-expo',
-          ready ? 'scale-100 opacity-100' : 'scale-90 opacity-0',
+          ready ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
         )}
       />
       <div ref={labels} className="pointer-events-none absolute inset-0 overflow-hidden" />

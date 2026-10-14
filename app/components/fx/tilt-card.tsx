@@ -21,12 +21,12 @@ interface TiltCardProps extends Omit<
 }
 
 /**
- * Glass card that tilts toward the pointer in 3D, with a cursor spotlight and
- * a soft glare. Mouse/trackpad only; static with reduced motion.
+ * Card that tilts gently toward the pointer in 3D, with a faint cursor
+ * highlight. Mouse/trackpad only; static with reduced motion.
  */
 export function TiltCard({
   as: Tag = 'div',
-  max = 6,
+  max = 4,
   className,
   children,
   ...rest
@@ -73,10 +73,6 @@ export function TiltCard({
       <span
         aria-hidden="true"
         className="spotlight pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/tilt:opacity-100"
-      />
-      <span
-        aria-hidden="true"
-        className="glare pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 mix-blend-soft-light transition-opacity duration-300 group-hover/tilt:opacity-100"
       />
     </Tag>
   );

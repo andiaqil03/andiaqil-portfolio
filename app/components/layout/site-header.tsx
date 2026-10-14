@@ -73,7 +73,7 @@ export function SiteHeader() {
     <header className="no-print pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 [view-transition-name:site-header] sm:px-5 sm:pt-4">
       <div
         className={cn(
-          'glass pointer-events-auto mx-auto flex h-14 max-w-[72rem] items-center justify-between gap-3 rounded-full pr-2 pl-3 transition-[max-width,box-shadow,background-color] duration-500 ease-out-expo sm:pl-4',
+          'surface-card pointer-events-auto mx-auto flex h-14 max-w-[72rem] items-center justify-between gap-3 rounded-full pr-2 pl-3 transition-[max-width,box-shadow,background-color] duration-500 ease-out-expo sm:pl-4',
           scrolled && 'max-w-[64rem] shadow-md',
         )}
       >
@@ -89,7 +89,7 @@ export function SiteHeader() {
                   viewTransition
                   className={({ isActive }) =>
                     cn(
-                      'relative inline-flex h-10 items-center rounded-full px-3.5 text-[0.875rem] font-medium transition-colors duration-200',
+                      'relative isolate inline-flex h-10 items-center rounded-full px-3.5 text-[0.875rem] font-medium transition-colors duration-200',
                       isActive ? 'text-ink' : 'text-ink-2 hover:text-ink',
                     )
                   }
@@ -99,7 +99,7 @@ export function SiteHeader() {
                       {isActive ? (
                         <span
                           aria-hidden="true"
-                          className="absolute inset-0 -z-10 rounded-full bg-surface shadow-xs ring-1 ring-line"
+                          className="absolute inset-0 -z-10 rounded-full bg-accent-soft"
                         />
                       ) : null}
                       {item.label}
@@ -141,16 +141,19 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile menu: a glass sheet under the pill with staggered links. */}
+      {/* Mobile menu: a surface-card sheet under the pill with staggered links. */}
       <div id={menuId} hidden={!isOpen} className="lg:hidden">
         <button
           type="button"
           aria-label="Close menu"
           tabIndex={-1}
           onClick={close}
-          className="pointer-events-auto fixed inset-0 -z-10 bg-[rgb(10_15_31/0.25)] backdrop-blur-[2px]"
+          className="pointer-events-auto fixed inset-0 -z-10 bg-[rgb(13_21_18/0.3)] backdrop-blur-[2px]"
         />
-        <nav aria-label="Main" className="menu-in glass pointer-events-auto mt-2 rounded-xl p-3">
+        <nav
+          aria-label="Main"
+          className="menu-in surface-card pointer-events-auto mt-2 rounded-xl p-3"
+        >
           <ul>
             {site.nav.map((item, index) => (
               <li
@@ -166,7 +169,7 @@ export function SiteHeader() {
                   className={({ isActive }) =>
                     cn(
                       'flex h-12 items-center justify-between rounded-md px-3 font-display text-lg font-semibold tracking-[-0.02em] transition-colors',
-                      isActive ? 'bg-surface text-ink shadow-xs' : 'text-ink-2 hover:text-ink',
+                      isActive ? 'bg-accent-soft text-ink' : 'text-ink-2 hover:text-ink',
                     )
                   }
                 >
@@ -177,7 +180,7 @@ export function SiteHeader() {
                         <span
                           aria-hidden="true"
                           className="size-2 rounded-full"
-                          style={{ background: 'var(--gradient-aurora)' }}
+                          style={{ background: 'var(--trail)' }}
                         />
                       ) : null}
                     </>

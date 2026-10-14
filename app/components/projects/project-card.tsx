@@ -43,7 +43,7 @@ function ViewProject({ label = 'View project' }: { label?: string }) {
       className="inline-flex items-center gap-2 text-sm font-semibold text-accent"
     >
       {label}
-      <span className="inline-flex size-7 items-center justify-center rounded-full bg-accent-soft transition-[background-color,color,translate] duration-300 ease-out-expo group-hover/tilt:translate-x-1 group-hover/tilt:bg-accent group-hover/tilt:text-white">
+      <span className="inline-flex size-7 items-center justify-center rounded-full bg-accent-soft transition-[background-color,color,translate] duration-300 ease-out-expo group-hover/tilt:translate-x-1 group-hover/tilt:bg-accent group-hover/tilt:text-on-accent">
         <ArrowRight className="size-3.5" strokeWidth={2.25} />
       </span>
     </span>
@@ -51,7 +51,7 @@ function ViewProject({ label = 'View project' }: { label?: string }) {
 }
 
 const cardSurface =
-  'glass relative flex h-full flex-col overflow-hidden transition-shadow duration-500 group-hover/tilt:shadow-lg';
+  'surface-card relative flex h-full flex-col overflow-hidden transition-shadow duration-500 group-hover/tilt:shadow-lg';
 
 /**
  * Product-style project card: name, visual, one-line description, technology,
@@ -121,14 +121,14 @@ export function FeaturedProjectCard({
 }) {
   return (
     <TiltCard as="article" max={3} className={cn('rounded-xl', className)}>
-      <div className={cn(cardSurface, 'ring-gradient rounded-xl lg:grid lg:grid-cols-12')}>
+      <div className={cn(cardSurface, 'rounded-xl lg:grid lg:grid-cols-12')}>
         <div className="flex flex-col p-6 sm:p-8 lg:col-span-5 lg:p-10">
           <div className="flex flex-wrap items-center gap-2">
             <Tag tone="accent">
               <span
                 aria-hidden="true"
                 className="size-1.5 rounded-full"
-                style={{ background: 'var(--gradient-aurora)' }}
+                style={{ background: 'var(--trail)' }}
               />
               Featured project
             </Tag>
@@ -169,18 +169,21 @@ export function AllProjectsCard({ count, className }: { count: number; className
       to="/projects"
       viewTransition
       className={cn(
-        'group relative flex flex-col justify-between overflow-hidden rounded-xl p-8 text-white shadow-lg',
+        'group relative isolate flex flex-col justify-between overflow-hidden rounded-xl p-8 text-white shadow-lg',
         className,
       )}
     >
-      <span aria-hidden="true" className="bg-brand is-animated absolute inset-0 -z-10" />
-      <span aria-hidden="true" className="dot-grid absolute inset-0 -z-10 opacity-40" />
+      <span aria-hidden="true" className="absolute inset-0 -z-10 bg-summit" />
+      <span
+        aria-hidden="true"
+        className="topo absolute inset-0 -z-10 [--topo:rgb(255_255_255/0.1)]"
+      />
       <span className="font-mono text-meta tracking-[0.12em] text-white/70 uppercase">Archive</span>
       <span>
-        <span className="block font-display text-4xl font-semibold tracking-[-0.04em]">
+        <span className="block font-display text-4xl font-semibold tracking-[-0.01em]">
           See all {count} projects
         </span>
-        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-full bg-white text-[#0a0f1f] transition-transform duration-500 ease-out-expo group-hover:rotate-45">
+        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-full bg-white text-summit transition-transform duration-500 ease-out-expo group-hover:rotate-45">
           <ArrowUpRight aria-hidden="true" className="size-6" strokeWidth={2} />
         </span>
       </span>

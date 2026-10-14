@@ -1,128 +1,145 @@
 ---
-name: Andi Aqil Portfolio — Living System
-description: A light, luminous, high-motion engineer's site. A live WebGL network of services, aurora light, frosted glass, kinetic type.
+name: Andi Aqil Portfolio — Trail Map
+description: A hiking-map engineer's site. Map-paper white, pine green, alpine-lake blue and granite, with sunrise orange for trail markers. A 3D contour mountain hero where the career is the trail. Solid colours only; no gradients, no neon, no glow.
 colors:
-  canvas: "#f6f7fb"
-  surface: "#ffffff"
-  surface-2: "#eef1f8"
-  glass: "rgba(255,255,255,0.66)"
-  ink: "#0a0f1f"
-  ink-2: "#454e66"
-  ink-3: "#687089"
-  line: "#e2e6f0"
-  line-strong: "#c9d0df"
-  accent: "#4f46e5"
-  accent-2: "#0369a1"
-  accent-3: "#047857"
-  graphic-indigo: "#6366f1"
-  graphic-sky: "#0ea5e9"
-  graphic-emerald: "#10b981"
-  graphic-fuchsia: "#d946ef"
-  dark-canvas: "#070a14"
-  dark-surface: "#0f1424"
-  dark-ink: "#eef1fa"
-  dark-accent: "#8b8cff"
+  canvas: '#f5f7f4'
+  surface: '#ffffff'
+  surface-2: '#ebf1ed'
+  water: '#e2eff5'
+  ink: '#12211c'
+  ink-2: '#41524b'
+  ink-3: '#5e6f68'
+  line: '#dce4de'
+  line-strong: '#c0cec5'
+  accent: '#2d6a4f'
+  accent-hover: '#24573f'
+  accent-soft: '#e1efe6'
+  on-accent: '#ffffff'
+  accent-2: '#1e6b93'
+  accent-3: '#a84d08'
+  graphic-trail: '#e07b39'
+  graphic-pine: '#2d6a4f'
+  graphic-lake: '#3b8bb5'
+  graphic-granite: '#7d8a82'
+  summit: '#17352a'
+  dark-canvas: '#0d1512'
+  dark-surface: '#141f1a'
+  dark-ink: '#e5ede8'
+  dark-accent: '#7cc39a'
+  dark-trail: '#f0a35e'
 typography:
   display:
-    fontFamily: "Bricolage Grotesque Variable (opsz 96), Geist, sans-serif"
-    fontSize: "clamp(2.25rem, 1.1rem + 3.7vw, 4.5rem)"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "-0.045em"
+    fontFamily: 'Barlow Semi Condensed 700, Geist, sans-serif'
+    fontSize: 'clamp(2.6rem, 1.4rem + 4.4vw, 5.25rem)'
+    fontWeight: 700
+    lineHeight: 0.98
+    letterSpacing: '-0.02em'
+    textTransform: 'uppercase (first line of the hero only)'
   title:
-    fontFamily: "Bricolage Grotesque Variable"
-    fontSize: "clamp(2.25rem, 1.5rem + 3vw, 4rem)"
-    fontWeight: 600
-    lineHeight: 1.02
-    letterSpacing: "-0.04em"
+    fontFamily: 'Barlow Semi Condensed'
+    fontSize: 'clamp(2.5rem, 1.6rem + 3.4vw, 4.5rem)'
+    fontWeight: 700
+    lineHeight: 1
   section:
-    fontFamily: "Bricolage Grotesque Variable"
-    fontSize: "clamp(2rem, 1.5rem + 2vw, 3.25rem)"
-    fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "-0.035em"
+    fontFamily: 'Barlow Semi Condensed'
+    fontSize: 'clamp(2.1rem, 1.6rem + 2vw, 3.4rem)'
+    fontWeight: 700
+    lineHeight: 1.02
   subheading:
-    fontFamily: "Bricolage Grotesque Variable"
-    fontSize: "1.375rem"
+    fontFamily: 'Barlow Semi Condensed'
+    fontSize: '1.5rem'
     fontWeight: 600
   body:
-    fontFamily: "Geist Variable, system-ui, sans-serif"
-    fontSize: "1rem"
+    fontFamily: 'Geist Variable, system-ui, sans-serif'
+    fontSize: '1rem'
     lineHeight: 1.65
   lead:
-    fontFamily: "Geist Variable"
-    fontSize: "1.1875rem"
+    fontFamily: 'Geist Variable'
+    fontSize: '1.1875rem'
     lineHeight: 1.65
   meta:
-    fontFamily: "Geist Mono Variable, monospace"
-    fontSize: "0.75rem"
+    fontFamily: 'Geist Mono Variable, monospace'
+    fontSize: '0.75rem'
     fontWeight: 500
 rounded:
-  sm: "8px"
-  md: "12px"
-  lg: "20px"
-  xl: "28px"
-  full: "9999px"
+  xs: '4px'
+  sm: '8px'
+  md: '12px'
+  lg: '16px'
+  xl: '24px'
+  full: '9999px'
 components:
   button-primary:
-    background: "rotating brand gradient #4338ca → #0369a1 → #047857"
-    textColor: "#ffffff"
-    rounded: "{rounded.full}"
-    height: "48px"
+    background: '{colors.accent}'
+    textColor: '{colors.on-accent}'
+    rounded: '{rounded.full}'
+    height: '48px'
   button-secondary:
-    background: "{colors.glass}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
-    height: "48px"
+    background: '{colors.surface} + 1px {colors.line} border'
+    textColor: '{colors.ink}'
+    rounded: '{rounded.full}'
+    height: '48px'
   card:
-    background: "{colors.glass} + 18px backdrop blur"
-    rounded: "{rounded.xl}"
+    background: '{colors.surface} + 1px {colors.line} border + soft pine-tinted shadow'
+    rounded: '{rounded.xl}'
+  kicker:
+    marker: 'trail blaze: 8×14px {colors.graphic-trail} rectangle'
+    text: 'Geist Mono, uppercase, {colors.ink-2}'
 ---
 
-# Design System: Living System
+# Design System: Trail Map
 
-**North star:** the site *is* a running system. Services glow, requests travel between them, and everything responds to the visitor. It's light by default, luminous rather than neon, and uses motion everywhere that makes sense, with all of it optional.
+**North star:** the site reads like a well-made hiking map, and the career is the trail on it. It reflects who Andi is outside of code (hiking, travel and sport) while staying calm and professional for recruiters. Light is the default. The palette is earthy and solid: no colour gradients, no neon, no glow.
 
 ## Signature pieces
 
-| Piece | Where | What it does |
-|---|---|---|
-| **Living System globe** | Home hero | three.js network of ~200 nodes on a sphere. 8 labelled hubs name the real stack, packets of light travel along connections, and it tilts toward the cursor. Lazy-loaded chunk; pauses off-screen; static frame under reduced motion; CSS orb fallback without WebGL. |
-| **Intro loader** | First visit per session | The logo draws itself, a counter runs to 100 and the panel lifts (CSS only, about 1.3s). Skipped for reduced motion and on repeat visits. |
-| **Kinetic type** | Hero, page titles | Characters flip up in 3D on first paint (CSS, no hydration wait). The second line is a slowly rotating gradient. |
-| **Scramble focus line** | Hero | `const focus = "…"` decodes through glyphs, cycling REST APIs → backend services → full-stack web apps → … |
-| **Aurora + grain** | Every page | Three drifting light fields (indigo, sky, emerald) and film grain behind everything. |
-| **Glass tilt cards** | Projects, skills, timeline, education | Frosted glass that tilts in 3D toward the pointer, with a cursor spotlight and glare. |
-| **Pinned horizontal gallery** | Home projects (≥1024px) | The section pins and the cards travel sideways with a progress bar, ending on a "See all projects" card. Vertical grid elsewhere. |
-| **Scroll-lit statement** | Home and About | Words light up one by one as you scroll. |
-| **Self-drawing timelines** | Experience, About story | A gradient rail draws with scroll progress and nodes pop in. |
-| **Counters and rings** | Stats band, case-study facts, CGPA | Real figures count up; CGPA rings fill toward 4.00. |
-| **⌘K command palette** | Global (Ctrl/⌘+K, header, footer) | Pages, projects and actions (copy email, open profiles, switch theme). Native `<dialog>` with combobox semantics. |
-| **Cinematic transitions** | Navigation | The old page sinks and blurs while the new one wipes up. Project titles morph from card to case study. Theme switches grow out of the toggle in a circle. |
-| **Magnetic CTAs** | Primary buttons | Buttons pull toward the pointer with an elastic return, plus a shine sweep and a glow. |
+| Piece                         | Where                                     | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Trail map hero**            | Home                                      | A three.js contour mountain (shader contours, an alpine lake, and a slow highlight sweep up the slope). A dashed orange trail draws up it, past real milestones as waypoint labels: UNITEN 2021 → TM R&D 2025 → PNB 2025–26 → Freelance now → a summit flag reading "Next: Software Engineer". A hiker dot then walks the route, and the camera drifts and leans toward the pointer. The chunk is lazy-loaded. It pauses off-screen, renders one still frame (trail fully drawn) under reduced motion, and falls back to a flat contour texture without WebGL2. Labels are clamped inside the canvas on narrow screens. |
+| **Contour textures**          | Every page, cards, panels                 | `public/topo.svg` is generated by `scripts/generate-topo.mjs` (marching squares over fractal noise). It's used as a CSS mask (`.topo`) and tinted per surface via `--topo`, so it works on light, dark and pine panels. Small strips render it at native scale so the lines never shrink to hairlines.                                                                                                                                                                                                                                                                                                                  |
+| **Trail blazes**              | Section kickers                           | The painted orange rectangle used to mark hiking trails, placed before each mono kicker ("Expeditions", "Gear", "The route", "Basecamp", "Off the trail").                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Ridgeline horizons**        | Footer, contact panel, contact email card | Three deterministic SVG ridgelines (far → near) in lake and pine tints, the way a map's horizon is drawn.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Trail timelines**           | Experience, About story, About process    | A dashed orange rail draws with scroll progress. Past stops are pine-ringed, the current stop is a pulsing orange marker, and "next" is a dashed lake ring.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Trail stats**               | Home                                      | A summit-green panel with contours and real figures that count up (CGPA, Dean's List semesters, survey responses, project and role counts).                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Off the trail**             | Home and About                            | Hiking / Travel / Sport, with up to six scrapbook-style photo frames. Frames appear on the live site only once real photos are added (`app/content/outdoors.ts`).                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| **Intro loader**              | First visit per session                   | A summit-green panel where a ridgeline draws, an orange flag rises and a counter runs to 100 (CSS only, about 2s). Skipped for reduced motion and on repeat visits.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Signage type**              | Hero, titles                              | Barlow Semi Condensed, like trail signage. The hero's first line is uppercase and characters rise in on first paint (CSS, no hydration wait). The second line is pine and sentence case.                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Scramble focus line**       | Hero                                      | `const focus = "…"` on a lake-tinted chip decodes through glyphs, cycling the real focus areas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Tilt cards**                | Projects, skills, process                 | Cards tilt up to 4° toward the pointer with a faint pine spotlight; there's no glare.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Pinned horizontal gallery** | Home projects (≥1024px)                   | The section pins and cards travel sideways, ending on a summit-green "See all projects" card. Vertical grid elsewhere.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Scroll-lit statement**      | Home and About                            | Words light up one by one as you scroll, with pine highlights.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **⌘K command palette**        | Global (Ctrl/⌘+K, header, footer)         | Pages, projects and actions. Native `<dialog>` with combobox semantics.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Transitions**               | Navigation                                | Page cross-fade and rise, a project title that morphs from card to case study, and a theme switch that grows out of the toggle in a circle.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Magnetic CTAs**             | Primary buttons                           | Buttons pull toward the pointer with an elastic return. Solid pine, no shine or glow.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 ## Colour
 
-Light is the default. Dark applies only when the visitor chooses it, and the choice is remembered.
-- **Text colours** (ink, ink-2, ink-3, accent and the text gradient) meet 4.5:1 on the canvas in both themes.
-- **Graphic colours** (indigo, sky, emerald, fuchsia) are for light, glows and WebGL only, never for small text.
-- **Brand gradient:** #4338ca → #0369a1 → #047857. White text passes AA at every stop. Its angle rotates slowly via `@property`.
+- **Default and dark mode:** light is the default. Dark ("night hike": deep forest, sage and lake) applies only when the visitor chooses it, and the choice is remembered.
+- **Roles:**
+  - **Pine** `#2d6a4f` is the primary colour: buttons, links, active states and the accent word in headings.
+  - **Lake** `#1e6b93` / `#3b8bb5` is secondary: focus rings, water, the frontend category, and the "next" markers.
+  - **Granite** neutrals carry text and lines.
+  - **Sunrise orange** `#e07b39` is reserved for trail markers (blazes, the trail line, the current-position dot and the summit flag). Its text-safe version is `#a84d08`.
+- **No colour gradients.** Gradients appear only as masks that fade a texture out, never as visible colour. No neon, no glows, no blurred colour blobs.
+- **Text contrast:** text colours (ink, ink-2, ink-3, accent, accent-2, accent-3) meet 4.5:1 on canvas, surface and their soft fills in both themes. This was checked programmatically across every page.
+- **Graphic colours** (trail, pine, lake, granite) are for fills, strokes and WebGL only, never for small text.
+- **On pine fills,** text uses `on-accent` (white in light mode, deep forest in dark), never hard-coded white. Summit-green panels stay dark in both themes and use white text.
 
 ## Motion rules
 
-- **Easing:** expo-out `cubic-bezier(.16,1,.3,1)` for entrances; elastic for magnetic springs; quart in-out for curtains and theme reveals.
-- **Entrances** (fade, 28px rise and 6px blur clearing) only arm for elements that start below the fold, so prerendered content never flashes or hides.
+- **Easing:** expo-out `cubic-bezier(.16,1,.3,1)` for entrances; elastic for magnetic springs; quart in-out for theme reveals.
+- **Entrances:** fade plus rise. They only arm for elements that start below the fold, so prerendered content never flashes or hides.
 - **Smooth scrolling:** Lenis drives GSAP ScrollTrigger. Native scrolling is kept on touch devices.
-- **Reduced motion:** no intro, no smooth scroll, no pinning (vertical layout), no reveals, counters show final values, the globe renders one still frame, and view transitions are off.
-- **Performance:** WebGL pauses when off-screen or the tab is hidden. DPR is capped at 1.75. Mobile gets fewer nodes and packets.
+- **Reduced motion:** no intro, no smooth scroll, no pinning, no reveals. Counters show their final values, the trail scene renders one still frame, and view transitions are off.
+- **Performance:** WebGL pauses off-screen and when the tab is hidden. DPR is capped. The three.js chunk (~137 KB gzipped) loads after first paint.
 
 ## Layout
 
-- The container is 76rem with 16/24/32px gutters, and the floating glass pill nav sits 12–16px from the top.
-- The desktop nav appears from 1024px; below that, a hamburger opens a glass sheet with staggered links.
-- Sections are 80 / 96 / 128px tall in padding. Headers are a mono kicker with a gradient rule, then a display heading with one gradient word, then a lead.
-- Tested at 320, 375, 390, 430, 768, 1024, 1280 and 1440px with no horizontal overflow and no tap target under 24px.
+- **Container and nav:** a 76rem container with 16/24/32px gutters. The nav is a floating white pill 12–16px from the top, and the active page gets a pine-soft pill.
+- **Breakpoints:** the desktop nav appears from 1024px. Below that, a menu button opens a sheet with staggered links.
+- **Sections:** a trail-blaze mono kicker, then a Barlow heading with one pine word, then a lead.
+- **Tested widths:** 320, 375, 768, 1024 and 1440px on every page, with no horizontal overflow and no tap target under 24px.
 
 ## Content honesty
 
-The effects never invent anything. The globe's labels are real stack items, counters show real figures, and project visuals are labelled illustrations until screenshots exist. No fake statistics, clients or testimonials appear.
+The effects never invent anything. Waypoints are real roles and dates; the summit is labelled as the next goal, not an achievement. Counters show real figures, project visuals are labelled illustrations until screenshots exist, and outdoor photo frames stay hidden until real photos are supplied. No fake statistics, clients or testimonials.

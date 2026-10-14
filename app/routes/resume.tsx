@@ -79,7 +79,7 @@ export default function Resume() {
     <Container className="pt-28 pb-16 sm:pt-32 sm:pb-20 print:max-w-none print:p-0">
       <div className="no-print mb-8 flex flex-wrap items-center justify-between gap-4">
         <h1 className="font-display text-title font-semibold">
-          Resume <span className="text-gradient is-animated">&amp; CV</span>
+          Resume <span className="text-accent">&amp; CV</span>
         </h1>
         <div className="flex flex-wrap gap-2.5">
           {pdf ? (
@@ -104,7 +104,7 @@ export default function Resume() {
 
       <article
         aria-label={`Resume of ${profile.fullName}`}
-        className="glass ring-gradient mx-auto max-w-[52rem] rounded-xl px-5 py-8 sm:px-12 sm:py-14 print:max-w-none print:rounded-none print:border-0 print:bg-transparent print:p-0 print:shadow-none print:backdrop-filter-none print:before:hidden"
+        className="surface-card mx-auto max-w-[52rem] rounded-xl px-5 py-8 sm:px-12 sm:py-14 print:max-w-none print:rounded-none print:border-0 print:bg-transparent print:p-0 print:shadow-none print:backdrop-filter-none print:before:hidden"
       >
         <header>
           <p className="text-[1.75rem] leading-tight font-semibold tracking-[-0.02em]">

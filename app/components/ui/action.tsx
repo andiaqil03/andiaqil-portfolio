@@ -7,10 +7,11 @@ type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'md' | 'sm';
 
 const variants: Record<Variant, string> = {
-  // Brand gradient that slowly rotates, a coloured glow, and a shine sweep on hover.
+  // Solid pine, like a trail sign: lifts slightly on hover.
   primary:
-    'bg-brand is-animated btn-shine relative overflow-hidden text-white shadow-[0_8px_24px_-8px_rgb(79_70_229/0.55)] hover:shadow-[0_14px_34px_-10px_rgb(79_70_229/0.7)] hover:-translate-y-0.5',
-  secondary: 'glass text-ink hover:border-line-strong hover:-translate-y-0.5 hover:shadow-md',
+    'bg-accent text-on-accent shadow-sm hover:bg-accent-hover hover:shadow-md hover:-translate-y-0.5',
+  secondary:
+    'surface-card text-ink hover:border-line-strong hover:-translate-y-0.5 hover:shadow-md',
   ghost: 'text-ink-2 hover:bg-surface-2 hover:text-ink',
 };
 

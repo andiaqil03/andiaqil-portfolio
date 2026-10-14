@@ -88,13 +88,10 @@ export function ProfileCard() {
   }
 
   return (
-    <div className="glass overflow-hidden rounded-xl">
+    <div className="surface-card overflow-hidden rounded-xl">
       <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3">
         <h2 id={`${id}-label`} className="flex items-center gap-2 text-sm font-medium text-ink-2">
-          <span
-            aria-hidden="true"
-            className="pulse-dot relative size-2 rounded-full bg-[#10b981]"
-          />
+          <span aria-hidden="true" className="pulse-dot relative size-2 rounded-full bg-pine" />
           Profile
         </h2>
         <div
@@ -121,7 +118,7 @@ export function ProfileCard() {
                 className={cn(
                   'h-8 rounded-full px-3.5 text-[0.8125rem] font-medium transition-[background-color,color,box-shadow] duration-200',
                   tab.id === 'json' && 'font-mono text-meta',
-                  selected ? 'bg-brand text-white shadow-sm' : 'text-ink-3 hover:text-ink',
+                  selected ? 'bg-accent text-on-accent shadow-sm' : 'text-ink-3 hover:text-ink',
                 )}
               >
                 {tab.label}

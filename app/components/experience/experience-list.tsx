@@ -12,7 +12,7 @@ import { PlaceholderNote } from '../ui/placeholder-note';
 import { Reveal } from '../ui/reveal';
 import { Tag, TechChips } from '../ui/tag';
 
-/** A gradient rail that draws itself as you scroll through the timeline. */
+/** A dashed trail that draws itself as you scroll through the timeline. */
 function useDrawnRail() {
   const scope = useRef<HTMLOListElement>(null);
   useGSAP(
@@ -66,8 +66,7 @@ function Rail() {
       <span
         aria-hidden="true"
         data-rail
-        className="absolute top-2 bottom-2 left-[6px] w-[3px] origin-top rounded-full sm:left-[10px]"
-        style={{ background: 'linear-gradient(var(--g-indigo), var(--g-sky), var(--g-emerald))' }}
+        className="trail-line absolute top-2 bottom-2 left-[6px] w-[3px] origin-top rounded-full sm:left-[10px]"
       />
     </>
   );
@@ -79,10 +78,9 @@ function Node({ current }: { current: boolean }) {
       aria-hidden="true"
       data-node
       className={cn(
-        'absolute top-7 left-0 size-[15px] rounded-full border-[3px] border-canvas shadow-md sm:size-[23px] sm:border-[5px]',
-        current && 'pulse-dot',
+        'absolute top-7 left-0 size-[15px] rounded-full border-[3px] shadow-sm sm:size-[23px] sm:border-[5px]',
+        current ? 'pulse-dot border-canvas bg-trail' : 'border-pine bg-surface',
       )}
-      style={{ background: current ? '#10b981' : 'var(--gradient-aurora)' }}
     />
   );
 }
@@ -130,7 +128,7 @@ export function ExperienceSummary({ items }: { items: Experience[] }) {
         >
           <Node current={item.period.end === 'present'} />
           <TiltCard as="article" max={3} className="rounded-xl" aria-labelledby={`${item.id}-role`}>
-            <div className="glass rounded-xl p-5 sm:p-7">
+            <div className="surface-card rounded-xl p-5 sm:p-7">
               <Header item={item} level="h3" />
               <p className="mt-3 max-w-[68ch] text-[0.9375rem] text-ink-2">{item.summary}</p>
               <div className="mt-4">
@@ -161,7 +159,7 @@ export function ExperienceTimeline({ items }: { items: Experience[] }) {
           <article
             id={item.id}
             aria-labelledby={`${item.id}-role`}
-            className="glass scroll-mt-28 rounded-xl p-5 sm:p-8"
+            className="surface-card scroll-mt-28 rounded-xl p-5 sm:p-8"
           >
             <Header item={item} level="h2" />
             <div className="mt-4">

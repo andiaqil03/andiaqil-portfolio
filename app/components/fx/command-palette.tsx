@@ -253,7 +253,7 @@ export function CommandPalette() {
     <dialog
       id={dialogId}
       aria-label="Command palette"
-      className="palette fixed inset-x-0 top-[12vh] m-0 mx-auto w-[min(640px,calc(100vw-2rem))] overflow-hidden rounded-xl border border-glass-border bg-glass-strong p-0 text-ink shadow-lg backdrop-blur-2xl backdrop:bg-[rgb(10_15_31/0.35)] backdrop:backdrop-blur-sm"
+      className="palette fixed inset-x-0 top-[12vh] m-0 mx-auto w-[min(640px,calc(100vw-2rem))] overflow-hidden rounded-xl border border-line bg-surface p-0 text-ink shadow-lg backdrop-blur-2xl backdrop:bg-[rgb(13_21_18/0.4)] backdrop:backdrop-blur-sm"
       onClick={(event) => {
         if (event.target === event.currentTarget) close();
       }}
@@ -319,7 +319,7 @@ export function CommandPalette() {
                   <span
                     className={cn(
                       'inline-flex size-8 shrink-0 items-center justify-center rounded-sm',
-                      selected ? 'bg-brand text-white' : 'bg-surface-2 text-ink-3',
+                      selected ? 'bg-accent text-on-accent' : 'bg-surface-2 text-ink-3',
                     )}
                   >
                     <command.Icon aria-hidden="true" className="size-4" strokeWidth={1.75} />

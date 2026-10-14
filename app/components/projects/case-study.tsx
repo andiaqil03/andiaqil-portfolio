@@ -58,8 +58,10 @@ export function CaseStudyHero({ project }: { project: Project }) {
     <header className="relative isolate">
       <div
         aria-hidden="true"
-        className="dot-grid absolute inset-x-0 top-0 -z-10 h-[70vh] [mask-image:radial-gradient(60%_80%_at_50%_0%,#000_20%,transparent_75%)]"
-      />
+        className="absolute inset-x-0 top-0 -z-10 h-[70vh] [mask-image:radial-gradient(70%_80%_at_80%_0%,#000_15%,transparent_75%)]"
+      >
+        <div className="topo absolute inset-0" />
+      </div>
       <Container className="pt-28 sm:pt-32 lg:pt-36">
         <Link
           to="/projects"
@@ -85,7 +87,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
               </Tag>
             </div>
             <h1
-              className="mt-5 font-display text-[clamp(2.75rem,1.6rem+5vw,6rem)] leading-[0.95] font-semibold tracking-[-0.05em]"
+              className="mt-5 font-display text-[clamp(2.75rem,1.6rem+5vw,6rem)] leading-[0.95] font-semibold tracking-[-0.01em]"
               style={projectTitleTransition(project.slug)}
             >
               <SplitText text={project.title} delay={120} stagger={32} />
@@ -96,7 +98,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
           </div>
 
           <div className="anim-rise lg:col-span-5" style={at(520)}>
-            <dl className="glass grid gap-4 rounded-xl p-5 sm:p-6">
+            <dl className="surface-card grid gap-4 rounded-xl p-5 sm:p-6">
               {project.stack.length > 0 ? (
                 <div>
                   <dt className="font-mono text-meta text-ink-3 uppercase">Built with</dt>
@@ -131,7 +133,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
 
         <div className="mt-12 [perspective:1400px] lg:mt-16">
           <div ref={visual} className="anim-rise origin-top" style={at(640)}>
-            <div className="glass ring-gradient overflow-hidden rounded-xl p-2 shadow-lg">
+            <div className="surface-card overflow-hidden rounded-xl p-2 shadow-lg">
               <ProjectVisual
                 project={project}
                 priority
@@ -204,7 +206,7 @@ export function CaseStudyBody({ project }: { project: Project }) {
   return (
     <Container className="grid gap-y-10 py-20 sm:py-24 lg:grid-cols-12 lg:gap-x-12 lg:py-32">
       <nav aria-label="On this page" className="hidden lg:col-span-3 lg:block">
-        <div className="glass sticky top-28 rounded-xl p-5">
+        <div className="surface-card sticky top-28 rounded-xl p-5">
           <p className="font-mono text-meta text-ink-3 uppercase">On this page</p>
           <ol className="relative mt-4 grid gap-0.5">
             <span aria-hidden="true" className="absolute top-0 bottom-0 left-0 w-px bg-line" />
@@ -214,7 +216,7 @@ export function CaseStudyBody({ project }: { project: Project }) {
               style={{
                 top: `${activeIndex * 2.125}rem`,
                 height: '2.125rem',
-                background: 'var(--gradient-aurora)',
+                background: 'var(--trail)',
               }}
             />
             {sections.map(({ section }) => (
@@ -283,22 +285,18 @@ export function NextProject({ project }: { project: Project }) {
             id="next-project-heading"
             className="inline-flex items-center gap-2 font-mono text-meta tracking-[0.12em] text-ink-3 uppercase"
           >
-            <span
-              aria-hidden="true"
-              className="h-px w-8"
-              style={{ background: 'var(--gradient-aurora)' }}
-            />
+            <span aria-hidden="true" className="blaze" />
             Next project
           </p>
           <TiltCard max={3} className="mt-5 rounded-xl">
             <Link
               to={`/projects/${project.slug}`}
               viewTransition
-              className="glass group grid overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-lg sm:grid-cols-12"
+              className="surface-card group grid overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-lg sm:grid-cols-12"
             >
               <span className="flex flex-col justify-center p-6 sm:col-span-6 sm:p-10">
                 <span
-                  className="font-display text-[clamp(2.25rem,1.4rem+3.5vw,4.5rem)] leading-[0.95] font-semibold tracking-[-0.045em]"
+                  className="font-display text-[clamp(2.25rem,1.4rem+3.5vw,4.5rem)] leading-[0.95] font-semibold tracking-[-0.01em]"
                   style={projectTitleTransition(project.slug)}
                 >
                   {project.title}
@@ -306,7 +304,7 @@ export function NextProject({ project }: { project: Project }) {
                 <span className="mt-3 text-lead text-ink-2">{project.tagline}</span>
                 <span className="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-accent">
                   View project
-                  <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent-soft transition-[background-color,color,rotate] duration-500 ease-out-expo group-hover:rotate-45 group-hover:bg-accent group-hover:text-white">
+                  <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent-soft transition-[background-color,color,rotate] duration-500 ease-out-expo group-hover:rotate-45 group-hover:bg-accent group-hover:text-on-accent">
                     <ArrowUpRight aria-hidden="true" className="size-4" strokeWidth={2.25} />
                   </span>
                 </span>

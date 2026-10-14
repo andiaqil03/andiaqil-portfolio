@@ -19,7 +19,7 @@ function FactValue({ value }: { value: string }) {
       value={Number(digits.replaceAll(',', ''))}
       decimals={decimals}
       suffix={suffix}
-      className="text-gradient is-animated"
+      className="text-accent"
     />
   );
 }
@@ -46,7 +46,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
             <div
               key={item.term}
               className={cn(
-                'glass rounded-xl p-5 sm:p-6',
+                'surface-card rounded-xl p-5 sm:p-6',
                 block.items.length % 2 === 1 && index === block.items.length - 1 && 'sm:col-span-2',
               )}
             >
@@ -54,7 +54,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
                 <span
                   aria-hidden="true"
                   className="size-2.5 rounded-full"
-                  style={{ background: 'var(--gradient-aurora)' }}
+                  style={{ background: 'var(--trail)' }}
                 />
                 {item.term}
               </dt>
@@ -69,8 +69,8 @@ export function CaseStudyBlock({ block }: { block: Block }) {
         <ol className="grid gap-3 lg:grid-cols-4 lg:gap-0">
           {block.items.map((step, index) => (
             <li key={step.title} className="relative flex flex-col lg:flex-row lg:items-stretch">
-              <div className="flex-1 glass rounded-xl p-5 sm:p-6">
-                <span className="bg-brand inline-flex size-8 items-center justify-center rounded-full font-mono text-meta font-semibold text-white shadow-md">
+              <div className="flex-1 surface-card rounded-xl p-5 sm:p-6">
+                <span className="bg-accent inline-flex size-8 items-center justify-center rounded-full font-mono text-meta font-semibold text-on-accent shadow-md">
                   {index + 1}
                 </span>
                 <p className="mt-3 font-semibold">{step.title}</p>
@@ -96,9 +96,9 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       return (
         <dl className="grid gap-4 min-[480px]:grid-cols-2 lg:grid-cols-4">
           {block.items.map((fact) => (
-            <div key={fact.label} className="glass rounded-xl p-5 sm:p-6">
+            <div key={fact.label} className="surface-card rounded-xl p-5 sm:p-6">
               <dt className="font-mono text-meta text-ink-3 uppercase">{fact.label}</dt>
-              <dd className="mt-2 font-display text-2xl leading-tight font-semibold tracking-[-0.03em] tabular">
+              <dd className="mt-2 font-display text-2xl leading-tight font-semibold tracking-[-0.01em] tabular">
                 <FactValue value={fact.value} />
               </dd>
             </div>
@@ -127,7 +127,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       return (
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {block.items.map((item) => (
-            <li key={item.id} className="glass rounded-xl p-5 sm:p-6">
+            <li key={item.id} className="surface-card rounded-xl p-5 sm:p-6">
               <p className="inline-flex h-7 items-center rounded-sm bg-surface-2 px-2.5 font-mono text-[0.8125rem] font-semibold">
                 {techName(item.id)}
               </p>
@@ -148,7 +148,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       return (
         <div className="grid gap-6 sm:grid-cols-2">
           {block.images.map((image) => (
-            <figure key={image.src} className="overflow-hidden glass rounded-xl">
+            <figure key={image.src} className="overflow-hidden surface-card rounded-xl">
               <img
                 src={image.src}
                 alt={image.alt}

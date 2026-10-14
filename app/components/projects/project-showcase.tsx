@@ -71,10 +71,10 @@ export function ProjectShowcase({
         <Reveal>
           <SectionHeader
             id="projects-heading"
-            kicker="Selected work"
+            kicker="Expeditions"
             title={
               <>
-                Things I’ve <span className="text-gradient is-animated">built</span>
+                Things I’ve <span className="text-accent">built</span>
               </>
             }
             description="From a researched final-year project to API-driven apps, each with a write-up."
@@ -110,7 +110,7 @@ export function ProjectShowcase({
             <div
               ref={bar}
               className="h-full origin-left scale-x-0 rounded-full"
-              style={{ background: 'var(--gradient-aurora)' }}
+              style={{ background: 'var(--trail)' }}
             />
           </div>
         </Container>

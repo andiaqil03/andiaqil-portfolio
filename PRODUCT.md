@@ -17,11 +17,11 @@ React 19 + TypeScript + Tailwind CSS v4, built with React Router (framework mode
 
 ## Product Purpose
 
-The personal portfolio of Andi Aqil (full name Andi Muhammad Aqil Bin Andi Abd Rahman), a Software Engineering graduate. Success means a recruiter quickly understands that he is an early-career software engineer who can actually build things across backend and frontend, has real internship and freelance experience, works well with clients, and is growing toward professional software engineering roles. Then they email him, open his LinkedIn, or download his resume.
+The personal portfolio of Andi Aqil (full name Andi Muhammad Aqil Bin Andi Abd Rahman), a Software Engineering graduate. Success means a recruiter quickly understands that Andi is an early-career software engineer who can actually build things across backend and frontend, has real internship and freelance experience, works well with clients, and is growing toward professional software engineering roles. Then they send an email, open the LinkedIn profile, or download the resume.
 
 ## Positioning
 
-Early-career and honest about it, but backed by evidence: NestJS REST API work at TM R&D, end-to-end freelance delivery for small-business clients (requirements, build, UAT, production deploy), and a researched final-year project (FocusPro). He is never positioned as senior or expert.
+Early-career and honest about it, but backed by evidence: NestJS REST API work at TM R&D, end-to-end freelance delivery for small-business clients (requirements, build, UAT, production deploy), and a researched final-year project (FocusPro). Andi is never positioned as senior or expert.
 
 ## Capabilities and Constraints
 
@@ -39,8 +39,10 @@ Early-career and honest about it, but backed by evidence: NestJS REST API work a
 ## Brand Commitments
 
 - Confident but honest voice. First person in body copy.
-- Visual identity set by the user (Oct 2026, "Living System"): light mode by default with dark as an opt-in toggle; maximal, high-end graphics and animation — a live WebGL network globe in the hero, aurora light, glass tilt cards, kinetic type, smooth scrolling, pinned horizontal project gallery, cinematic page/theme transitions, a once-per-session intro loader, animated real-number stats and a ⌘K command palette. Every effect must stay honest (no invented data) and switch off for reduced motion. See DESIGN.md.
-- Still unwanted: fake statistics, invented clients/testimonials, skill bars/percentages, rows of technology logos and "Hello World" clichés. (Earlier bans on gradients, glass and heavy animation were lifted by the user in Oct 2026.)
+- Visual identity set by the user (Oct 2026, "Trail Map"): the site should show Andi's personality (hiking, travel, sport) through an earthy hiking-map world: map-paper white, pine green, alpine-lake blue and granite, with sunrise orange reserved for trail markers. Light by default with dark ("night hike") as an opt-in toggle. Keep the rich motion: a 3D contour-mountain hero where the career is the trail, contour textures, self-drawing trail timelines, an intro loader, animated real-number stats, a ⌘K command palette and smooth scrolling. Every effect stays honest (no invented data) and switches off for reduced motion. See DESIGN.md.
+- Unwanted (user feedback, Oct 2026): colour gradients, neon colours, glows and anything that "looks AI-generated". Use solid colours; gradients only as invisible masks that fade textures.
+- Also unwanted: fake statistics, invented clients/testimonials, skill bars/percentages, rows of technology logos and "Hello World" clichés.
+- Outdoor photos (hiking, travel, sport) are supplied by Andi only; frames stay hidden on the live site until real photos are added.
 
 ## Evidence on Hand
 

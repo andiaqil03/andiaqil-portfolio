@@ -2,7 +2,7 @@
 <!--
   Source for public/og-image.png (1200×630 link-preview image).
   Regenerate after changing it: npm run og-image (requires Microsoft Edge or Chrome).
-  Colours and type follow DESIGN.md.
+  Colours and type follow DESIGN.md (Trail Map).
 -->
 <html lang="en">
   <head>
@@ -20,6 +20,12 @@
           format('woff2');
         font-weight: 100 900;
       }
+      @font-face {
+        font-family: 'Barlow Semi Condensed';
+        src: url('../../node_modules/@fontsource/barlow-semi-condensed/files/barlow-semi-condensed-latin-700-normal.woff2')
+          format('woff2');
+        font-weight: 700;
+      }
       * {
         box-sizing: border-box;
         margin: 0;
@@ -34,22 +40,32 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 64px 72px;
-        background: #f6f7fb;
-        color: #0a0f1f;
+        padding: 60px 72px;
+        background: #f5f7f4;
+        color: #12211c;
         font-family: 'Geist', sans-serif;
         -webkit-font-smoothing: antialiased;
       }
-      .aurora {
-        position: absolute;
-        border-radius: 9999px;
-      }
-      .dots {
+      .topo {
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(rgb(14 20 17 / 0.12) 1px, transparent 1.2px);
-        background-size: 22px 22px;
-        mask-image: radial-gradient(80% 90% at 85% 20%, #000 20%, transparent 70%);
+        background-color: rgb(45 106 79 / 0.2);
+        -webkit-mask: url('../../public/topo.svg') center / cover no-repeat;
+        mask: url('../../public/topo.svg') center / cover no-repeat;
+      }
+      .fade {
+        position: absolute;
+        inset: 0;
+        -webkit-mask: radial-gradient(70% 80% at 85% 25%, #000 15%, transparent 75%);
+        mask: radial-gradient(70% 80% at 85% 25%, #000 15%, transparent 75%);
+      }
+      .ridges {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 190px;
       }
       .brand {
         position: relative;
@@ -60,35 +76,46 @@
         font-weight: 600;
       }
       .brand span {
-        color: #69716b;
+        color: #41524b;
         font-weight: 400;
+      }
+      .kicker {
+        position: relative;
+        margin-top: 44px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Geist Mono', monospace;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #41524b;
+      }
+      .blaze {
+        width: 10px;
+        height: 18px;
+        border-radius: 2px;
+        background: #e07b39;
       }
       h1 {
         position: relative;
-        margin-top: 56px;
-        font-size: 74px;
-        line-height: 1.04;
-        letter-spacing: -0.035em;
-        font-weight: 600;
+        margin-top: 14px;
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-size: 92px;
+        line-height: 0.98;
+        font-weight: 700;
+        text-transform: uppercase;
       }
       h1 span {
         display: block;
-        background: linear-gradient(110deg, #4338ca, #0369a1 50%, #047857);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      p {
-        position: relative;
-        margin-top: 24px;
-        max-width: 820px;
-        font-size: 24px;
-        line-height: 1.5;
-        color: #4a524d;
+        color: #2d6a4f;
+        text-transform: none;
+        font-size: 74px;
       }
       ul {
         position: relative;
-        margin-top: auto;
+        margin-top: 34px;
         display: flex;
         gap: 10px;
         padding: 0;
@@ -96,33 +123,35 @@
       }
       li {
         padding: 8px 14px;
-        border-radius: 8px;
-        background: rgb(255 255 255 / 0.75);
-        border: 1px solid #e2e6f0;
+        border-radius: 9999px;
+        background: #ffffff;
+        border: 1px solid #dce4de;
         font-family: 'Geist Mono', monospace;
         font-size: 18px;
         font-weight: 500;
-        color: #4a524d;
+        color: #41524b;
       }
       li.accent {
-        background: linear-gradient(110deg, #4338ca, #0369a1 55%, #047857);
-        border-color: transparent;
+        background: #2d6a4f;
+        border-color: #2d6a4f;
         color: #ffffff;
       }
     </style>
   </head>
   <body>
-    <div class="aurora" style="width:900px;height:900px;left:-300px;top:-450px;background:radial-gradient(closest-side,rgb(99 102 241 / 0.28),transparent)"></div>
-    <div class="aurora" style="width:800px;height:800px;right:-260px;top:-80px;background:radial-gradient(closest-side,rgb(14 165 233 / 0.22),transparent)"></div>
-    <div class="aurora" style="width:700px;height:700px;left:300px;bottom:-460px;background:radial-gradient(closest-side,rgb(16 185 129 / 0.2),transparent)"></div>
-    <div class="dots"></div>
+    <div class="fade"><div class="topo"></div></div>
+    <svg class="ridges" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
+      <path id="r0" fill="rgb(59 139 181 / 0.14)" />
+      <path id="r1" fill="rgb(45 106 79 / 0.16)" />
+      <path id="r2" fill="rgb(45 106 79 / 0.26)" />
+    </svg>
     <div class="brand">
       <svg width="40" height="40" viewBox="0 0 32 32" aria-hidden="true">
-        <rect width="32" height="32" rx="9" fill="#0a0f1f" />
+        <rect width="32" height="32" rx="9" fill="#2d6a4f" />
         <path
           d="M9.5 23.5 16 8.5l6.5 15"
           fill="none"
-          stroke="#f7f8f7"
+          stroke="#ffffff"
           stroke-width="2.6"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -130,15 +159,15 @@
         <path
           d="M12.2 18.2h7.6"
           fill="none"
-          stroke="#38bdf8"
+          stroke="#e07b39"
           stroke-width="2.6"
           stroke-linecap="round"
         />
       </svg>
       Andi Aqil <span>· Selangor, Malaysia</span>
     </div>
+    <p class="kicker"><span class="blaze"></span>Backend · REST APIs · Full-stack web</p>
     <h1>Software Engineer <span>building practical digital products.</span></h1>
-    <p>Backend development, REST APIs and full-stack web applications.</p>
     <ul>
       <li class="accent">Freelance Software Developer</li>
       <li>NestJS</li>
@@ -147,5 +176,25 @@
       <li>Laravel</li>
       <li>.NET</li>
     </ul>
+    <script>
+      // Same ridgelines as app/components/fx/ridges.tsx.
+      function ridge(seed, base, amplitude) {
+        const points = [];
+        for (let x = 0; x <= 1440; x += 16) {
+          const t = x / 1440;
+          const y =
+            base -
+            amplitude *
+              (0.55 * Math.sin(t * Math.PI * (2.2 + seed * 0.3) + seed) +
+                0.3 * Math.sin(t * Math.PI * (5.1 + seed) + seed * 2.1) +
+                0.15 * Math.sin(t * Math.PI * (11.3 + seed * 2) + seed * 3.7));
+          points.push(x + ' ' + y.toFixed(1));
+        }
+        return 'M0 240L' + points.join('L') + 'L1440 240Z';
+      }
+      document.getElementById('r0').setAttribute('d', ridge(1.3, 110, 70));
+      document.getElementById('r1').setAttribute('d', ridge(2.1, 150, 55));
+      document.getElementById('r2').setAttribute('d', ridge(3.4, 190, 38));
+    </script>
   </body>
 </html>

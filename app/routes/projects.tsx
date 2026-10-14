@@ -86,7 +86,7 @@ export default function Projects() {
           <div
             role="group"
             aria-label="Filter projects by category"
-            className="glass inline-flex max-w-full flex-wrap gap-1 rounded-[1.75rem] p-1.5"
+            className="surface-card inline-flex max-w-full flex-wrap gap-1 rounded-[1.75rem] p-1.5"
           >
             {filters.map((filter) => {
               const pressed = active === filter.id;
@@ -97,14 +97,14 @@ export default function Projects() {
                   aria-pressed={pressed}
                   onClick={() => select(filter.id)}
                   className={cn(
-                    'relative inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium transition-colors duration-200',
-                    pressed ? 'text-white' : 'text-ink-2 hover:text-ink',
+                    'relative isolate inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium transition-colors duration-200',
+                    pressed ? 'text-on-accent' : 'text-ink-2 hover:text-ink',
                   )}
                 >
                   {pressed ? (
                     <span
                       aria-hidden="true"
-                      className="bg-brand absolute inset-0 -z-10 rounded-full shadow-md"
+                      className="bg-accent absolute inset-0 -z-10 rounded-full shadow-md"
                       style={{ viewTransitionName: 'filter-pill' }}
                     />
                   ) : null}
@@ -112,7 +112,7 @@ export default function Projects() {
                   <span
                     className={cn(
                       'font-mono text-meta tabular',
-                      pressed ? 'text-white/80' : 'text-ink-3',
+                      pressed ? 'text-on-accent/80' : 'text-ink-3',
                     )}
                   >
                     {filter.count}

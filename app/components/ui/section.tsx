@@ -34,11 +34,7 @@ export function SectionHeader({
       <div className="max-w-3xl">
         {kicker ? (
           <p className="mb-4 inline-flex items-center gap-2 font-mono text-meta tracking-[0.12em] text-ink-3 uppercase">
-            <span
-              aria-hidden="true"
-              className="h-px w-8"
-              style={{ background: 'var(--gradient-aurora)' }}
-            />
+            <span aria-hidden="true" className="blaze" />
             {kicker}
           </p>
         ) : null}
