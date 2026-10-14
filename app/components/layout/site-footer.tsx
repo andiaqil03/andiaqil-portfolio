@@ -53,7 +53,7 @@ export function SiteFooter() {
             aria-hidden="true"
             className="group mt-10 flex justify-between font-display text-[clamp(4rem,1rem+15vw,15rem)] leading-[0.8] font-bold tracking-[-0.01em] select-none"
           >
-            {[...profile.name.replace(' ', '')].map((letter, index) => (
+            {[...profile.shortName.replace(' ', '')].map((letter, index) => (
               <span
                 key={index}
                 className="inline-block text-transparent uppercase [-webkit-text-stroke:1.5px_color-mix(in_srgb,var(--pine)_45%,transparent)] transition-transform duration-500 ease-out-expo group-hover:-translate-y-3"

@@ -11,7 +11,7 @@ export const meta: Route.MetaFunction = () =>
   pageMeta({
     title: 'Experience',
     path: '/experience',
-    description: `${profile.name}'s experience: freelance software development, a backend internship at TM R&D building NestJS REST APIs, and a project-management role at PNB.`,
+    description: `${profile.name}'s experience: software engineer at MTechnix, freelance web development, a backend internship at TM R&D and a project-management role at PNB.`,
   });
 
 export default function ExperiencePage() {
@@ -21,7 +21,7 @@ export default function ExperiencePage() {
         kicker="Experience"
         title="Where I’ve"
         accent="delivered."
-        lead="Freelance work delivering web applications for clients, a project-management role at PNB, and a backend internship building NestJS REST APIs at TM R&D."
+        lead="Building for clients at MTechnix, freelance on the side, and earlier roles at PNB and TM R&D."
       />
       <div>
         <Container className="max-w-[60rem] pt-4 pb-16 sm:pb-20 lg:pb-24">

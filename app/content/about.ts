@@ -1,6 +1,6 @@
 import type { ProcessStep, StoryChapter } from './types';
 
-/** The About page story: education → backend → programme work → freelance → projects → what's next. */
+/** The About page story: education → internship → programme work → MTechnix and freelance → projects → what's next. */
 export const story: StoryChapter[] = [
   {
     id: 'education',
@@ -23,10 +23,18 @@ export const story: StoryChapter[] = [
     text: 'As a Protégé Project Management Officer in the Tech & Cyber Risk Department, I supported a cybersecurity transformation programme: coordinating meetings, tracking deliverables, working with external PMO stakeholders from KPMG and building a Power BI reporting dashboard. Not an engineering role, but a close look at how large programmes are governed.',
   },
   {
+    id: 'mtechnix',
+    period: 'Aug 2026 – now',
+    title: 'Software engineer at MTechnix',
+    text: 'Through the K-Youth Programme, I build full-stack web apps for clients with React, Express.js and PostgreSQL, from the first requirements meeting to deployment on Microsoft Azure.',
+    link: { label: 'Role details', to: '/experience#mtechnix' },
+    state: 'current',
+  },
+  {
     id: 'freelance',
     period: 'May 2026 – now',
     title: 'Freelance software development',
-    text: 'I design, build and deploy web applications for small-business clients, working with them directly from the first requirements through user acceptance testing to production.',
+    text: 'On the side, I design, build and deploy web applications for small-business clients, working with them directly from the first requirements through user acceptance testing to production.',
     link: { label: 'How I work', to: '#process' },
     state: 'current',
   },
@@ -41,7 +49,7 @@ export const story: StoryChapter[] = [
     id: 'next',
     period: 'Next',
     title: 'Continued technical growth',
-    text: 'Going deeper into .NET, Angular and backend engineering, and into building software that is scalable and reliable. I’m also exploring data engineering and learning React Native.',
+    text: 'Growing as a software engineer across the whole stack, and building software that is scalable and reliable. I’m also learning React Native and exploring data engineering.',
     state: 'next',
   },
 ];

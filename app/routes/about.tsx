@@ -25,7 +25,7 @@ export const meta: Route.MetaFunction = () =>
   pageMeta({
     title: 'About',
     path: '/about',
-    description: `About ${profile.fullName}: Software Engineering graduate from UNITEN, backend-focused software engineer based in ${profile.location}.`,
+    description: `About ${profile.fullName}: Software Engineering graduate from UNITEN and full-stack software engineer based in ${profile.location}.`,
   });
 
 function StoryLink({ to, label }: { to: string; label: string }) {
@@ -117,8 +117,8 @@ export default function About() {
       <PageHeader
         kicker="About"
         title="Software engineer,"
-        accent="backend first."
-        lead={`${profile.fullName}: a software engineer focused on the backend, comfortable across the stack, and interested in building software that is scalable and reliable.`}
+        accent="front to back."
+        lead={`${profile.fullName}: a software engineer who enjoys the whole stack and building software that is scalable and reliable.`}
       >
         <ul className="flex flex-wrap gap-2 text-[0.9375rem] text-ink-2">
           <li className="surface-card inline-flex items-center gap-2 rounded-full px-3.5 py-2">
@@ -140,8 +140,8 @@ export default function About() {
         <Container>
           <ScrubText
             className="max-w-5xl text-[clamp(1.75rem,1.1rem+2.6vw,3.25rem)] leading-[1.15] font-semibold tracking-[-0.01em]"
-            text="Software engineering at UNITEN, backend APIs at TM R&D, programme work at PNB, and now freelance delivery for real clients. Each step taught me something different about building software."
-            highlight={['backend', 'freelance', 'reliable']}
+            text="Software engineering at UNITEN, an internship at TM R&D, programme work at PNB, and now building for clients at MTechnix, with freelance on the side."
+            highlight={['UNITEN,', 'MTechnix,', 'freelance']}
           />
         </Container>
       </section>
@@ -196,7 +196,7 @@ export default function About() {
             The stack I <span className="text-accent">build with</span>
           </>
         }
-        description="Backend first, comfortable across the stack."
+        description="Front end to back end."
       >
         <SkillGroups />
       </Section>

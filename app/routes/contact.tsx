@@ -19,7 +19,7 @@ export const meta: Route.MetaFunction = () =>
   pageMeta({
     title: 'Contact',
     path: '/contact',
-    description: `Get in touch with ${profile.name} about Software Engineer, Backend Developer and Full-Stack Developer roles, or a freelance project.`,
+    description: `Get in touch with ${profile.name} about software engineering roles or a freelance project.`,
   });
 
 interface Channel {

@@ -14,8 +14,10 @@ export interface DateRange {
 /* ------------------------------------------------------------------ */
 
 export interface Profile {
-  /** Short display name used in the header, hero and titles. */
+  /** Display name used in the header, hero and titles. */
   name: string;
+  /** Short name for the footer wordmark and intro loader. */
+  shortName: string;
   /** Full legal name: About page, resume and search metadata. */
   fullName: string;
   /** Formal short name used in the footer and copyright. */
@@ -23,6 +25,8 @@ export interface Profile {
   role: string;
   /** Role line for the footer. */
   roleLine: string;
+  /** What Andi is doing right now, shown in the hero pill. */
+  now: string;
   headline: string;
   /** Hero heading, split into its strong first line and quieter second line. */
   heroHeading: [string, string];
@@ -40,8 +44,6 @@ export interface Profile {
   };
   /** Path under /public once the PDF is added, e.g. `/andi-aqil-resume.pdf`. */
   resumePdf: MaybePlaceholder<string>;
-  /** The technologies to lead with in the hero. */
-  coreStack: TechId[];
   openTo: string[];
   spokenLanguages: string[];
   /** Short paragraphs used on the home page and resume. */

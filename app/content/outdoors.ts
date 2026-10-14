@@ -12,44 +12,44 @@ export interface OutdoorPhoto {
 }
 
 export const outdoors = {
-  intro: 'When I’m not coding, I like to go hiking, travel and play sport.',
+  intro: 'Life outside work: hiking, travel and sport.',
   interests: ['Hiking', 'Travel', 'Sport'] as OutdoorKind[],
   photos: [
     {
       id: 'hike-1',
       kind: 'Hiking',
-      caption: todo('Caption: which trail or peak?'),
+      caption: todo('Hiking activity: which trail or peak, and when?'),
       image: todo('Hiking photo (landscape, ~1600px wide)'),
     },
     {
       id: 'travel-1',
       kind: 'Travel',
-      caption: todo('Caption: where was this?'),
+      caption: todo('Travel activity: where, and when?'),
       image: todo('Travel photo'),
     },
     {
       id: 'sport-1',
       kind: 'Sport',
-      caption: todo('Caption: which sport?'),
+      caption: todo('Sport activity: which sport, team or event?'),
       image: todo('Sport photo'),
     },
     {
       id: 'hike-2',
       kind: 'Hiking',
-      caption: todo('Caption'),
-      image: todo('Another hiking photo (optional)'),
+      caption: todo('Another hiking activity (optional)'),
+      image: todo('Hiking photo (optional)'),
     },
     {
       id: 'travel-2',
       kind: 'Travel',
-      caption: todo('Caption'),
-      image: todo('Another travel photo (optional)'),
+      caption: todo('Another trip (optional)'),
+      image: todo('Travel photo (optional)'),
     },
     {
       id: 'sport-2',
       kind: 'Sport',
-      caption: todo('Caption'),
-      image: todo('Another sport photo (optional)'),
+      caption: todo('Another sport activity (optional)'),
+      image: todo('Sport photo (optional)'),
     },
   ] satisfies OutdoorPhoto[],
 };

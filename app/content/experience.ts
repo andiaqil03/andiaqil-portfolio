@@ -4,6 +4,28 @@ import type { Experience } from './types';
 /** Most recent first. */
 export const experience: Experience[] = [
   {
+    id: 'mtechnix',
+    role: 'Software Engineer',
+    organization: 'MTechnix Sdn Bhd',
+    organizationShort: 'MTechnix',
+    context: 'K-Youth Programme',
+    kind: 'Graduate programme',
+    period: { start: '2026-08', end: 'present' },
+    summary:
+      'Building full-stack web applications for clients, from requirements gathering to deployment.',
+    highlights: [
+      'Develop full-stack web applications for clients across the whole lifecycle, from requirements gathering and analysis to development and deployment.',
+      'Design and build full-stack web applications with React, Express.js and PostgreSQL.',
+      'Deploy applications on Microsoft Azure, validating them before delivery to clients.',
+    ],
+    details: [
+      'Run meetings with clients to gather business requirements, understand user needs and turn them into clear functional specifications.',
+      'Refine requirements and feature specifications with clients through iterative discussions.',
+      'Coordinate with clients throughout development to validate features and make sure the final solution meets the agreed requirements.',
+    ],
+    tech: ['react', 'express', 'postgresql', 'azure'],
+  },
+  {
     id: 'freelance',
     role: 'Freelance Software Developer',
     organization: 'Self-employed',

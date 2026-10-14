@@ -1,6 +1,6 @@
 import type { SkillGroup } from './types';
 
-/** Compact skill categories, ordered by relevance to backend and full-stack roles. */
+/** Compact skill categories. */
 export const skillGroups: SkillGroup[] = [
   {
     id: 'backend',
@@ -24,6 +24,7 @@ export const skillGroups: SkillGroup[] = [
       'postgresql',
       'mysql',
       'firebase',
+      'azure',
       'git',
       'docker',
       'postman',

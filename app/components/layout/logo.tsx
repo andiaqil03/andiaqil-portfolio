@@ -35,7 +35,9 @@ export function Logo({ onNavigate }: { onNavigate?: () => void }) {
       aria-label={`${profile.name}, home`}
     >
       <LogoMark className="size-7 transition-transform duration-300 ease-out-soft group-hover:-rotate-6" />
-      <span className="text-[0.9375rem] font-semibold tracking-[-0.01em]">{profile.name}</span>
+      <span className="text-sm font-semibold tracking-[-0.01em] whitespace-nowrap sm:text-[0.9375rem]">
+        {profile.name}
+      </span>
     </Link>
   );
 }

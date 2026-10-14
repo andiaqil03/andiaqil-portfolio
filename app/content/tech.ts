@@ -36,6 +36,7 @@ export const tech = {
   powerbi: 'Power BI',
 
   // Tools
+  azure: 'Microsoft Azure',
   git: 'Git',
   docker: 'Docker',
   postman: 'Postman',

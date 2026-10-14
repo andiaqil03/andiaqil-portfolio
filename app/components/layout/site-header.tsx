@@ -73,7 +73,7 @@ export function SiteHeader() {
     <header className="no-print pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 [view-transition-name:site-header] sm:px-5 sm:pt-4">
       <div
         className={cn(
-          'surface-card pointer-events-auto mx-auto flex h-14 max-w-[72rem] items-center justify-between gap-3 rounded-full pr-2 pl-3 transition-[max-width,box-shadow,background-color] duration-500 ease-out-expo sm:pl-4',
+          'surface-card pointer-events-auto mx-auto flex h-14 max-w-[72rem] items-center justify-between gap-2 rounded-full pr-2 pl-3 transition-[max-width,box-shadow,background-color] duration-500 ease-out-expo sm:pl-4',
           scrolled && 'max-w-[64rem] shadow-md',
         )}
       >
@@ -111,8 +111,11 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1.5">
-          <PaletteButton />
+        <div className="flex items-center gap-0.5 sm:gap-1.5">
+          {/* Hidden on the narrowest phones, where the menu already covers navigation. */}
+          <div className="max-[359px]:hidden">
+            <PaletteButton />
+          </div>
           <ThemeToggle />
           <div className="hidden lg:block">
             <Action to={site.navCta.to} size="sm">

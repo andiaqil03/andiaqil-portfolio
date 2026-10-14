@@ -1,7 +1,6 @@
 import { MapPin } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { profile } from '~/content/profile';
-import { formatList } from '~/lib/format';
 import { HeroScene } from '../fx/hero-scene';
 import { Magnetic } from '../fx/magnetic';
 import { ScrambleText } from '../fx/scramble-text';
@@ -33,7 +32,8 @@ export function Hero() {
           <p className="anim-rise" style={at(0)}>
             <span className="surface-card inline-flex items-center gap-2 rounded-full py-1.5 pr-3.5 pl-3 text-sm font-medium text-ink-2">
               <span aria-hidden="true" className="pulse-dot relative size-2 rounded-full bg-pine" />
-              Open to {formatList(profile.openTo)} roles
+              <span className="font-semibold text-ink">Now</span>
+              {profile.now}
             </span>
           </p>
 
@@ -104,7 +104,7 @@ export function Hero() {
       </Container>
 
       <a
-        href="#stats"
+        href="#off-the-trail"
         aria-label="Scroll to content"
         className="anim-rise absolute bottom-6 left-1/2 hidden -translate-x-1/2 lg:block"
         style={at(1400)}

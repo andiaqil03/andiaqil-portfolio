@@ -6,10 +6,10 @@ import type { TrailWaypoint } from './trail-scene';
 /** Real milestones along the trail, trailhead to summit. */
 const WAYPOINTS: TrailWaypoint[] = [
   { label: 'UNITEN · 2021', t: 0.04 },
-  { label: 'TM R&D · 2025', t: 0.34 },
-  { label: 'PNB · 2025–26', t: 0.6 },
-  { label: 'Freelance · now', t: 0.84 },
-  { label: 'Next: Software Engineer', t: 1, summit: true },
+  { label: 'TM R&D · 2025', t: 0.3 },
+  { label: 'PNB · 2025–26', t: 0.54 },
+  { label: 'Freelance · 2026', t: 0.78 },
+  { label: 'Software Engineer · MTechnix', t: 1, summit: true },
 ];
 
 function supportsWebGL(): boolean {

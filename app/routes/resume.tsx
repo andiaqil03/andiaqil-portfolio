@@ -18,7 +18,7 @@ export const meta: Route.MetaFunction = () =>
   pageMeta({
     title: 'Resume',
     path: '/resume',
-    description: `Resume of ${profile.fullName}: Software Engineering graduate, backend and full-stack developer.`,
+    description: `Resume of ${profile.fullName}: Software Engineering graduate and full-stack software engineer.`,
   });
 
 function ResumeSection({ title, children }: { title: string; children: ReactNode }) {

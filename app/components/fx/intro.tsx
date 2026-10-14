@@ -41,7 +41,7 @@ export function Intro() {
             strokeLinejoin="round"
           />
         </svg>
-        <p className="font-display text-3xl tracking-[0.02em] uppercase">{profile.name}</p>
+        <p className="font-display text-3xl tracking-[0.02em] uppercase">{profile.shortName}</p>
         <div className="flex w-44 items-center gap-3">
           <div className="h-px flex-1 overflow-hidden bg-white/15">
             <div className="intro-bar h-full bg-[#f0a35e]" />
