@@ -1,4 +1,4 @@
-import { ContactPanel } from '~/components/contact/contact-panel';
+import { ContactLine } from '~/components/contact/contact-line';
 import { NotFoundContent } from '~/components/layout/not-found-content';
 import { CaseStudyBody, CaseStudyHero, NextProject } from '~/components/projects/case-study';
 import { getProject, nextProject } from '~/lib/content';
@@ -28,7 +28,7 @@ export default function ProjectPage({ params }: Route.ComponentProps) {
       <CaseStudyHero project={project} />
       <CaseStudyBody project={project} />
       {next ? <NextProject project={next} /> : null}
-      <ContactPanel />
+      <ContactLine />
     </>
   );
 }

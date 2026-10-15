@@ -4,7 +4,6 @@ import { ScrubText } from '~/components/fx/scrub-text';
 import { Hero } from '~/components/home/hero';
 import { OffTheTrail } from '~/components/home/off-the-trail';
 import { ProjectShowcase } from '~/components/projects/project-showcase';
-import { SkillGroups } from '~/components/skills/skill-groups';
 import { ArrowLink } from '~/components/ui/action';
 import { Container } from '~/components/ui/container';
 import { Section } from '~/components/ui/section';
@@ -18,12 +17,16 @@ export const meta: Route.MetaFunction = () => [
   personJsonLd(),
 ];
 
+/**
+ * Home is a preview: one short taste of each area, each linking to the page
+ * that owns it (Projects, About, Experience). Work first, personality last.
+ */
 export default function Home() {
   return (
     <>
       <Hero />
 
-      <OffTheTrail />
+      <ProjectShowcase featured={featuredProject} projects={selectedProjects} />
 
       {/* About: one short statement that lights up as you read it. */}
       <section
@@ -50,21 +53,6 @@ export default function Home() {
         </Container>
       </section>
 
-      <ProjectShowcase featured={featuredProject} projects={selectedProjects} />
-
-      <Section
-        id="skills"
-        kicker="Gear"
-        title={
-          <>
-            The stack I <span className="text-accent">build with</span>
-          </>
-        }
-        description="Front end to back end."
-      >
-        <SkillGroups />
-      </Section>
-
       <Section
         id="experience"
         kicker="The route"
@@ -79,6 +67,8 @@ export default function Home() {
           <ExperienceSummary items={experience} />
         </div>
       </Section>
+
+      <OffTheTrail limit={3} action={<ArrowLink to="/about#outdoors">More adventures</ArrowLink>} />
 
       <ContactPanel />
     </>

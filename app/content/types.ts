@@ -161,17 +161,6 @@ export interface Education {
   coursework?: string[];
 }
 
-export interface StoryChapter {
-  id: string;
-  /** Free text, e.g. 'Jul – Sep 2025' or 'Next'. */
-  period: string;
-  title: string;
-  text: string;
-  link?: { label: string; to: string };
-  /** Highlights the current chapter or the one still ahead. */
-  state?: 'current' | 'next';
-}
-
 export interface ProcessStep {
   title: string;
   detail: string;

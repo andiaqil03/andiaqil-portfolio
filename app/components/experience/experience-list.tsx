@@ -1,12 +1,12 @@
 import { ChevronDown } from 'lucide-react';
 import { useRef } from 'react';
+import { Link } from 'react-router';
 import { isPlaceholder } from '~/content/placeholder';
 import { techName } from '~/content/tech';
 import type { Experience } from '~/content/types';
 import { cn } from '~/lib/cn';
 import { formatRange } from '~/lib/format';
 import { gsap, prefersReducedMotion, useGSAP } from '~/lib/gsap';
-import { TiltCard } from '../fx/tilt-card';
 import { List } from '../ui/list';
 import { PlaceholderNote } from '../ui/placeholder-note';
 import { Reveal } from '../ui/reveal';
@@ -72,13 +72,14 @@ function Rail() {
   );
 }
 
-function Node({ current }: { current: boolean }) {
+function Node({ current, compact = false }: { current: boolean; compact?: boolean }) {
   return (
     <span
       aria-hidden="true"
       data-node
       className={cn(
-        'absolute top-7 left-0 size-[15px] rounded-full border-[3px] shadow-sm sm:size-[23px] sm:border-[5px]',
+        compact ? 'top-[1.35rem]' : 'top-7',
+        'absolute left-0 size-[15px] rounded-full border-[3px] shadow-sm sm:size-[23px] sm:border-[5px]',
         current ? 'pulse-dot border-canvas bg-trail' : 'border-pine bg-surface',
       )}
     />
@@ -113,29 +114,30 @@ function Labels({ item }: { item: Experience }) {
   );
 }
 
-/** Home page: a compact timeline whose rail draws itself as you scroll. */
+/** Home page: one line per role, linking to its full entry on the Experience page. */
 export function ExperienceSummary({ items }: { items: Experience[] }) {
   const scope = useDrawnRail();
   return (
     <ol ref={scope} className="relative">
       <Rail />
       {items.map((item, index) => (
-        <Reveal
-          as="li"
-          key={item.id}
-          delay={index * 80}
-          className="relative pb-6 pl-9 last:pb-0 sm:pl-14"
-        >
-          <Node current={item.period.end === 'present'} />
-          <TiltCard as="article" max={3} className="rounded-xl" aria-labelledby={`${item.id}-role`}>
-            <div className="surface-card rounded-xl p-5 sm:p-7">
-              <Header item={item} level="h3" />
-              <p className="mt-3 max-w-[68ch] text-[0.9375rem] text-ink-2">{item.summary}</p>
-              <div className="mt-4">
-                <Labels item={item} />
-              </div>
-            </div>
-          </TiltCard>
+        <Reveal as="li" key={item.id} delay={index * 60} className="relative pl-9 sm:pl-14">
+          <Node current={item.period.end === 'present'} compact />
+          <Link
+            to={`/experience#${item.id}`}
+            viewTransition
+            className="group flex flex-col gap-0.5 border-b border-line py-4 transition-colors hover:border-line-strong sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+          >
+            <span>
+              <span className="font-display text-xl font-semibold transition-colors group-hover:text-accent">
+                {item.role}
+              </span>
+              <span className="text-ink-2"> · {item.organizationShort}</span>
+            </span>
+            <span className="font-mono text-meta text-ink-3 sm:shrink-0">
+              {formatRange(item.period)}
+            </span>
+          </Link>
         </Reveal>
       ))}
     </ol>

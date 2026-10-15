@@ -104,7 +104,7 @@ export function Hero() {
       </Container>
 
       <a
-        href="#off-the-trail"
+        href="#projects"
         aria-label="Scroll to content"
         className="anim-rise absolute bottom-6 left-1/2 hidden -translate-x-1/2 lg:block"
         style={at(1400)}

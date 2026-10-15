@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router';
-import { ContactPanel } from '~/components/contact/contact-panel';
+import { ContactLine } from '~/components/contact/contact-line';
 import { PageHeader } from '~/components/layout/page-header';
 import { FeaturedProjectCard, ProjectGrid } from '~/components/projects/project-card';
 import { Reveal } from '~/components/ui/reveal';
@@ -140,7 +140,7 @@ export default function Projects() {
         />
       </Container>
 
-      <ContactPanel />
+      <ContactLine />
     </>
   );
 }

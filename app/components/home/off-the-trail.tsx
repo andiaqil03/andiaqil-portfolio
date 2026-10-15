@@ -1,5 +1,5 @@
 import { Dumbbell, Mountain, Plane } from 'lucide-react';
-import type { ComponentType, SVGProps } from 'react';
+import type { ComponentType, ReactNode, SVGProps } from 'react';
 import { outdoors, type OutdoorActivity, type OutdoorKind } from '~/content/outdoors';
 import { isPlaceholder, resolved } from '~/content/placeholder';
 import { formatYearMonth } from '~/lib/format';
@@ -56,10 +56,21 @@ function ActivityCard({ activity }: { activity: OutdoorActivity }) {
  * Hiking, travel and sport. In production only activities with real photos
  * appear (app/content/outdoors.ts); the interests always show.
  */
-export function OffTheTrail({ id = 'off-the-trail' }: { id?: string }) {
-  const activities = outdoors.activities.filter(
-    (activity) => import.meta.env.DEV || resolved(activity.photos) !== undefined,
-  );
+export function OffTheTrail({
+  id = 'off-the-trail',
+  limit,
+  action,
+}: {
+  id?: string;
+  /** Show only the N most recent activities (Home shows three). */
+  limit?: number;
+  action?: ReactNode;
+}) {
+  // Most recent first; undated activities go last, otherwise content order is kept.
+  const activities = outdoors.activities
+    .filter((activity) => import.meta.env.DEV || resolved(activity.photos) !== undefined)
+    .toSorted((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+    .slice(0, limit);
 
   return (
     <Section
@@ -71,6 +82,7 @@ export function OffTheTrail({ id = 'off-the-trail' }: { id?: string }) {
         </>
       }
       description={outdoors.intro}
+      action={action}
     >
       <ul className="flex flex-wrap gap-3">
         {outdoors.interests.map((kind, index) => {

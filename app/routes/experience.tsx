@@ -1,5 +1,6 @@
-import { ContactPanel } from '~/components/contact/contact-panel';
+import { ContactLine } from '~/components/contact/contact-line';
 import { ExperienceTimeline } from '~/components/experience/experience-list';
+import { WorkProcess } from '~/components/experience/work-process';
 import { PageHeader } from '~/components/layout/page-header';
 import { Container } from '~/components/ui/container';
 import { experience } from '~/content/experience';
@@ -28,7 +29,8 @@ export default function ExperiencePage() {
           <ExperienceTimeline items={experience} />
         </Container>
       </div>
-      <ContactPanel />
+      <WorkProcess />
+      <ContactLine />
     </>
   );
 }

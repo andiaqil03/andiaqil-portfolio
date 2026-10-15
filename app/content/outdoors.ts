@@ -65,6 +65,7 @@ export const outdoors = {
       kind: 'Hiking',
       title: 'Gunung Prau',
       detail: 'via Patak Banteng',
+      date: '2026-05',
       photos: [
         prau(
           1,

@@ -1,23 +1,18 @@
-import { ArrowRight, Languages, MapPin, Users } from 'lucide-react';
-import { useRef } from 'react';
-import { Link } from 'react-router';
-import { ContactPanel } from '~/components/contact/contact-panel';
+import { Languages, MapPin, Users } from 'lucide-react';
+import { ContactLine } from '~/components/contact/contact-line';
 import { EducationList } from '~/components/education/education-list';
-import { ScrubText } from '~/components/fx/scrub-text';
 import { TiltCard } from '~/components/fx/tilt-card';
 import { OffTheTrail } from '~/components/home/off-the-trail';
 import { PageHeader } from '~/components/layout/page-header';
 import { SkillGroups } from '~/components/skills/skill-groups';
-import { Container } from '~/components/ui/container';
+import { ArrowLink } from '~/components/ui/action';
 import { List } from '~/components/ui/list';
 import { Reveal } from '~/components/ui/reveal';
 import { Section } from '~/components/ui/section';
-import { story, workProcess } from '~/content/about';
+import { story } from '~/content/about';
 import { activities, education } from '~/content/education';
 import { profile } from '~/content/profile';
-import { cn } from '~/lib/cn';
 import { formatYearMonth } from '~/lib/format';
-import { gsap, prefersReducedMotion, useGSAP } from '~/lib/gsap';
 import { pageMeta } from '~/lib/seo';
 import type { Route } from './+types/about';
 
@@ -27,89 +22,6 @@ export const meta: Route.MetaFunction = () =>
     path: '/about',
     description: `About ${profile.fullName}: Software Engineering graduate from UNITEN and full-stack software engineer based in ${profile.location}.`,
   });
-
-function StoryLink({ to, label }: { to: string; label: string }) {
-  const className =
-    'group mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hover';
-  const arrow = (
-    <ArrowRight
-      aria-hidden="true"
-      className="size-4 transition-transform duration-300 group-hover:translate-x-1"
-      strokeWidth={2}
-    />
-  );
-  return to.startsWith('#') ? (
-    <a href={to} className={className}>
-      {label}
-      {arrow}
-    </a>
-  ) : (
-    <Link to={to} viewTransition className={className}>
-      {label}
-      {arrow}
-    </Link>
-  );
-}
-
-/** Story timeline whose dashed trail draws as you read down it. */
-function Story() {
-  const scope = useRef<HTMLOListElement>(null);
-
-  useGSAP(
-    () => {
-      const rail = scope.current?.querySelector('[data-rail]');
-      if (!rail || prefersReducedMotion()) return;
-      gsap.fromTo(
-        rail,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: scope.current,
-            start: 'top 70%',
-            end: 'bottom 65%',
-            scrub: 0.6,
-          },
-        },
-      );
-    },
-    { scope },
-  );
-
-  return (
-    <ol ref={scope} className="relative max-w-3xl">
-      <span aria-hidden="true" className="absolute top-2 bottom-2 left-[11px] w-px bg-line" />
-      <span
-        aria-hidden="true"
-        data-rail
-        className="trail-line absolute top-2 bottom-2 left-[10px] w-[3px] origin-top rounded-full"
-      />
-      {story.map((chapter, index) => (
-        <Reveal
-          as="li"
-          key={chapter.id}
-          delay={index * 60}
-          className="relative pb-12 pl-12 last:pb-0 sm:pl-16"
-        >
-          <span
-            aria-hidden="true"
-            className={cn(
-              'absolute top-1 left-0 size-[23px] rounded-full border-[5px] shadow-sm',
-              chapter.state === 'current' && 'pulse-dot border-canvas bg-trail',
-              chapter.state === 'next' && 'border-[3px] border-dashed border-lake bg-canvas',
-              !chapter.state && 'border-pine bg-surface',
-            )}
-          />
-          <p className="font-mono text-meta text-accent uppercase">{chapter.period}</p>
-          <h3 className="mt-1.5 font-display text-subheading font-semibold">{chapter.title}</h3>
-          <p className="mt-2 max-w-[64ch] text-ink-2">{chapter.text}</p>
-          {chapter.link ? <StoryLink {...chapter.link} /> : null}
-        </Reveal>
-      ))}
-    </ol>
-  );
-}
 
 export default function About() {
   return (
@@ -136,16 +48,6 @@ export default function About() {
         </ul>
       </PageHeader>
 
-      <section aria-label="In short" className="py-16 sm:py-20">
-        <Container>
-          <ScrubText
-            className="max-w-5xl text-[clamp(1.75rem,1.1rem+2.6vw,3.25rem)] leading-[1.15] font-semibold tracking-[-0.01em]"
-            text="Software engineering at UNITEN, an internship at TM R&D, programme work at PNB, and now building for clients at MTechnix, with freelance on the side."
-            highlight={['UNITEN,', 'MTechnix,', 'freelance']}
-          />
-        </Container>
-      </section>
-
       <Section
         id="story"
         kicker="The route"
@@ -154,38 +56,18 @@ export default function About() {
             My story <span className="text-accent">so far</span>
           </>
         }
-        description="From studying software engineering to building for clients."
       >
-        <Story />
-      </Section>
-
-      <Section
-        id="process"
-        kicker="Process"
-        title="How I work with clients"
-        description="The way a freelance project moves from first conversation to production."
-      >
-        <ol className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          <span
-            aria-hidden="true"
-            className="absolute top-[2.4rem] right-[10%] left-[10%] hidden h-[3px] bg-[repeating-linear-gradient(to_right,var(--trail)_0_10px,transparent_10px_18px)] lg:block"
-          />
-          {workProcess.map((step, index) => (
-            <Reveal as="li" key={step.title} delay={index * 90} className="relative">
-              <TiltCard max={5} className="h-full rounded-xl">
-                <div className="surface-card h-full rounded-xl p-5">
-                  <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent font-mono text-sm font-semibold text-on-accent shadow-sm">
-                    {index + 1}
-                  </span>
-                  <p className="mt-4 font-display text-lg font-semibold tracking-[-0.02em]">
-                    {step.title}
-                  </p>
-                  <p className="mt-1.5 text-[0.9375rem] text-ink-2">{step.detail}</p>
-                </div>
-              </TiltCard>
+        <div className="max-w-3xl space-y-5 text-lead text-ink-2">
+          {story.map((paragraph) => (
+            <Reveal as="p" key={paragraph}>
+              {paragraph}
             </Reveal>
           ))}
-        </ol>
+        </div>
+        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2">
+          <ArrowLink to="/experience">Full experience</ArrowLink>
+          <ArrowLink to="/projects/focuspro">FocusPro case study</ArrowLink>
+        </div>
       </Section>
 
       <Section
@@ -207,7 +89,7 @@ export default function About() {
 
       <OffTheTrail id="outdoors" />
 
-      <Section id="beyond" kicker="Beyond the code" title="Outside the editor">
+      <Section id="beyond" kicker="Campus" title="Committee work">
         <ul className="grid gap-5 sm:gap-6 lg:grid-cols-2">
           {activities.map((activity) => (
             <Reveal as="li" key={activity.id}>
@@ -231,7 +113,7 @@ export default function About() {
         </ul>
       </Section>
 
-      <ContactPanel />
+      <ContactLine />
     </>
   );
 }

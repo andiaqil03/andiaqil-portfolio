@@ -28,6 +28,7 @@ Balanced, not backend-first (user, Oct 2026): just "Software Engineer", equally 
 ## Capabilities and Constraints
 
 - Pages: Home, About, Experience, Projects (filterable), per-project case studies, Contact, Resume (web + PDF download), 404.
+- Each topic is covered in full on one page only (user, Oct 2026). Home is a preview: hero → selected projects → short about → one-line-per-role experience → the latest trip → the contact panel, and each part links to the page that owns it. About covers the story (short prose), skills, education, all trips and committee work. Experience has the full role detail and the client process. The big contact panel appears on Home only; other pages end with a short contact line.
 - All content lives in typed data modules under `app/content/`; unknown facts use `todo()` placeholders that render only in development and are listed by `npm run check:content`.
 - Phone number appears **only** on the Contact page and in the resume PDF: never in the hero, header, footer, web resume or structured data.
 - Public location is "Selangor, Malaysia" only.
