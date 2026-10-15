@@ -22,12 +22,17 @@ export interface OutdoorActivity {
   photos: MaybePlaceholder<OutdoorPhoto[]>;
 }
 
-const merbabu = (n: number, alt: string, width = 960): OutdoorPhoto => ({
-  src: `/images/outdoors/merbabu-${n}.jpg`,
-  alt,
-  width,
-  height: 1280,
-});
+/** Photos are named `<trip>-<n>.jpg`, in display order. */
+const photo =
+  (trip: string) =>
+  (n: number, alt: string, width = 960, height = 1280): OutdoorPhoto => ({
+    src: `/images/outdoors/${trip}-${n}.jpg`,
+    alt,
+    width,
+    height,
+  });
+const merbabu = photo('merbabu');
+const prau = photo('prau');
 
 export const outdoors = {
   intro: 'Life outside work: hiking, travel and sport.',
@@ -53,6 +58,26 @@ export const outdoors = {
         merbabu(7, 'Andi resting on a low branch of a tree on a grassy slope above the clouds'),
         merbabu(8, 'Andi relaxing against a tree trunk among red flowers on a misty slope'),
         merbabu(9, 'Andi and two fellow hikers on a grassy ridge trail, clouds behind', 853),
+      ],
+    },
+    {
+      id: 'prau',
+      kind: 'Hiking',
+      title: 'Gunung Prau',
+      detail: 'via Patak Banteng',
+      photos: [
+        prau(
+          1,
+          'Andi looking out over grassland toward volcano peaks rising above the clouds',
+          1500,
+          2000,
+        ),
+        prau(2, 'Andi and six fellow hikers under the Gunung Prau Patak Banteng trail gate', 720),
+        prau(3, 'Andi under the Sunrise Camp sign at 2,565 m, holding a Mt. Prau marker', 960),
+        prau(4, 'Andi and the group posing on a rocky forest trail', 853),
+        prau(5, 'Andi beside the Sunrise Camp Zona 3 sign, a volcano peak behind'),
+        prau(6, 'Andi at sunset, with volcano silhouettes above a sea of clouds'),
+        prau(7, 'Andi at the Puncak Joyo Dwipo marker, Gunung Prau, 2,558 m'),
       ],
     },
     {
