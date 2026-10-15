@@ -1,11 +1,12 @@
 import { Dumbbell, Mountain, Plane } from 'lucide-react';
 import type { ComponentType, SVGProps } from 'react';
-import { outdoors, type OutdoorKind, type OutdoorPhoto } from '~/content/outdoors';
+import { outdoors, type OutdoorActivity, type OutdoorKind } from '~/content/outdoors';
 import { isPlaceholder, resolved } from '~/content/placeholder';
-import { cn } from '~/lib/cn';
+import { formatYearMonth } from '~/lib/format';
 import { PlaceholderNote } from '../ui/placeholder-note';
 import { Reveal } from '../ui/reveal';
 import { Section } from '../ui/section';
+import { QuickSnap } from './quick-snap';
 
 const kinds: Record<OutdoorKind, { Icon: ComponentType<SVGProps<SVGSVGElement>>; tint: string }> = {
   Hiking: { Icon: Mountain, tint: 'var(--pine)' },
@@ -13,66 +14,51 @@ const kinds: Record<OutdoorKind, { Icon: ComponentType<SVGProps<SVGSVGElement>>;
   Sport: { Icon: Dumbbell, tint: 'var(--trail)' },
 };
 
-// A gentle scrapbook tilt that straightens on hover.
-const tilts = [
-  '-rotate-[1.5deg]',
-  'rotate-[1deg]',
-  '-rotate-[0.75deg]',
-  'rotate-[1.5deg]',
-  '-rotate-[1deg]',
-  'rotate-[0.5deg]',
-];
-
-function PhotoFrame({ photo, index }: { photo: OutdoorPhoto; index: number }) {
-  const image = resolved(photo.image);
-  const caption = resolved(photo.caption);
-  const { Icon, tint } = kinds[photo.kind];
+function ActivityCard({ activity }: { activity: OutdoorActivity }) {
+  const photos = resolved(activity.photos);
+  const title = resolved(activity.title);
+  const detail = resolved(activity.detail);
+  const { Icon, tint } = kinds[activity.kind];
 
   return (
-    <figure
-      className={cn(
-        'surface-card rounded-lg p-2 pb-3 transition-transform duration-500 ease-out-expo hover:rotate-0 hover:scale-[1.02] motion-reduce:rotate-0',
-        tilts[index % tilts.length],
-      )}
-    >
-      {image ? (
-        <img
-          src={image.src}
-          alt={image.alt}
-          width={image.width}
-          height={image.height}
-          loading="lazy"
-          decoding="async"
-          className="aspect-[4/3] w-full rounded-md object-cover"
-        />
+    <article className="surface-card rounded-xl p-2.5 pb-4">
+      {photos?.length ? (
+        <QuickSnap photos={photos} label={`${title ?? activity.kind} photos`} />
       ) : (
-        <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-3 rounded-md border border-dashed border-line-strong bg-surface-2 p-3 text-center">
+        <div className="flex aspect-[3/4] flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-line-strong bg-surface-2 p-4 text-center">
           <Icon aria-hidden="true" className="size-6" style={{ color: tint }} strokeWidth={1.5} />
-          {isPlaceholder(photo.image) ? <PlaceholderNote note={photo.image.todo} /> : null}
+          {isPlaceholder(activity.photos) ? <PlaceholderNote note={activity.photos.todo} /> : null}
         </div>
       )}
-      <figcaption className="mt-2.5 flex items-center gap-2 px-1 font-mono text-meta text-ink-2">
-        <Icon
-          aria-hidden="true"
-          className="size-3.5 shrink-0"
-          style={{ color: tint }}
-          strokeWidth={2}
-        />
-        <span className="font-semibold text-ink">{photo.kind}</span>
-        {caption ? <span className="truncate">· {caption}</span> : null}
-        {isPlaceholder(photo.caption) ? <PlaceholderNote note={photo.caption.todo} /> : null}
-      </figcaption>
-    </figure>
+      <div className="mt-4 px-2">
+        <p className="flex items-center gap-2 font-mono text-meta text-ink-2 uppercase">
+          <Icon aria-hidden="true" className="size-3.5" style={{ color: tint }} strokeWidth={2} />
+          {activity.kind}
+          {activity.date ? (
+            <>
+              <span aria-hidden="true">·</span>
+              <time dateTime={activity.date}>{formatYearMonth(activity.date)}</time>
+            </>
+          ) : null}
+        </p>
+        <h3 className="mt-1.5 font-display text-subheading font-semibold">
+          {title}
+          {isPlaceholder(activity.title) ? <PlaceholderNote note={activity.title.todo} /> : null}
+        </h3>
+        {detail ? <p className="text-ink-2">{detail}</p> : null}
+        {isPlaceholder(activity.detail) ? <PlaceholderNote note={activity.detail.todo} /> : null}
+      </div>
+    </article>
   );
 }
 
 /**
- * Hiking, travel and sport. In production the photo grid appears only once
- * real photos are added (app/content/outdoors.ts); the interests always show.
+ * Hiking, travel and sport. In production only activities with real photos
+ * appear (app/content/outdoors.ts); the interests always show.
  */
 export function OffTheTrail({ id = 'off-the-trail' }: { id?: string }) {
-  const photos = outdoors.photos.filter(
-    (photo) => import.meta.env.DEV || resolved(photo.image) !== undefined,
+  const activities = outdoors.activities.filter(
+    (activity) => import.meta.env.DEV || resolved(activity.photos) !== undefined,
   );
 
   return (
@@ -108,11 +94,11 @@ export function OffTheTrail({ id = 'off-the-trail' }: { id?: string }) {
         })}
       </ul>
 
-      {photos.length > 0 ? (
-        <ul className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
-          {photos.map((photo, index) => (
-            <Reveal as="li" key={photo.id} delay={(index % 3) * 80}>
-              <PhotoFrame photo={photo} index={index} />
+      {activities.length > 0 ? (
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {activities.map((activity, index) => (
+            <Reveal as="li" key={activity.id} delay={(index % 3) * 80}>
+              <ActivityCard activity={activity} />
             </Reveal>
           ))}
         </ul>

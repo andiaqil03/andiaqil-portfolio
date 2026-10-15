@@ -86,26 +86,10 @@ content: [
 
 ### Outdoor photos
 
-The "Off the trail" section (Home and About) has six photo frames for hiking, travel and sport. They stay hidden on the live site until real photos are added:
+The "Off the trail" section (Home and About) shows one card per activity. Each card is a story-style viewer: tap the right side (or swipe, or press →) for the next photo, and the left side for the previous one. Activities without real photos are hidden on the live site.
 
-1. Put images in `public/images/outdoors/` (WebP or JPG, landscape, around 1600px wide).
-2. In `app/content/outdoors.ts`, replace a photo's `image: todo(...)` with its details and its `caption: todo(...)` with a short caption, for example the trail, peak, city or sport:
-
-```ts
-{
-  id: 'hike-1',
-  kind: 'Hiking',
-  caption: 'Sunrise at the summit',
-  image: {
-    src: '/images/outdoors/hike-1.webp',
-    alt: 'Sunrise over forested hills, seen from a summit',
-    width: 1600,
-    height: 1200,
-  },
-},
-```
-
-Delete the photo entries you don't need. In production, only frames with a real image are shown.
+1. Put the photos in `public/images/outdoors/`, named in order (e.g. `merbabu-1.jpg`, `merbabu-2.jpg`, …). Portrait 3:4, around 960×1280.
+2. In `app/content/outdoors.ts`, add an activity (or fill in a `todo(...)` one) with its `kind`, `title`, optional `detail` and `date`, and the `photos` in display order, each with an `alt` description. See the Gunung Merbabu entry for an example.
 
 ### Resume PDF
 
