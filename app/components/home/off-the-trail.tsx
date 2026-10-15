@@ -1,6 +1,6 @@
 import { Dumbbell, Mountain, Plane } from 'lucide-react';
 import type { ComponentType, ReactNode, SVGProps } from 'react';
-import { outdoors, type OutdoorActivity, type OutdoorKind } from '~/content/outdoors';
+import { byRecent, outdoors, type OutdoorActivity, type OutdoorKind } from '~/content/outdoors';
 import { isPlaceholder, resolved } from '~/content/placeholder';
 import { formatYearMonth } from '~/lib/format';
 import { PlaceholderNote } from '../ui/placeholder-note';
@@ -66,10 +66,9 @@ export function OffTheTrail({
   limit?: number;
   action?: ReactNode;
 }) {
-  // Most recent first; undated activities go last, otherwise content order is kept.
   const activities = outdoors.activities
     .filter((activity) => import.meta.env.DEV || resolved(activity.photos) !== undefined)
-    .toSorted((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+    .toSorted(byRecent)
     .slice(0, limit);
 
   return (

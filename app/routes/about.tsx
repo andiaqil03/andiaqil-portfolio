@@ -1,15 +1,14 @@
 import { Languages, MapPin, Users } from 'lucide-react';
+import { RightNow } from '~/components/about/right-now';
 import { ContactLine } from '~/components/contact/contact-line';
 import { EducationList } from '~/components/education/education-list';
 import { TiltCard } from '~/components/fx/tilt-card';
 import { OffTheTrail } from '~/components/home/off-the-trail';
 import { PageHeader } from '~/components/layout/page-header';
 import { SkillGroups } from '~/components/skills/skill-groups';
-import { ArrowLink } from '~/components/ui/action';
 import { List } from '~/components/ui/list';
 import { Reveal } from '~/components/ui/reveal';
 import { Section } from '~/components/ui/section';
-import { story } from '~/content/about';
 import { activities, education } from '~/content/education';
 import { profile } from '~/content/profile';
 import { formatYearMonth } from '~/lib/format';
@@ -48,27 +47,7 @@ export default function About() {
         </ul>
       </PageHeader>
 
-      <Section
-        id="story"
-        kicker="The route"
-        title={
-          <>
-            My story <span className="text-accent">so far</span>
-          </>
-        }
-      >
-        <div className="max-w-3xl space-y-5 text-lead text-ink-2">
-          {story.map((paragraph) => (
-            <Reveal as="p" key={paragraph}>
-              {paragraph}
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2">
-          <ArrowLink to="/experience">Full experience</ArrowLink>
-          <ArrowLink to="/projects/focuspro">FocusPro case study</ArrowLink>
-        </div>
-      </Section>
+      <RightNow />
 
       <Section
         id="skills"

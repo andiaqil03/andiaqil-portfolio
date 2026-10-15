@@ -96,3 +96,8 @@ export const outdoors = {
     },
   ] satisfies OutdoorActivity[],
 };
+
+/** Most recent first; undated activities go last, otherwise content order is kept. */
+export function byRecent(a: OutdoorActivity, b: OutdoorActivity): number {
+  return (b.date ?? '').localeCompare(a.date ?? '');
+}
