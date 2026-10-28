@@ -8,7 +8,7 @@ import { ArrowLink } from '~/components/ui/action';
 import { Container } from '~/components/ui/container';
 import { Section } from '~/components/ui/section';
 import { experience } from '~/content/experience';
-import { featuredProject, selectedProjects } from '~/lib/content';
+import { selectedProjects } from '~/lib/content';
 import { pageMeta, personJsonLd } from '~/lib/seo';
 import type { Route } from './+types/home';
 
@@ -26,7 +26,7 @@ export default function Home() {
     <>
       <Hero />
 
-      <ProjectShowcase featured={featuredProject} projects={selectedProjects} />
+      <ProjectShowcase projects={selectedProjects} />
 
       {/* About: one short statement that lights up as you read it. */}
       <section
@@ -44,8 +44,8 @@ export default function Home() {
           </p>
           <ScrubText
             className="max-w-5xl text-[clamp(1.75rem,1.1rem+2.6vw,3.5rem)] leading-[1.12] font-semibold tracking-[-0.01em]"
-            text="I’m a software engineer, passionate about modern technology. Outside of work, I’m into sports. Jack of all trades, master of none."
-            highlight={['technology.', 'sports.', 'jack']}
+            text="I build full-stack web apps for clients at MTechnix and freelance on the side. Outside of work, I hike, travel and play sport."
+            highlight={['full-stack', 'hike,', 'sport.']}
           />
           <ArrowLink to="/about" className="mt-10">
             More about me

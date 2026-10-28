@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Clock } from 'lucide-react';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router';
 import { isPlaceholder, resolved, type Placeholder } from '~/content/placeholder';
@@ -80,7 +80,6 @@ export function CaseStudyHero({ project }: { project: Project }) {
         <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
           <div className="lg:col-span-7">
             <div className="anim-rise flex flex-wrap items-center gap-2" style={at(60)}>
-              {project.featured ? <Tag tone="accent">Featured project</Tag> : null}
               {project.kind ? <Tag>{project.kind}</Tag> : null}
               <Tag tone="outline">
                 <time dateTime={project.date}>{formatYearMonth(project.date)}</time>
@@ -123,6 +122,16 @@ export function CaseStudyHero({ project }: { project: Project }) {
                       Live demo
                     </Action>
                   ) : null}
+                  {live && project.links.liveNote ? (
+                    <p className="flex w-full items-start gap-2 pt-1 text-sm text-ink-2">
+                      <Clock
+                        aria-hidden="true"
+                        className="mt-0.5 size-4 shrink-0 text-accent-3"
+                        strokeWidth={1.75}
+                      />
+                      {project.links.liveNote}
+                    </p>
+                  ) : null}
                 </div>
               ) : import.meta.env.DEV ? (
                 <PlaceholderNote note="Repository and/or live demo URL" />
@@ -133,11 +142,11 @@ export function CaseStudyHero({ project }: { project: Project }) {
 
         <div className="mt-12 [perspective:1400px] lg:mt-16">
           <div ref={visual} className="anim-rise origin-top" style={at(640)}>
-            <div className="surface-card overflow-hidden rounded-xl p-2 shadow-lg">
+            <div className="surface-card overflow-hidden rounded-xl p-2 shadow-md">
               <ProjectVisual
                 project={project}
                 priority
-                className="aspect-[16/10] rounded-[calc(var(--radius-xl)-8px)] sm:aspect-[16/8]"
+                className="aspect-[16/10] rounded-[calc(var(--radius-xl)-8px)]"
               />
             </div>
           </div>

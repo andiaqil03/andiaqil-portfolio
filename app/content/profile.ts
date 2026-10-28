@@ -13,7 +13,7 @@ export const profile: Profile = {
   heroHeading: ['Software Engineer', 'building practical digital products.'],
   heroFocus: ['full-stack web apps', 'frontend interfaces', 'backend APIs', 'cloud deployments'],
   heroIntro:
-    'I’m a Software Engineering graduate who enjoys doing fullstack development. Passionate about modern technology and always learning how to build better, more scalable apps.',
+    'I build and deploy full-stack apps for clients with React, Express.js, PostgreSQL and Azure, and take on freelance web projects on the side.',
   location: 'Selangor, Malaysia',
   email: 'andimuhammadaqil03@gmail.com',
   phone: { display: '+60 11-2170 9231', href: 'tel:+601121709231' },

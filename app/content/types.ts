@@ -101,7 +101,8 @@ export type Block =
   | { type: 'facts'; items: { label: string; value: string }[] }
   | { type: 'note'; text: string }
   | { type: 'tech'; items: { id: TechId; role?: MaybePlaceholder<string> }[] }
-  | { type: 'gallery'; images: Screenshot[] };
+  /** `columns: 3` suits tall phone screenshots. */
+  | { type: 'gallery'; images: Screenshot[]; columns?: 2 | 3 };
 
 export interface CaseStudySection {
   id: string;
@@ -127,15 +128,15 @@ export interface Project {
   stack: TechId[];
   /** Two or three sentences for cards and meta descriptions. */
   summary: string;
-  featured?: boolean;
-  /** Shown on the home page below the featured project. */
+  /** Shown on the home page. */
   selected?: boolean;
   links: {
     repo: MaybePlaceholder<string>;
-    live: MaybePlaceholder<string>;
+    /** Omit when there is no public deployment. */
+    live?: MaybePlaceholder<string>;
+    /** Shown under the Live demo button, e.g. a hosting caveat. */
+    liveNote?: string;
   };
-  /** Three short points for the featured-project card. */
-  keyPoints?: string[];
   sections: CaseStudySection[];
 }
 

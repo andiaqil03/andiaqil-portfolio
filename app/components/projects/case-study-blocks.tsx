@@ -146,7 +146,12 @@ export function CaseStudyBlock({ block }: { block: Block }) {
 
     case 'gallery':
       return (
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div
+          className={cn(
+            'grid gap-6',
+            block.columns === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'sm:grid-cols-2',
+          )}
+        >
           {block.images.map((image) => (
             <figure key={image.src} className="overflow-hidden surface-card rounded-xl">
               <img

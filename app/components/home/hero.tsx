@@ -7,7 +7,6 @@ import { ScrambleText } from '../fx/scramble-text';
 import { SplitText } from '../fx/split-text';
 import { Action } from '../ui/action';
 import { Container } from '../ui/container';
-import { SocialLinks } from '../ui/social-links';
 
 const at = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 
@@ -27,8 +26,10 @@ export function Hero() {
         <div className="topo absolute inset-0" />
       </div>
 
-      <Container className="grid items-center gap-4 lg:grid-cols-12 lg:gap-6">
-        <div className="relative z-10 order-1 lg:col-span-6">
+      {/* Phones: name and role, then the trail, then the rest, so the map is in the first view.
+          Desktop: the two text blocks stack on the left, centred beside the map. */}
+      <Container className="grid gap-4 lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-6 lg:gap-y-0">
+        <div className="relative z-10 lg:col-span-6 lg:col-start-1 lg:row-start-2">
           <p className="anim-rise" style={at(0)}>
             <span className="surface-card inline-flex items-center gap-2 rounded-full py-1.5 pr-3.5 pl-3 text-sm font-medium text-ink-2">
               <span aria-hidden="true" className="pulse-dot relative size-2 rounded-full bg-pine" />
@@ -56,7 +57,14 @@ export function Hero() {
               {quiet}
             </span>
           </h1>
+        </div>
 
+        {/* The trail: a 3D contour map with Andi's milestones as waypoints. */}
+        <div className="relative -mx-4 h-[min(80vw,320px)] sm:mx-0 sm:h-[440px] lg:col-span-6 lg:col-start-7 lg:row-span-4 lg:row-start-1 lg:-mr-16 lg:h-[min(74vh,640px)] lg:self-center">
+          <HeroScene className="absolute inset-0" />
+        </div>
+
+        <div className="relative z-10 lg:col-span-6 lg:col-start-1 lg:row-start-3">
           <p className="anim-rise mt-6 font-mono text-sm text-ink-2" style={at(760)}>
             <span className="sr-only">Focus areas: {profile.heroFocus.join(', ')}.</span>
             <span
@@ -91,15 +99,6 @@ export function Hero() {
               </Action>
             </Magnetic>
           </div>
-
-          <div className="anim-rise" style={at(1060)}>
-            <SocialLinks labelled className="mt-6" />
-          </div>
-        </div>
-
-        {/* The trail: a 3D contour map with Andi's milestones as waypoints. */}
-        <div className="relative order-2 -mx-4 mt-4 h-[min(90vw,360px)] sm:mx-0 sm:h-[460px] lg:col-span-6 lg:-mr-16 lg:mt-0 lg:h-[min(74vh,640px)]">
-          <HeroScene className="absolute inset-0" />
         </div>
       </Container>
 

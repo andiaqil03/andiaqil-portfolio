@@ -10,7 +10,8 @@ function randomGlyph() {
 /**
  * Cycles through `words`, decoding each one through random glyphs like a
  * terminal. The first word is what prerenders; cycling runs in the browser
- * only. Decorative: give the surrounding element an accessible label.
+ * only, and not on touch screens, where it reads as glyph noise. Decorative:
+ * give the surrounding element an accessible label.
  */
 export function ScrambleText({
   words,
@@ -28,6 +29,7 @@ export function ScrambleText({
 
   useEffect(() => {
     if (words.length < 2 || prefersReducedMotion()) return;
+    if (window.matchMedia('(hover: none)').matches) return;
     let frame = 0;
     let timer = 0;
     let index = 0;

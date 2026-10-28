@@ -1,18 +1,11 @@
 import { useSearchParams } from 'react-router';
 import { ContactLine } from '~/components/contact/contact-line';
 import { PageHeader } from '~/components/layout/page-header';
-import { FeaturedProjectCard, ProjectGrid } from '~/components/projects/project-card';
-import { Reveal } from '~/components/ui/reveal';
+import { ProjectGrid } from '~/components/projects/project-card';
 import { Container } from '~/components/ui/container';
 import type { ProjectCategory } from '~/content/types';
 import { useHydrated } from '~/hooks/use-hydrated';
-import {
-  allProjects,
-  categoryLabels,
-  featuredProject,
-  isProjectCategory,
-  projectCategories,
-} from '~/lib/content';
+import { allProjects, categoryLabels, isProjectCategory, projectCategories } from '~/lib/content';
 import { cn } from '~/lib/cn';
 import { pageMeta } from '~/lib/seo';
 import type { Route } from './+types/projects';
@@ -56,9 +49,6 @@ export default function Projects() {
     active === 'all'
       ? allProjects
       : allProjects.filter((project) => projectCategories(project).includes(active));
-
-  const featuredVisible = visible.includes(featuredProject);
-  const others = visible.filter((project) => project !== featuredProject);
 
   function select(filter: Filter) {
     // Cards glide to their new places; the page itself doesn't wipe.
@@ -126,18 +116,7 @@ export default function Projects() {
           </p>
         </div>
 
-        {featuredVisible ? (
-          <div style={{ viewTransitionName: `card-${featuredProject.slug}` }}>
-            <Reveal>
-              <FeaturedProjectCard project={featuredProject} headingLevel="h2" />
-            </Reveal>
-          </div>
-        ) : null}
-        <ProjectGrid
-          projects={others}
-          headingLevel="h2"
-          className={featuredVisible ? 'mt-6' : undefined}
-        />
+        <ProjectGrid projects={visible} headingLevel="h2" />
       </Container>
 
       <ContactLine />

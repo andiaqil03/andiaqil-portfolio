@@ -14,21 +14,11 @@ export function isProjectCategory(value: string | null): value is ProjectCategor
   return value !== null && value in categoryLabels;
 }
 
-function getFeaturedProject(): Project {
-  const featured = projects.find((project) => project.featured);
-  if (!featured) throw new Error('Mark one project as `featured` in app/content/projects.ts');
-  return featured;
-}
+/** Display order: the order in app/content/projects.ts. */
+export const allProjects = projects;
 
-export const featuredProject = getFeaturedProject();
-
+/** Shown on the home page, in display order. */
 export const selectedProjects = projects.filter((project) => project.selected);
-
-/** Featured first, then newest first. */
-export const allProjects = [...projects].sort((a, b) => {
-  if (a.featured !== b.featured) return a.featured ? -1 : 1;
-  return b.date.localeCompare(a.date);
-});
 
 export function getProject(slug: string | undefined): Project | undefined {
   return projects.find((project) => project.slug === slug);

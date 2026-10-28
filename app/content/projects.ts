@@ -3,7 +3,7 @@ import type { Project } from './types';
 
 /**
  * Add a project here and its card, case-study page, sitemap entry and meta
- * tags are generated automatically. Display order (featured first, then
+ * tags are generated automatically. Display order (as listed here, then
  * newest) is handled in `~/lib/content`.
  *
  * Case-study sections follow one structure: Overview → Problem → Solution →
@@ -26,15 +26,15 @@ export const projects: Project[] = [
     stack: ['laravel', 'mysql', 'firebase'],
     summary:
       'A full-stack productivity app combining task management, Pomodoro focus sessions, website distraction blocking and a productivity analytics dashboard, with separate interfaces for users and administrators.',
-    featured: true,
-    keyPoints: [
-      'Requirements shaped by a user survey with 60+ responses',
-      'Task management, Pomodoro sessions and website blocking',
-      'Analytics dashboard with charts and downloadable reports',
-    ],
+    selected: true,
     links: {
-      repo: todo('FocusPro repository URL'),
-      live: todo('FocusPro live demo URL (if any)'),
+      repo: 'https://github.com/andiaqil03/FocusPro',
+    },
+    cover: {
+      src: '/images/projects/focuspro/landing.webp',
+      alt: 'FocusPro landing page: “Deep work, without the distractions.” beside a focus timer card that is blocking youtube.com and x.com',
+      width: 1800,
+      height: 1125,
     },
     sections: [
       {
@@ -44,7 +44,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             paragraphs: [
-              'FocusPro is a web-based productivity and time-management application. I built it as my Final Year Project using Laravel, MySQL and Firebase.',
+              'FocusPro is a web-based productivity and time-management application. I built it as my Final Year Project using Laravel, MySQL and Firebase, with a Chrome extension that blocks distracting sites during focus sessions.',
             ],
           },
           {
@@ -71,7 +71,6 @@ export const projects: Project[] = [
             type: 'note',
             text: 'I gathered requirements through a user survey with more than 60 responses and kept the design user-centered throughout.',
           },
-          todo('Two or three key findings from the survey, and how they shaped the features'),
         ],
       },
       {
@@ -81,7 +80,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             paragraphs: [
-              'FocusPro brings these into one application: task management, Pomodoro focus sessions, website distraction blocking and a productivity analytics dashboard, with responsive interfaces for both users and administrators.',
+              'FocusPro brings these into one application: task management, Pomodoro focus sessions, website distraction blocking and a productivity analytics dashboard, with separate interfaces for users and administrators.',
             ],
           },
         ],
@@ -93,15 +92,34 @@ export const projects: Project[] = [
           {
             type: 'definitions',
             items: [
-              { term: 'Task management', detail: 'Create, edit, prioritize and track tasks.' },
-              { term: 'Pomodoro focus sessions', detail: 'Pomodoro-style timed focus sessions.' },
-              { term: 'Distraction blocking', detail: 'Block distracting websites.' },
+              {
+                term: 'Task management',
+                detail:
+                  'Create, edit and complete tasks with priorities, categories and due dates; search, filter, sort and export them to PDF.',
+              },
+              {
+                term: 'Pomodoro focus sessions',
+                detail:
+                  'Adjustable focus and break lengths, with completed cycles saved to your history.',
+              },
+              {
+                term: 'Distraction blocking',
+                detail: 'A Chrome extension blocks the sites you list while a focus session runs.',
+              },
               {
                 term: 'Productivity analytics',
-                detail: 'A dashboard with charts and downloadable reports.',
+                detail:
+                  'Charts for sessions per day, focus vs. break time and task completion, over 7 or 30 days, plus a PDF report.',
               },
-              { term: 'User accounts', detail: 'Account management for each user.' },
-              { term: 'Admin panel', detail: 'Administration tools, including system logs.' },
+              {
+                term: 'User accounts',
+                detail: 'Sign-up, login, password reset and profile settings.',
+              },
+              {
+                term: 'Admin panel',
+                detail:
+                  'Platform-wide totals and user management: change roles and remove accounts.',
+              },
             ],
           },
         ],
@@ -115,10 +133,16 @@ export const projects: Project[] = [
             items: [
               {
                 id: 'laravel',
-                role: todo('What Laravel handled (e.g. routing, auth, business logic)'),
+                role: 'Routing, authentication with user and admin roles, task and session logic, and PDF reports.',
               },
-              { id: 'mysql', role: todo('What MySQL stored') },
-              { id: 'firebase', role: todo('What Firebase was used for in FocusPro') },
+              {
+                id: 'mysql',
+                role: 'Stores users, tasks (status, priority, category, due date) and focus sessions.',
+              },
+              {
+                id: 'firebase',
+                role: 'Realtime Database holding each user’s focus status and blocked sites for the extension.',
+              },
             ],
           },
         ],
@@ -126,9 +150,39 @@ export const projects: Project[] = [
       {
         id: 'architecture',
         title: 'Implementation and architecture',
-        content: todo(
-          'A short description or diagram of how Laravel, MySQL and Firebase fit together',
-        ),
+        content: [
+          {
+            type: 'text',
+            paragraphs: [
+              'The web app is a Laravel monolith with Blade, Tailwind CSS and Alpine.js on the front end and MySQL behind it. Analytics charts use Chart.js, and PDF reports are generated with dompdf. Site blocking needed a browser extension, so the app and the extension talk through Firebase.',
+            ],
+          },
+          {
+            type: 'steps',
+            items: [
+              {
+                title: 'Start a session',
+                detail:
+                  'The Focus page writes the user’s focus status and blocked sites to Firebase Realtime Database.',
+              },
+              {
+                title: 'Extension picks it up',
+                detail:
+                  'The Manifest V3 extension reads that status, instantly via a message from the open FocusPro tab, or on a 30-second check.',
+              },
+              {
+                title: 'Sites are blocked',
+                detail:
+                  'It sets declarativeNetRequest rules that redirect blocked sites to a “blocked” page.',
+              },
+              {
+                title: 'End the session',
+                detail:
+                  'Completed cycles and duration are saved to MySQL, and the focus flag is cleared so blocking stops.',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 'challenges',
@@ -138,12 +192,14 @@ export const projects: Project[] = [
             type: 'definitions',
             items: [
               {
-                term: 'Time-tracking accuracy',
-                detail: 'Keeping recorded focus time accurate.',
+                term: 'Blocking within browser limits',
+                detail:
+                  'A website can’t block other sites, so blocking lives in a Chrome extension. Manifest V3 stops background workers at any time, so it uses declarativeNetRequest rules, which Chrome keeps enforcing while the worker sleeps.',
               },
               {
-                term: 'Blocking within browser limits',
-                detail: 'Implementing website blocking within the limitations browsers impose.',
+                term: 'Time-tracking accuracy',
+                detail:
+                  'Only completed cycles count: a session is saved only after at least one full focus-and-break cycle, and the server validates the numbers before storing them.',
               },
               {
                 term: 'Intuitive UX',
@@ -151,24 +207,81 @@ export const projects: Project[] = [
               },
             ],
           },
-          todo('How you solved or worked around each challenge above'),
         ],
       },
       {
         id: 'lessons',
         title: 'Lessons learned',
-        content: todo('Two to four things you learned building FocusPro'),
+        content: [
+          {
+            type: 'list',
+            items: [
+              'How to build an intuitive, responsive UI/UX.',
+              'Distraction blocking needs a real-time link between the app and the browser extension. MySQL doesn’t provide that on its own, so I used Firebase Realtime Database.',
+              'A better understanding of the MVC pattern through Laravel.',
+            ],
+          },
+        ],
       },
       {
         id: 'screenshots',
         title: 'Screenshots',
-        content: todo('Screenshots: task list, Pomodoro session, analytics dashboard, admin panel'),
+        content: [
+          {
+            type: 'gallery',
+            images: [
+              {
+                src: '/images/projects/focuspro/dashboard.webp',
+                alt: 'Dashboard with task, completion, session and cycle totals, an Up next task list and a 79% task progress ring',
+                width: 1800,
+                height: 1125,
+                caption: 'Dashboard: today at a glance (demo data).',
+              },
+              {
+                src: '/images/projects/focuspro/tasks.webp',
+                alt: 'Task list with search, category and sort filters, an overall progress bar, and tasks tagged by status, category, due date and priority',
+                width: 1800,
+                height: 1125,
+                caption: 'Tasks with priorities, categories and due dates.',
+              },
+              {
+                src: '/images/projects/focuspro/pomodoro.webp',
+                alt: 'Focus session page with a 25:00 timer ring, focus and break durations, and a blocked-websites list',
+                width: 1800,
+                height: 1125,
+                caption: 'Focus sessions, with the sites to block.',
+              },
+              {
+                src: '/images/projects/focuspro/blocked.webp',
+                alt: 'The extension’s block page: “Stay focused”, youtube.com is blocked while your focus session is running, with the session’s blocked sites and a back-to-session button',
+                width: 1800,
+                height: 1125,
+                caption: 'The extension’s block page during a session (demo values).',
+              },
+              {
+                src: '/images/projects/focuspro/analytics.webp',
+                alt: 'Analytics page with session, cycle and focus-time totals, a sessions-per-day bar chart and 7 or 30 day toggles',
+                width: 1800,
+                height: 1125,
+                caption: 'Analytics over 7 or 30 days, with a PDF report (demo data).',
+              },
+              {
+                src: '/images/projects/focuspro/admin-dashboard.webp',
+                alt: 'Admin overview showing totals for users, tasks, completed tasks and focus sessions across the platform',
+                width: 1800,
+                height: 1125,
+                caption: 'Admin overview across all users.',
+              },
+            ],
+          },
+        ],
       },
-      {
-        id: 'future',
-        title: 'Future improvements',
-        content: todo('What you would add or change next'),
-      },
+      // Hidden for now; restore once the future improvements are written.
+      // {
+      //   id: 'future',
+      //   title: 'Future improvements',
+      //   content: todo('What you would add or change next'),
+      // },
     ],
   },
 
@@ -177,6 +290,12 @@ export const projects: Project[] = [
     title: 'What’s Cooking',
     tagline: 'Recipe recommendations from the ingredients you already have.',
     highlight: 'Generates recipes from your ingredients with Gemini 2.5 Flash',
+    cover: {
+      src: '/images/projects/whats-cooking/home.webp',
+      alt: 'What’s Cooking landing page: a bold “What’s Cooking?” headline, a Start cooking button and sample dish cards',
+      width: 1800,
+      height: 1125,
+    },
     date: '2025-06',
     categories: ['full-stack', 'backend'],
     stack: ['nestjs', 'angular', 'gemini'],
@@ -185,7 +304,9 @@ export const projects: Project[] = [
     selected: true,
     links: {
       repo: todo('What’s Cooking repository URL'),
-      live: todo('What’s Cooking live demo URL (if any)'),
+      live: 'https://whats-cooking-41xf.onrender.com/',
+      liveNote:
+        'Hosted on Render’s free plan, so the demo may take up to a minute to wake up if nobody has opened it recently.',
     },
     sections: [
       {
@@ -275,7 +396,27 @@ export const projects: Project[] = [
       {
         id: 'screenshots',
         title: 'Screenshots',
-        content: todo('Screenshots: ingredient input and generated recipes'),
+        content: [
+          {
+            type: 'gallery',
+            images: [
+              {
+                src: '/images/projects/whats-cooking/kitchen.webp',
+                alt: 'The kitchen page with eggs, rice, garlic, tomato and onion added as ingredient chips, ready to cook',
+                width: 1800,
+                height: 1125,
+                caption: 'Add ingredients by typing or with quick-add chips.',
+              },
+              {
+                src: '/images/projects/whats-cooking/results.webp',
+                alt: 'Generated recipe suggestions, starting with a Chinese-style tomato and egg stir-fry over rice',
+                width: 1800,
+                height: 1125,
+                caption: 'Gemini returns dishes you can make with what you have.',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -286,11 +427,10 @@ export const projects: Project[] = [
     tagline: 'A daily hydration tracker: set a goal, log your water, see what’s left.',
     highlight: 'Automatically calculates your remaining daily target',
     date: '2026-05',
-    categories: todo('Confirm AquaBoost’s platform (web or mobile) so it can be categorized'),
+    categories: ['full-stack'],
     stack: ['dotnet', 'firebase'],
     summary:
       'A hydration tracking app built with .NET and Firebase: set a daily water goal, log your intake and see how much is left for the day.',
-    selected: true,
     links: {
       repo: todo('AquaBoost repository URL'),
       live: todo('AquaBoost live demo URL (if any)'),
@@ -365,7 +505,6 @@ export const projects: Project[] = [
     stack: [],
     summary:
       'An academic binary-classification project comparing Logistic Regression, Decision Tree and KNN on a dataset of 27,901 records. Logistic Regression performed best, at 83.66% accuracy.',
-    selected: true,
     links: {
       repo: todo('Notebook or repository URL'),
       live: todo('Not applicable? Remove this placeholder if there is no live version'),
@@ -459,17 +598,24 @@ export const projects: Project[] = [
   {
     slug: 'yumefind',
     title: 'YumeFind',
-    tagline: 'An anime search website powered by the Jikan API.',
+    tagline: 'An anime search website powered by the AniList API.',
     highlight: 'Live anime search with a detail page for every title',
+    cover: {
+      src: '/images/projects/yumefind/home.webp',
+      alt: 'YumeFind home page: “Every search begins with a dream” headline, a title search bar with filters, and a trending anime',
+      width: 1800,
+      height: 1125,
+    },
     date: '2025-11',
     kind: 'Learning project',
     categories: ['frontend'],
-    stack: ['react', 'jikan'],
+    stack: ['react', 'anilist'],
     summary:
-      'An anime search site built with React and the Jikan API, showing live titles, synopses, ratings, episode counts and images, with a dedicated detail page for each anime.',
+      'An anime search site built with React and the AniList API, showing live titles, synopses, ratings, episode counts and images, with a dedicated detail page for each anime.',
+    selected: true,
     links: {
       repo: todo('YumeFind repository URL'),
-      live: todo('YumeFind live demo URL (if any)'),
+      live: 'https://yumefind.netlify.app/',
     },
     sections: [
       {
@@ -479,7 +625,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             paragraphs: [
-              'YumeFind lets you search for anime and browse real-time data from the Jikan API. I built it as a learning project focused on API integration, state management and component-based architecture.',
+              'YumeFind lets you search for anime and browse real-time data from the AniList API. I built it as a learning project focused on API integration, state management and component-based architecture.',
             ],
           },
         ],
@@ -492,7 +638,7 @@ export const projects: Project[] = [
             type: 'list',
             items: [
               'Anime search',
-              'Real-time data from the Jikan API',
+              'Real-time data from the AniList API',
               'Titles, synopses, ratings, episode counts and images',
               'A dedicated detail page for each anime',
             ],
@@ -508,8 +654,33 @@ export const projects: Project[] = [
             items: [
               { id: 'react', role: 'Component-based UI and state management.' },
               {
-                id: 'jikan',
+                id: 'anilist',
                 role: 'Real-time anime data: titles, synopses, ratings, episodes and images.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'screenshots',
+        title: 'Screenshots',
+        content: [
+          {
+            type: 'gallery',
+            images: [
+              {
+                src: '/images/projects/yumefind/browse.webp',
+                alt: 'A grid of highest-rated anime with posters, scores, year, format and episode counts',
+                width: 1800,
+                height: 1125,
+                caption: 'Browse the highest-rated titles.',
+              },
+              {
+                src: '/images/projects/yumefind/detail.webp',
+                alt: 'The detail page for Frieren: Beyond Journey’s End with score, rank, popularity, genres and synopsis',
+                width: 1800,
+                height: 1125,
+                caption: 'Each title has its own detail page.',
               },
             ],
           },
@@ -533,6 +704,12 @@ export const projects: Project[] = [
     title: 'Paw & Preferences',
     tagline: 'A swipe-style cat preference app powered by the CATAAS API.',
     highlight: 'Smooth swipe gestures for like and dislike',
+    cover: {
+      src: '/images/projects/paw-and-preferences/cover.webp',
+      alt: 'Three phone screens of Paw & Preferences: the swipe guide, a cat card to swipe, and the results with liked cats',
+      width: 1800,
+      height: 1125,
+    },
     date: '2025-11',
     kind: 'Learning project',
     categories: ['frontend'],
@@ -541,7 +718,7 @@ export const projects: Project[] = [
       'A swipe-style preference app built with React and the CATAAS API: dynamic cat images, like and dislike interactions and smooth swipe gestures.',
     links: {
       repo: todo('Paw & Preferences repository URL'),
-      live: todo('Paw & Preferences live demo URL (if any)'),
+      live: 'https://pawandpreferences.netlify.app',
     },
     sections: [
       {
@@ -579,6 +756,39 @@ export const projects: Project[] = [
             items: [
               { id: 'react', role: 'Swipe interactions, event handling and UI components.' },
               { id: 'cataas', role: 'Supplies the dynamic cat images.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'screenshots',
+        title: 'Screenshots',
+        content: [
+          {
+            type: 'gallery',
+            columns: 3,
+            images: [
+              {
+                src: '/images/projects/paw-and-preferences/guide.webp',
+                alt: 'The swipe guide: swipe right to like, swipe left to pass, rate all 20 cats',
+                width: 780,
+                height: 1688,
+                caption: 'A short guide before you start.',
+              },
+              {
+                src: '/images/projects/paw-and-preferences/swipe.webp',
+                alt: 'A cat photo card ready to swipe, with a 1 of 20 counter',
+                width: 780,
+                height: 1688,
+                caption: 'Swipe through 20 cats.',
+              },
+              {
+                src: '/images/projects/paw-and-preferences/results.webp',
+                alt: 'Results: 13 cats liked, a 65% approval rating, and a grid of the liked cats',
+                width: 780,
+                height: 1688,
+                caption: 'Your results and favourite cats.',
+              },
             ],
           },
         ],

@@ -1,25 +1,20 @@
 import { useRef } from 'react';
 import type { Project } from '~/content/types';
 import { allProjects } from '~/lib/content';
+import { cn } from '~/lib/cn';
 import { gsap, useGSAP } from '~/lib/gsap';
 import { ArrowLink } from '../ui/action';
 import { Container } from '../ui/container';
 import { Reveal } from '../ui/reveal';
 import { SectionHeader } from '../ui/section';
-import { AllProjectsCard, FeaturedProjectCard, ProjectCard } from './project-card';
+import { AllProjectsCard, ProjectCard } from './project-card';
 
 /**
  * Home-page projects. On desktop with motion allowed, the section pins and
  * the cards travel sideways as you scroll. Everywhere else (and before
  * hydration) it is a normal vertical layout.
  */
-export function ProjectShowcase({
-  featured,
-  projects,
-}: {
-  featured: Project;
-  projects: Project[];
-}) {
+export function ProjectShowcase({ projects }: { projects: Project[] }) {
   const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLDivElement>(null);
@@ -86,18 +81,20 @@ export function ProjectShowcase({
       <div className="mt-12 sm:mt-14 group-data-[horizontal=true]/show:mt-10">
         <div
           ref={track}
-          className="mx-auto grid max-w-[76rem] gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8 group-data-[horizontal=true]/show:mx-0 group-data-[horizontal=true]/show:flex group-data-[horizontal=true]/show:w-max group-data-[horizontal=true]/show:max-w-none group-data-[horizontal=true]/show:items-stretch group-data-[horizontal=true]/show:px-[max(2rem,calc((100vw_-_76rem)/2_+_2rem))] group-data-[horizontal=true]/show:will-change-transform"
+          className="mx-auto grid max-w-[76rem] gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:px-8 group-data-[horizontal=true]/show:mx-0 group-data-[horizontal=true]/show:flex group-data-[horizontal=true]/show:w-max group-data-[horizontal=true]/show:max-w-none group-data-[horizontal=true]/show:items-stretch group-data-[horizontal=true]/show:px-[max(2rem,calc((100vw_-_76rem)/2_+_2rem))] group-data-[horizontal=true]/show:will-change-transform"
         >
-          <Reveal className="sm:col-span-2 lg:col-span-3 group-data-[horizontal=true]/show:h-[min(66vh,560px)] group-data-[horizontal=true]/show:w-[min(74vw,1000px)] group-data-[horizontal=true]/show:shrink-0">
-            <FeaturedProjectCard project={featured} className="h-full" />
-          </Reveal>
           {projects.map((project, index) => (
             <Reveal
               key={project.slug}
               delay={index * 80}
-              className="group-data-[horizontal=true]/show:h-[min(66vh,560px)] group-data-[horizontal=true]/show:w-[420px] group-data-[horizontal=true]/show:shrink-0"
+              className={cn(
+                'group-data-[horizontal=true]/show:h-[min(66vh,560px)] group-data-[horizontal=true]/show:shrink-0',
+                index === 0
+                  ? 'sm:col-span-2 group-data-[horizontal=true]/show:w-[600px]'
+                  : 'group-data-[horizontal=true]/show:w-[420px]',
+              )}
             >
-              <ProjectCard project={project} index={index + 2} />
+              <ProjectCard project={project} index={index + 1} lead={index === 0} />
             </Reveal>
           ))}
           <div className="hidden group-data-[horizontal=true]/show:block group-data-[horizontal=true]/show:h-[min(66vh,560px)] group-data-[horizontal=true]/show:w-[340px] group-data-[horizontal=true]/show:shrink-0">

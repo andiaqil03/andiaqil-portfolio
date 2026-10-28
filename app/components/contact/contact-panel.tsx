@@ -40,13 +40,13 @@ export function ContactPanel({ headingLevel: Heading = 'h2' }: { headingLevel?: 
 
             <p className="font-mono text-meta tracking-[0.14em] text-white/60 uppercase">
               <span aria-hidden="true" className="blaze mr-2 align-[-2px]" />
-              Available for work
+              Open to freelance
             </p>
             <Heading
               id="contact-cta-heading"
               className="mt-5 max-w-[14ch] font-display text-[clamp(2.75rem,1.6rem+5.5vw,6.5rem)] leading-[0.95] tracking-[-0.01em] uppercase"
             >
-              Let’s build something <span className="text-[#f0a35e]">reliable.</span>
+              Let’s build something <span className="text-trail-on-summit">reliable.</span>
             </Heading>
             <p className="mt-6 max-w-[52ch] text-lead text-white/75">
               I’m open to {formatList(profile.openTo)} roles, and to new freelance projects. Email
@@ -76,7 +76,7 @@ export function ContactPanel({ headingLevel: Heading = 'h2' }: { headingLevel?: 
                   quietBase,
                   'h-14 justify-center border border-white/20 px-6 hover:border-white/45 hover:bg-white/10',
                 )}
-                copiedClassName="text-[#f0a35e]"
+                copiedClassName="text-trail-on-summit"
               />
             </div>
 

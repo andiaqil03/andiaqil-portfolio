@@ -3,7 +3,6 @@ import type { ComponentType, SVGProps } from 'react';
 import { learning, skillGroups } from '~/content/skills';
 import { techName } from '~/content/tech';
 import { cn } from '~/lib/cn';
-import { Marquee } from '../fx/marquee';
 import { TiltCard } from '../fx/tilt-card';
 import { Reveal } from '../ui/reveal';
 
@@ -37,20 +36,8 @@ const meta: Record<
   },
 };
 
-/** Small mountain peak used as the marquee separator. */
-function Peak({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 12" aria-hidden="true" className={className} fill="currentColor">
-      <path d="M0 12 6 2l3 4 2-3 5 9z" />
-    </svg>
-  );
-}
-
-/** Skills as a bento grid of tilting cards, then the whole stack in motion. */
+/** Skills as a bento grid of tilting cards. */
 export function SkillGroups() {
-  const everything = skillGroups.flatMap((group) => group.items.map(techName));
-  const half = Math.ceil(everything.length / 2);
-
   return (
     <div>
       <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
@@ -152,32 +139,6 @@ export function SkillGroups() {
           </TiltCard>
         </Reveal>
       </ul>
-
-      {/* The whole stack in motion (decorative; the cards above carry the content). */}
-      <div aria-hidden="true" className="mt-16 -mx-4 space-y-4 sm:-mx-6 lg:-mx-8">
-        <Marquee duration={48}>
-          {everything.slice(0, half).map((name) => (
-            <span
-              key={name}
-              className="flex items-center gap-8 pr-8 font-display text-4xl tracking-[-0.01em] text-ink uppercase sm:text-6xl"
-            >
-              {name}
-              <Peak className="h-3 w-4 text-trail" />
-            </span>
-          ))}
-        </Marquee>
-        <Marquee duration={54} reverse>
-          {everything.slice(half).map((name) => (
-            <span
-              key={name}
-              className="flex items-center gap-8 pr-8 font-display text-4xl tracking-[-0.01em] text-transparent uppercase [-webkit-text-stroke:1.5px_var(--ink-3)] sm:text-6xl"
-            >
-              {name}
-              <Peak className="h-3 w-4 text-pine" />
-            </span>
-          ))}
-        </Marquee>
-      </div>
     </div>
   );
 }

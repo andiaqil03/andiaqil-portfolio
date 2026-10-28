@@ -45,7 +45,7 @@ export const tech = {
 
   // External APIs used in projects
   gemini: 'Gemini 2.5 Flash API',
-  jikan: 'Jikan API',
+  anilist: 'AniList API',
   cataas: 'CATAAS API',
 } as const satisfies Record<string, string>;
 

@@ -48,6 +48,8 @@
   --topo: light-dark(rgb(45 106 79 / 0.16), rgb(124 195 154 / 0.1));
 
   --summit: light-dark(#17352a, #10241c);
+  /* Trail orange as text on summit panels, which stay dark in both themes. */
+  --trail-on-summit: #f0a35e;
   --shadow-ink: light-dark(rgb(18 33 28 / 1), rgb(0 0 0 / 1));
 }
 
@@ -131,6 +133,7 @@
   --color-lake: var(--lake);
   --color-granite: var(--granite);
   --color-summit: var(--summit);
+  --color-trail-on-summit: var(--trail-on-summit);
 }
 
 /* ================================================================== */
