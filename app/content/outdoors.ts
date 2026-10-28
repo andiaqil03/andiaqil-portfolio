@@ -33,6 +33,7 @@ const photo =
   });
 const merbabu = photo('merbabu');
 const prau = photo('prau');
+const bromo = photo('bromo');
 
 export const outdoors = {
   intro: 'Life outside work: hiking, travel and sport.',
@@ -82,11 +83,38 @@ export const outdoors = {
       ],
     },
     {
-      id: 'travel-1',
+      id: 'bromo',
       kind: 'Travel',
-      title: todo('Travel: where did you go?'),
-      detail: todo('Travel: city or country'),
-      photos: todo('Travel photos (portrait 3:4, ~960×1280), in order'),
+      title: 'Planet Bromo',
+      detail: 'East Java, Indonesia',
+      date: '2025-11',
+      photos: [
+        bromo(1, 'A hiker on the crater rim as steam pours out of Bromo', 1536, 2048),
+        bromo(2, 'A hiker standing on a jeep roof under billowing clouds', 1536, 2048),
+        bromo(
+          3,
+          'Looking down the crater stairs to crowds and horses on the sand sea below',
+          1536,
+          2048,
+        ),
+        bromo(4, 'A hiker walking the narrow crater rim in the mist', 1536, 2048),
+        bromo(5, 'A hiker in a green jacket pointing at the steaming crater', 1536, 2048),
+        bromo(6, 'A hiker balancing along the crater rim, Mount Batok behind', 1536, 2048),
+        bromo(7, 'A group selfie on the crater rim with a cloud-capped cone behind', 1536, 2048),
+        bromo(
+          8,
+          'Riding horses across the misty sand sea toward Bromo, a guide alongside',
+          1536,
+          2048,
+        ),
+        bromo(9, 'The group posing on a jeep, with Mount Batok in the background', 960, 1280),
+        bromo(10, 'The group standing in the grassland at Bukit Teletubbies', 2048, 1536),
+        bromo(11, 'Two friends on the grey crater slope', 960, 1280),
+        bromo(12, 'A pink sunrise over Mount Semeru, framed by bare branches', 1536, 2048),
+        bromo(13, 'The group among the grass beside a blue jeep, shot on film', 2048, 1536),
+        bromo(14, 'The whole group lined up in front of two jeeps, Mount Batok behind', 1536, 2191),
+        bromo(15, 'Mount Batok seen through a pair of tinted sunglasses', 1536, 2048),
+      ],
     },
     {
       id: 'sport-1',

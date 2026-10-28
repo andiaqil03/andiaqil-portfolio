@@ -8,6 +8,11 @@ import { cn } from '~/lib/cn';
  * side for the previous one (or swipe, or use the arrow keys). Photos slide
  * and fade between each other; the bars on top show where you are.
  */
+/** True when a photo is close enough to the 3:4 frame to fill it with only a slight crop. */
+function fitsFrame(photo: OutdoorPhoto): boolean {
+  return Math.abs(photo.width / photo.height - 3 / 4) < 0.06;
+}
+
 export function QuickSnap({ photos, label }: { photos: OutdoorPhoto[]; label: string }) {
   // `reached`: photos are only mounted once they're current or next, so the rest load on demand.
   const [{ index, reached }, setView] = useState({ index: 0, reached: 1 });
@@ -59,27 +64,44 @@ export function QuickSnap({ photos, label }: { photos: OutdoorPhoto[]; label: st
       aria-label={label}
       className="group/snap relative aspect-[3/4] touch-pan-y overflow-hidden rounded-lg bg-summit select-none"
     >
-      {photos.map((photo, i) =>
-        i <= reached ? (
-          <img
+      {photos.map((photo, i) => {
+        if (i > reached) return null;
+        const fits = fitsFrame(photo);
+        return (
+          <div
             key={photo.src}
-            src={photo.src}
-            alt={i === index ? photo.alt : ''}
             aria-hidden={i !== index}
-            width={photo.width}
-            height={photo.height}
-            loading={i === 0 ? 'lazy' : 'eager'}
-            decoding="async"
-            draggable={false}
             className={cn(
-              'absolute inset-0 size-full object-cover transition-[opacity,translate,scale] duration-500 ease-out-expo motion-reduce:transition-none',
+              'absolute inset-0 transition-[opacity,translate,scale] duration-500 ease-out-expo motion-reduce:transition-none',
               i === index && 'translate-x-0 scale-100 opacity-100',
               i < index && '-translate-x-[12%] scale-[0.96] opacity-0',
               i > index && 'translate-x-[12%] scale-[0.96] opacity-0',
             )}
-          />
-        ) : null,
-      )}
+          >
+            {/* Photos that aren't 3:4 are shown whole, over a blurred copy of themselves. */}
+            {fits ? null : (
+              <img
+                src={photo.src}
+                alt=""
+                aria-hidden="true"
+                decoding="async"
+                draggable={false}
+                className="absolute inset-0 size-full scale-110 object-cover opacity-70 blur-xl"
+              />
+            )}
+            <img
+              src={photo.src}
+              alt={i === index ? photo.alt : ''}
+              width={photo.width}
+              height={photo.height}
+              loading={i === 0 ? 'lazy' : 'eager'}
+              decoding="async"
+              draggable={false}
+              className={cn('relative size-full', fits ? 'object-cover' : 'object-contain')}
+            />
+          </div>
+        );
+      })}
 
       {/* Progress bars, like stories. */}
       <div
