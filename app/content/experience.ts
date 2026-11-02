@@ -1,4 +1,3 @@
-import { todo } from './placeholder';
 import type { Experience } from './types';
 
 /** Most recent first. */
@@ -43,8 +42,23 @@ export const experience: Experience[] = [
       'Iterate on features based on client feedback.',
       'Run user acceptance testing with clients and fix the bugs it uncovers.',
       'Deploy completed applications to production environments.',
+      'Set projects up on accounts the client owns: Vercel with me as a collaborator, a domain bought through Hostinger or Exabytes with their business email, and a GitHub repository that is theirs or transferred after final payment.',
+      'Hand over each project with a Notion page or PDF document.',
+      'This is my standard stack; when a client prefers other tools or technologies, I work with theirs.',
     ],
-    tech: todo('Which technologies do you use for freelance projects?'),
+    tech: [
+      'nextjs',
+      'react',
+      'tailwind',
+      'shadcn',
+      'vercel',
+      'cloudflare',
+      'resend',
+      'ga4',
+      'searchConsole',
+      'github',
+      'notion',
+    ],
   },
   {
     id: 'pnb',
