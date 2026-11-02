@@ -319,12 +319,6 @@ html.lenis body {
   }
 }
 
-@keyframes caret {
-  50% {
-    opacity: 0;
-  }
-}
-
 @keyframes stream {
   from {
     opacity: 0;
@@ -376,7 +370,7 @@ html.lenis body {
   }
 }
 
-/* Intro: first visit per session (see root.tsx and use-theme.ts). */
+/* Intro: first Home visit per session, about 1.4s (see root.tsx and use-theme.ts). */
 @keyframes intro-count {
   from {
     --count: 0;
@@ -409,24 +403,24 @@ html.lenis body {
 }
 
 #intro {
-  animation: intro-out 800ms var(--ease-in-out-quart) 1250ms forwards;
+  animation: intro-out 600ms var(--ease-in-out-quart) 800ms forwards;
 }
 #intro .intro-stroke {
   stroke-dasharray: 120;
   stroke-dashoffset: 120;
-  animation: intro-draw 900ms var(--ease-out-expo) 100ms forwards;
+  animation: intro-draw 600ms var(--ease-out-expo) 50ms forwards;
 }
 #intro .intro-content {
-  animation: intro-fade 400ms ease 1050ms forwards;
+  animation: intro-fade 300ms ease 650ms forwards;
 }
 #intro .intro-count::after {
   counter-reset: n var(--count);
   content: counter(n);
-  animation: intro-count 1000ms var(--ease-out-soft) forwards;
+  animation: intro-count 650ms var(--ease-out-soft) forwards;
 }
 #intro .intro-bar {
   transform-origin: left;
-  animation: bar-fill 1000ms var(--ease-out-soft) forwards;
+  animation: bar-fill 650ms var(--ease-out-soft) forwards;
 }
 html.no-intro #intro {
   display: none;
@@ -434,7 +428,7 @@ html.no-intro #intro {
 
 /* Hero choreography waits for the intro when it plays. */
 :root {
-  --intro-delay: 1350ms;
+  --intro-delay: 900ms;
 }
 html.no-intro {
   --intro-delay: 0ms;
@@ -467,10 +461,6 @@ html.no-intro {
     border-radius: inherit;
     background: inherit;
     animation: pulse-ring 2s var(--ease-out-soft) infinite;
-  }
-
-  .caret {
-    animation: caret 1s steps(1) infinite;
   }
 
   .scroll-cue-dot {

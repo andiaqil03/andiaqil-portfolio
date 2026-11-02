@@ -303,7 +303,7 @@ export const projects: Project[] = [
       'A full-stack recipe recommendation app: an Angular frontend sends your ingredients to a NestJS REST API, which uses Gemini 2.5 Flash to generate recipe suggestions.',
     selected: true,
     links: {
-      repo: todo('What’s Cooking repository URL'),
+      repo: 'https://github.com/andiaqil03/What-s-Cooking',
       live: 'https://whats-cooking-41xf.onrender.com/',
       liveNote:
         'Hosted on Render’s free plan, so the demo may take up to a minute to wake up if nobody has opened it recently.',
@@ -374,6 +374,35 @@ export const projects: Project[] = [
                 detail: 'The backend processes the request and asks Gemini 2.5 Flash for recipes.',
               },
               { title: 'Display', detail: 'The Angular frontend renders the recommendations.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'challenges',
+        title: 'Challenges',
+        content: [
+          {
+            type: 'definitions',
+            items: [
+              {
+                term: 'Free-plan cold starts',
+                detail:
+                  'The API runs on Render’s free plan, which sleeps when nobody is using it, so the first request can take up to a minute. The demo link warns visitors before they open it.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'lessons',
+        title: 'Lessons learned',
+        content: [
+          {
+            type: 'list',
+            items: [
+              'How to connect an app to an LLM API using an API key.',
+              'How to write prompts that get the output I want from the model.',
             ],
           },
         ],
@@ -614,7 +643,7 @@ export const projects: Project[] = [
       'An anime search site built with React and the AniList API, showing live titles, synopses, ratings, episode counts and images, with a dedicated detail page for each anime.',
     selected: true,
     links: {
-      repo: todo('YumeFind repository URL'),
+      repo: 'https://github.com/andiaqil03/YumeFind',
       live: 'https://yumefind.netlify.app/',
     },
     sections: [
@@ -717,7 +746,7 @@ export const projects: Project[] = [
     summary:
       'A swipe-style preference app built with React and the CATAAS API: dynamic cat images, like and dislike interactions and smooth swipe gestures.',
     links: {
-      repo: todo('Paw & Preferences repository URL'),
+      repo: 'https://github.com/andiaqil03/Paw-Preferences',
       live: 'https://pawandpreferences.netlify.app',
     },
     sections: [

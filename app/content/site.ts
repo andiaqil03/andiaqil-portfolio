@@ -18,7 +18,7 @@ export const site: {
   url: todo(
     'Production domain (e.g. https://andiaqil.dev): enables canonical URLs, sitemap and link previews',
   ),
-  sourceRepo: todo('GitHub URL of this portfolio’s repository'),
+  sourceRepo: 'https://github.com/andiaqil03/andiaqil-portfolio',
   description:
     'Andi Aqil is a software engineer building practical digital products, focused on backend development, REST APIs and full-stack web applications.',
   nav: [

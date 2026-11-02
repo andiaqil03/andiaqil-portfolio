@@ -57,4 +57,4 @@ export function useTheme() {
  * Light unless the visitor previously chose dark. Also decides whether the
  * intro plays (first visit per session, motion allowed).
  */
-export const themeInitScript = `(function(){var d=document.documentElement;try{d.dataset.theme=localStorage.getItem('${STORAGE_KEY}')==='dark'?'dark':'light'}catch(e){d.dataset.theme='light'}try{var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(r||sessionStorage.getItem('intro-seen')){d.classList.add('no-intro')}else{sessionStorage.setItem('intro-seen','1')}}catch(e){d.classList.add('no-intro')}})();`;
+export const themeInitScript = `(function(){var d=document.documentElement;try{d.dataset.theme=localStorage.getItem('${STORAGE_KEY}')==='dark'?'dark':'light'}catch(e){d.dataset.theme='light'}try{var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(r||location.pathname!=='/'||sessionStorage.getItem('intro-seen')){d.classList.add('no-intro')}else{sessionStorage.setItem('intro-seen','1')}}catch(e){d.classList.add('no-intro')}})();`;

@@ -1,4 +1,3 @@
-import { todo } from './placeholder';
 import type { Profile } from './types';
 
 export const profile: Profile = {
@@ -21,9 +20,7 @@ export const profile: Profile = {
     github: 'https://github.com/andiaqil03',
     linkedin: 'https://www.linkedin.com/in/andi-muhammad-aqil-7b5905354',
   },
-  resumePdf: todo(
-    'Add your resume PDF to /public (e.g. andi-aqil-resume.pdf) and set its path here',
-  ),
+  resumePdf: '/andi-muhammad-aqil-resume.pdf',
   openTo: ['Software Engineer'],
   spokenLanguages: ['Malay', 'English'],
   summary: [

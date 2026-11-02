@@ -2,12 +2,9 @@ import { Languages, MapPin, Users } from 'lucide-react';
 import { RightNow } from '~/components/about/right-now';
 import { ContactLine } from '~/components/contact/contact-line';
 import { EducationList } from '~/components/education/education-list';
-import { TiltCard } from '~/components/fx/tilt-card';
 import { OffTheTrail } from '~/components/home/off-the-trail';
 import { PageHeader } from '~/components/layout/page-header';
 import { SkillGroups } from '~/components/skills/skill-groups';
-import { List } from '~/components/ui/list';
-import { Reveal } from '~/components/ui/reveal';
 import { Section } from '~/components/ui/section';
 import { activities, education } from '~/content/education';
 import { profile } from '~/content/profile';
@@ -64,33 +61,22 @@ export default function About() {
 
       <Section id="education" kicker="Basecamp" title="Software engineering, with honours">
         <EducationList items={education} showCoursework />
+        {activities.length > 0 ? (
+          <ul className="mt-8 space-y-3 border-t border-line pt-6">
+            {activities.map((activity) => (
+              <li key={activity.id} className="text-[0.9375rem] text-ink-2">
+                <span className="font-semibold text-ink">{activity.role}</span>, {activity.title}{' '}
+                <time dateTime={activity.date} className="font-mono text-meta text-ink-3">
+                  · {formatYearMonth(activity.date)}
+                </time>
+                <span className="mt-0.5 block">{activity.points[0]}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </Section>
 
       <OffTheTrail id="outdoors" />
-
-      <Section id="beyond" kicker="Campus" title="Committee work">
-        <ul className="grid gap-5 sm:gap-6 lg:grid-cols-2">
-          {activities.map((activity) => (
-            <Reveal as="li" key={activity.id}>
-              <TiltCard as="article" max={4} className="h-full rounded-xl">
-                <div className="surface-card h-full rounded-xl p-6 sm:p-7">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                    <h3 className="font-display text-subheading font-semibold">{activity.title}</h3>
-                    <time
-                      dateTime={activity.date}
-                      className="order-first font-mono text-meta text-accent sm:order-none sm:mt-1.5 sm:shrink-0"
-                    >
-                      {formatYearMonth(activity.date)}
-                    </time>
-                  </div>
-                  <p className="mt-0.5 font-medium text-ink-2">{activity.role}</p>
-                  <List items={activity.points} marker="check" className="mt-4 text-[0.9375rem]" />
-                </div>
-              </TiltCard>
-            </Reveal>
-          ))}
-        </ul>
-      </Section>
 
       <ContactLine />
     </>

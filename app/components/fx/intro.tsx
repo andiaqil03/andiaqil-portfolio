@@ -4,15 +4,15 @@ import { profile } from '~/content/profile';
 /**
  * Branded intro: a mountain ridge draws itself, a counter runs to 100 and
  * the panel lifts away. Entirely CSS-driven so it never waits for JavaScript;
- * the head script in use-theme.ts skips it after the first visit of a session
- * and for reduced motion.
+ * the head script in use-theme.ts plays it only on the first Home visit of a
+ * session, and never for reduced motion.
  */
 export function Intro() {
   // Once it has played, retire it for the rest of the session (also removes the hero delay).
   useEffect(() => {
     const root = document.documentElement;
     if (root.classList.contains('no-intro')) return;
-    const id = window.setTimeout(() => root.classList.add('no-intro'), 2200);
+    const id = window.setTimeout(() => root.classList.add('no-intro'), 1500);
     return () => window.clearTimeout(id);
   }, []);
 

@@ -46,9 +46,6 @@ export function Hero() {
             <span aria-hidden="true" className="h-4 w-px bg-line-strong" />
             <MapPin aria-hidden="true" className="size-4 text-accent-3" strokeWidth={1.75} />
             {profile.location}
-            <span aria-hidden="true" className="font-mono text-meta text-ink-3">
-              · 3°N 101°E
-            </span>
           </p>
 
           <h1 id="hero-heading" className="mt-4 font-display text-display uppercase">
@@ -79,7 +76,6 @@ export function Hero() {
                 <ScrambleText words={profile.heroFocus} startDelay={1600} />
                 &quot;
               </span>
-              <span className="caret -ml-1 text-accent-3">▍</span>
             </span>
           </p>
 

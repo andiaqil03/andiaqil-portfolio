@@ -77,7 +77,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
           All projects
         </Link>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
+        <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-10">
           <div className="lg:col-span-7">
             <div className="anim-rise flex flex-wrap items-center gap-2" style={at(60)}>
               {project.kind ? <Tag>{project.kind}</Tag> : null}
