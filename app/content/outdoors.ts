@@ -34,6 +34,7 @@ const photo =
 const merbabu = photo('merbabu');
 const prau = photo('prau');
 const bromo = photo('bromo');
+const ijen = photo('ijen');
 
 export const outdoors = {
   intro: 'Life outside work: hiking, travel and sport.',
@@ -114,6 +115,23 @@ export const outdoors = {
         bromo(13, 'The group among the grass beside a blue jeep, shot on film', 2048, 1536),
         bromo(14, 'The whole group lined up in front of two jeeps, Mount Batok behind', 1536, 2191),
         bromo(15, 'Mount Batok seen through a pair of tinted sunglasses', 1536, 2048),
+      ],
+    },
+    {
+      id: 'ijen',
+      kind: 'Hiking',
+      title: 'Kawah Ijen',
+      detail: 'East Java, Indonesia',
+      date: '2025-11',
+      photos: [
+        ijen(1, 'Hikers climbing the pale, rocky path down into the Ijen crater', 1536, 2048),
+        ijen(2, 'The blue fire of burning sulphur glowing in the dark crater', 1536, 2730),
+        ijen(3, 'Hikers in gas masks and headlamps beside the blue fire at night'),
+        ijen(4, 'A hiker by the Kawah Ijen sign, 2,386 m, the crater behind', 1536, 2048),
+        ijen(5, 'A forested volcano under a clear morning sky, seen from the trail', 1536, 2048),
+        ijen(6, 'Two hikers in gas masks on the rocks of the crater wall'),
+        ijen(7, 'A hiker in a white jacket and gas mask among the crater rocks'),
+        ijen(8, 'The group gathered in a wooden shelter before the night hike', 2048, 1536),
       ],
     },
     {
