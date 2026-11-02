@@ -98,10 +98,11 @@ export const experience: Experience[] = [
       'Improved code quality by reducing code smells identified by SonarQube.',
     ],
     details: [
+      'Tested APIs with Postman and inspected the database with DBeaver.',
       'Resolved merge conflicts and helped ensure smooth deployments to the staging environment.',
       'Collaborated with team members across the project.',
       'Presented internship progress to my university lecturer.',
     ],
-    tech: ['nestjs', 'sonarqube'],
+    tech: ['nestjs', 'sonarqube', 'postman', 'dbeaver'],
   },
 ];
