@@ -1,4 +1,4 @@
-import { todo, type MaybePlaceholder } from './placeholder';
+import type { MaybePlaceholder } from './placeholder';
 import type { YearMonth } from './types';
 
 export type OutdoorKind = 'Hiking' | 'Travel' | 'Sport';
@@ -35,6 +35,7 @@ const merbabu = photo('merbabu');
 const prau = photo('prau');
 const bromo = photo('bromo');
 const ijen = photo('ijen');
+const tumpakSewu = photo('tumpak-sewu');
 
 export const outdoors = {
   intro: 'Life outside work: hiking, travel and sport.',
@@ -135,11 +136,26 @@ export const outdoors = {
       ],
     },
     {
-      id: 'sport-1',
-      kind: 'Sport',
-      title: todo('Sport: which sport, team or event?'),
-      photos: todo('Sport photos (portrait 3:4, ~960×1280), in order'),
+      id: 'tumpak-sewu',
+      kind: 'Travel',
+      title: 'Tumpak Sewu',
+      detail: 'East Java, Indonesia',
+      date: '2025-11',
+      photos: [
+        tumpakSewu(1, 'Standing on a country road on the way, under a clear blue sky'),
+        tumpakSewu(2, 'Tumpak Sewu’s curtain of waterfalls pouring over a jungle cliff'),
+        tumpakSewu(3, 'Hikers on the rocky canyon floor between moss-covered walls'),
+        tumpakSewu(4, 'A hiker on a rock beneath the waterfalls, the sun breaking through above'),
+        tumpakSewu(5, 'The group on the rocks at the foot of the falls'),
+      ],
     },
+    // Hidden for now; restore once there are sport photos.
+    // {
+    //   id: 'sport-1',
+    //   kind: 'Sport',
+    //   title: todo('Sport: which sport, team or event?'),
+    //   photos: todo('Sport photos (portrait 3:4, ~960×1280), in order'),
+    // },
   ] satisfies OutdoorActivity[],
 };
 
